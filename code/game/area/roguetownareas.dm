@@ -988,7 +988,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 /area/rogue/indoors/deserttown/bath
 	name = "Baths"
 	icon_state = "bath"
-	droning_sound = 'sound/music/area/desert/Spice.ogg'
+	droning_sound = 'sound/music/area/desert/TenThousandDelights.ogg'
 	droning_sound_dusk = null
 	droning_sound_night = null
 
