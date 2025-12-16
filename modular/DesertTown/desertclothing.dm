@@ -545,14 +545,14 @@
 	item_state = "exoticsilkbrar"
 
 /obj/item/clothing/mask/rogue/exoticsilkmask/green
-	// icon = 'modular/DesertTown/icons/clothing/mask.dmi' fix these please
-	// icon_state = "exoticsilkmaskg"
-	// item_state = "exoticsilkmaskg"
+	icon = 'modular/DesertTown/icons/clothing/mask.dmi'
+	icon_state = "exoticsilkmaskg"
+	item_state = "exoticsilkmaskg"
 
 /obj/item/clothing/mask/rogue/exoticsilkmask/red
-	// icon = 'modular/DesertTown/icons/clothing/mask.dmi'
-	// icon_state = "exoticsilkmaskr"
-	// item_state = "exoticsilkmaskr"
+	icon = 'modular/DesertTown/icons/clothing/mask.dmi'
+	icon_state = "exoticsilkmaskr"
+	item_state = "exoticsilkmaskr"
 
 //Because some people can't live without BiS
 /obj/item/clothing/shoes/roguetown/shalal/reinforced
