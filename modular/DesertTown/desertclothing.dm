@@ -8,6 +8,7 @@
 	desc = "A longer steel maille that protects the legs, still doesn't protect against arrows though."
 	body_parts_covered = COVERAGE_FULL
 	icon = 'modular/DesertTown/icons/clothing/armor.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/armor.dmi'
 	icon_state = "mamaluke"
 	item_state = "mamaluke"
 	armor = ARMOR_MAILLE
@@ -25,6 +26,8 @@
 	body_parts_covered = COVERAGE_FULL
 	allowed_sex = list(MALE, FEMALE)
 	icon = 'modular/DesertTown/icons/clothing/armor.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/armor.dmi'
+	icon_state = "mamaluke"
 	icon_state = "cataphract"
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -88,6 +91,8 @@
 	name = "open vest"
 	desc = "A leather vest. Not very protective when worn like this."
 	icon = 'modular/DesertTown/icons/clothing/armor.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/armor.dmi'
+	icon_state = "mamaluke"
 	icon_state = "openvest"
 	body_parts_covered = CHEST|VITALS
 
@@ -169,6 +174,7 @@
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	body_parts_covered = CHEST|VITALS
 	icon = 'modular/DesertTown/icons/clothing/armor.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/armor.dmi'
 	name = "guild bisht"
 	desc = "An open robe, made from luxurious silks."
 	armor = ARMOR_PADDED
@@ -187,6 +193,7 @@
 	armor = ARMOR_CLOTHING
 	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon = 'modular/DesertTown/icons/clothing/shirts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/shirts.dmi'
 	icon_state = "thawb"
 	item_state = "thawb"
 
@@ -220,6 +227,7 @@
 	desc = "A long, loose Zybantine robe. This one is trimmed with gold-silk thread."
 	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon = 'modular/DesertTown/icons/clothing/shirts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/shirts.dmi'
 	icon_state = "thawbgold"
 	item_state = "thawbgold"
 
@@ -229,6 +237,7 @@
 	desc = "A red skirt and binder, embroidened with infinitely intricate gold-thread patterns, and made of silk as light as air. Fit for a princess of Zybantine."
 	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon = 'modular/DesertTown/icons/clothing/shirts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/shirts.dmi'
 	icon_state = "dprince"
 	item_state = "dprince"
 
@@ -437,6 +446,7 @@
 	name = "cataphracts cloak"
 	desc = "Noble red cloak of a Zybantine Cataphract"
 	icon = 'modular/DesertTown/icons/clothing/cloaks.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/cloaks.dmi'
 	icon_state = "catcloak"
 	body_parts_covered = CHEST|GROIN|VITALS|ARMS
 	sleeved = 'modular/DesertTown/icons/clothing/onmob/cloaks.dmi'
@@ -450,6 +460,7 @@
 	name = "amir's cloak"
 	desc = "A silky red cloak as light as a feather, embroidened with gold patterns. Fit for a prince of Zybantine."
 	icon = 'modular/DesertTown/icons/clothing/cloaks.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/cloaks.dmi'
 	icon_state = "dprince"
 	item_state = "dprince"
 	sleeved = 'modular/DesertTown/icons/clothing/onmob/cloaks.dmi'
@@ -461,7 +472,8 @@
 /obj/item/clothing/head/hooded/rainhood/amirhood
 	name = "amir's hood"
 	desc = "A silky red hood as light as a feather, embroidened with gold patterns. Fit for a prince of Zybantine."
-	icon = 'modular/DesertTown/icons/clothing/cloaks.dmi'
+	icon = 'modular/DesertTown/icons/clothing/head.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/head32x48.dmi'
 	icon_state = "dprince"
 	item_state = "dprince"
 	block2add = FOV_BEHIND
@@ -475,6 +487,7 @@
 	desc = "A simple cloth sash."
 	color = null
 	icon = 'modular/DesertTown/icons/clothing/belts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/belts.dmi'
 	icon_state = "sashgrey"
 	item_state = "sashgrey"
 
@@ -502,18 +515,21 @@
 /obj/item/storage/belt/rogue/leather/noblesash
 	name = "Zybantine noblesash"
 	icon = 'modular/DesertTown/icons/clothing/belts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/belts.dmi'
 	icon_state = "noblesash"
 	sellprice = 5
 
 /obj/item/storage/belt/rogue/leather/sultbelt
 	name = "Zybantine Sultans Sash"
 	icon = 'modular/DesertTown/icons/clothing/belts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/belts.dmi'
 	icon_state = "sultbelt"
 	sellprice = 30
 
 /obj/item/storage/belt/rogue/leather/jafar
 	name = "Zybantine magos Sash"
 	icon = 'modular/DesertTown/icons/clothing/belts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/belts.dmi'
 	icon_state = "jafar"
 	sellprice = 30
 
@@ -521,6 +537,7 @@
 	name = "green exotic silk skirt"
 	desc = "A gold adorned belt with the softest of silk skirts barely concealing one's bits."
 	icon = 'modular/DesertTown/icons/clothing/belts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/belts.dmi'
 	icon_state = "exoticsilkskirt2"
 	item_state = "exoticsilkskirt2"
 
@@ -528,28 +545,33 @@
 	name = "red exotic silk skirt"
 	desc = "A gold adorned belt with the softest of silk skirts barely concealing one's bits."
 	icon = 'modular/DesertTown/icons/clothing/belts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/belts.dmi'
 	icon_state = "exoticsilkskirt"
 	item_state = "exoticsilkskirt"
 ////////
 
 /obj/item/clothing/suit/roguetown/shirt/exoticsilkbra/green
-	icon = 'modular/DesertTown/icons/clothing/belts.dmi'
+	icon = 'modular/DesertTown/icons/clothing/shirts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/shirts.dmi'
 	icon_state = "exoticsilkbrag"
 	item_state = "exoticsilkbrag"
 
 /obj/item/clothing/suit/roguetown/shirt/exoticsilkbra/red
 	desc = "Fanciful gold laced silks barely able to conceal what little it covers. Long, flowing sleeves droop from the upper arms to a ring on each hand, fluttering in the wind and with every movement."
-	icon = 'modular/DesertTown/icons/clothing/belts.dmi'
+	icon = 'modular/DesertTown/icons/clothing/shirts.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/shirts.dmi'
 	icon_state = "exoticsilkbrar"
 	item_state = "exoticsilkbrar"
 
 /obj/item/clothing/mask/rogue/exoticsilkmask/green
 	icon = 'modular/DesertTown/icons/clothing/masks.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/masks.dmi'
 	icon_state = "exoticsilkmaskg"
 	item_state = "exoticsilkmaskg"
 
 /obj/item/clothing/mask/rogue/exoticsilkmask/red
 	icon = 'modular/DesertTown/icons/clothing/masks.dmi'
+	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/masks.dmi'
 	icon_state = "exoticsilkmaskr"
 	item_state = "exoticsilkmaskr"
 

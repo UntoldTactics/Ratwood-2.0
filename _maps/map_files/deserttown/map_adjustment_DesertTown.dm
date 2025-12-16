@@ -4,20 +4,20 @@
 	These 'map_adjustment.dm' files shouldn't be included in 'dme'
 */
 
-// /datum/map_adjustment/template/deserttown
-// 	map_file_name = "deserttown.dmm"
-// 	realm_name = "Al-Ashur"
-// 	slot_adjust = list(
-// 		/datum/job/roguetown/villager = 42,
-// 		/datum/job/roguetown/adventurer = 69
-// 	)
-// 	title_adjust = list(
-// 		/datum/job/roguetown/lord = list(display_title = "Lord Castellan", f_title = "Lady Castellan")
-// 	)
-// 	tutorial_adjust = list(
-// 		/datum/job/roguetown/lord = "The Gronnmen are coming."
-// 	)
-// 	/// Jobs that this map won't use
-// 	list/blacklist = list(
+/datum/map_adjustment/template/deserttown
+	map_file_name = "deserttown.dmm"
+	realm_name = "Al-Ashur"
+	// slot_adjust = list(
+	// 	/datum/job/roguetown/villager = 42,
+	// 	/datum/job/roguetown/adventurer = 69
+	// )
+	// title_adjust = list(
+	// 	/datum/job/roguetown/lord = list(display_title = "Lord Castellan", f_title = "Lady Castellan")
+	// )
+	// tutorial_adjust = list(
+	// 	/datum/job/roguetown/lord = "The Gronnmen are coming."
+	// )
+	/// Jobs that this map won't use
+	list/blacklist = list(/datum/job/roguetown/lord, /datum/job/roguetown/prince, 
 		
-// 	)
+	)

@@ -13,7 +13,7 @@
 	name = "\improper Staff of the Serpent"
 	desc = "A mysterious golden staff shaped like a snake. You could swear its staring at you"
 	icon = 'modular/DesertTown/icons/items/desertweapons64.dmi'
-	icon_state = "courtstaff"
+	icon_state = "snakestaff"
 
 
 /obj/item/rogueweapon/sword/long/kriegmesser/zybantine
