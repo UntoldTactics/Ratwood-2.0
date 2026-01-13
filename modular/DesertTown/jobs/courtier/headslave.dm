@@ -14,7 +14,7 @@
 	  and, to a certain degree, respected member of the court, trained far beyond need of the whip. Indeed, you are entrusted to take the whip to those slaves beneath you.\
 	  You love your masters."
 	outfit = /datum/outfit/job/roguetown/headslave
-	advclass_cat_rolls = list(CTAG_SENESCHAL = 20)
+	advclass_cat_rolls = list(CTAG_HEADSLAVE = 20)
 	display_order = JDO_BUTLER
 	give_bank_account = 30
 	min_pq = 3
@@ -29,7 +29,7 @@
 
 /datum/advclass/headslave
 	traits_applied = list(TRAIT_CICERONE, TRAIT_HOMESTEAD_EXPERT, TRAIT_SEWING_EXPERT, TRAIT_ROYALSERVANT) // They have Expert Sewing
-	category_tags = list(CTAG_SENESCHAL)
+	category_tags = list(CTAG_HEADSLAVE)
 	name = "Head Slave"
 	tutorial = "While still expected to fill in for the duties of the household slaves as needed, you have styled yourself as a figure beyond them."
 	outfit = /datum/outfit/job/roguetown/headslave/headslave

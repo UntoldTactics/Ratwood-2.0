@@ -13,7 +13,7 @@
 	tutorial = "Whether you were once a free soul or were born into chattel servitude, you're one of the many abused and mistreated slaves whipped by the Task Master to keep the Sultan's palace running smooth. Each day is marked by a scar on your back, and it is your back that carries the dirty, menial work required to keep the royal family content and decadent."
 	
 	outfit = /datum/outfit/job/roguetown/slave
-	advclass_cat_rolls = list(CTAG_SERVANT = 20)
+	advclass_cat_rolls = list(CTAG_PSLAVE = 20)
 	job_traits = list(TRAIT_HOMESTEAD_EXPERT)
 	display_order = JDO_SERVANT
 	give_bank_account = TRUE
@@ -40,7 +40,7 @@
 	name = "Servant"
 	tutorial = "You are a humdrum servant, dressed the part; lowly and best out of sight. It's practical, however."
 	outfit = /datum/outfit/job/roguetown/slave/servant
-	category_tags = list(CTAG_SERVANT)
+	category_tags = list(CTAG_PSLAVE)
 	subclass_stats = list(
 		STATKEY_PER = 2,
 		STATKEY_INT = 1,
@@ -86,7 +86,7 @@
 	name = "Exotic Slave"
 	tutorial = "Not one really mentions how hard it is to do yardwork in a dress and stockings, but at least you still look really good."
 	outfit = /datum/outfit/job/roguetown/slave/pleasure
-	category_tags = list(CTAG_SERVANT)
+	category_tags = list(CTAG_PSLAVE)
 	subclass_stats = list(
 		STATKEY_PER = 2,
 		STATKEY_INT = 1,
@@ -164,7 +164,7 @@
 	name = "Slave Laborer"
 	tutorial = "CHANGE THIS. You do HARD WORK!."
 	outfit = /datum/outfit/job/roguetown/slave/worker
-	category_tags = list(CTAG_SERVANT)
+	category_tags = list(CTAG_PSLAVE)
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_END = 3,

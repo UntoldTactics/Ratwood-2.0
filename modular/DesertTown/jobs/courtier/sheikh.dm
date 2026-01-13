@@ -15,7 +15,7 @@
 			You only answer to the Sultan, Sultana, Heir, or Heiress. However, your main focus is to assist the Vizier with their duties."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/sheikh
-	advclass_cat_rolls = list(CTAG_COUNCILLOR = 2)
+	advclass_cat_rolls = list(CTAG_SHEIKH = 2)
 
 	give_bank_account = 40
 	noble_income = 20
@@ -54,7 +54,7 @@
 			You help him oversee the taxation, construction, and planning of new laws. \
 			You only answer to the Sultan, Sultana, Heir, or Heiress. However, your main focus is to assist the Vizier with their duties."
 	outfit = /datum/outfit/job/roguetown/sheikh/basic
-	category_tags = list(CTAG_COUNCILLOR)
+	category_tags = list(CTAG_SHEIKH)
 	subclass_stats = list(
 		STATKEY_SPD = 2,
 		STATKEY_INT = 2,

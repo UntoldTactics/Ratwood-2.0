@@ -10,7 +10,7 @@
 	allowed_races = RACES_NO_CONSTRUCT	//No noble constructs.
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/job/roguetown/vizier
-	advclass_cat_rolls = list(CTAG_HAND = 20)
+	advclass_cat_rolls = list(CTAG_VIZIER = 20)
 	display_order = JDO_HAND
 	tutorial = "You are one of the most important men within the realm itself. \
 	You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, something you exploit with potent conviction.\
@@ -74,7 +74,7 @@
 	tutorial = "You have played blademaster and strategist to the Noble-Family for so long that you are a master tactician, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with swords than any spymaster could ever claim to."
 	outfit = /datum/outfit/job/roguetown/vizier/blademaster
 
-	category_tags = list(CTAG_HAND)
+	category_tags = list(CTAG_VIZIER)
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_HEAVYARMOR)
 	subclass_stats = list(
 		STATKEY_PER = 3,
@@ -122,7 +122,7 @@
 	extra_context = "This subclass recieves 'Perfect Tracker' and 'Keen Ears' for free."
 	outfit = /datum/outfit/job/roguetown/vizier/spymaster
 
-	category_tags = list(CTAG_HAND)
+	category_tags = list(CTAG_VIZIER)
 	subclass_languages = list(/datum/language/thievescant)
 	traits_applied = list(TRAIT_KEENEARS, TRAIT_DODGEEXPERT, TRAIT_PERFECT_TRACKER)//Spy not a royal champion
 	subclass_stats = list(
@@ -180,7 +180,7 @@
 	tutorial = "You serve as both scholar and advisor to the Noble-Family, wielding knowledge and magicks with potent ability. Let no man forget whose ear you whisper into, your sage advice has saved more lives than any strategist’s orders or spymaster’s schemes could ever claim to."
 	outfit = /datum/outfit/job/roguetown/vizier/advisor
 
-	category_tags = list(CTAG_HAND)
+	category_tags = list(CTAG_VIZIER)
 	traits_applied = list(TRAIT_ALCHEMY_EXPERT, TRAIT_MAGEARMOR, TRAIT_ARCYNE_T2)
 	subclass_stats = list(
 		STATKEY_INT = 4,

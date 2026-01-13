@@ -22,7 +22,7 @@
 	max_pq = null
 	round_contrib_points = 2
 	cmode_music = 'sound/music/cmode/nobility/combat_courtmage.ogg'
-	advclass_cat_rolls = list(CTAG_COURTMAGE = 2)
+	advclass_cat_rolls = list(CTAG_DTCOURTMAGE = 2)
 	social_rank = SOCIAL_RANK_NOBLE
 	// Can't get very far as a magician if you can't chant spells now can you?
 	vice_restrictions = list(/datum/charflaw/mute)
@@ -40,7 +40,7 @@
 	outfit = /datum/outfit/job/roguetown/dtmagician/basic
 
 	subclass_spellpoints = 36
-	category_tags = list(CTAG_COURTMAGE)
+	category_tags = list(CTAG_DTCOURTMAGE)
 	subclass_stats = list(
 		STATKEY_INT = 5,// Automatic advanced magic for most spells. (I.E summon weapon being upgraded to steel from iron/etc)
 		STATKEY_PER = 3,
