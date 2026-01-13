@@ -72,11 +72,9 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	"Knight",
 	//Desert
 	"Sultan",
+	"Amir",
 	"Sheikh",
 	"Vizier",
-	"Cataphract",
-
-
 ))
 
 GLOBAL_LIST_INIT(courtier_positions, list(
@@ -98,6 +96,7 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	"Squire",
 	"Dungeoneer",
 	//desert
+	"Cataphract",
 	"Mamluk",
 	"Janissary Agha",
 	"Janissary",
@@ -152,6 +151,7 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Refugee",
 	"Pilgrim",
 	//desert
+	"Villager",
 	"Nomad",
 ))
 
@@ -179,6 +179,7 @@ GLOBAL_LIST_INIT(wanderer_positions, list(
 	"Mercenary",
 	"Bandit",
 	"Court Agent",
+	"Enslaved Adventurer",
 	"Wretch",
 ))
 
