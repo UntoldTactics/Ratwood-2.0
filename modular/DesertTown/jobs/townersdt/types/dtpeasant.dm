@@ -7,7 +7,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/dtpeasant
 	subclass_social_rank = SOCIAL_RANK_PEASANT
 	cmode_music = 'sound/music/cmode/towner/combat_towner2.ogg'
-	category_tags = list(CTAG_DTPILGRIM, CTAG_DTTOWNER)
+	category_tags = list(CTAG_NOMAD, CTAG_DTTOWNER)
 	subclass_stats = list(
 		STATKEY_STR = 1,
 		STATKEY_CON = 1,

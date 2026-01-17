@@ -1,6 +1,6 @@
 /datum/job/roguetown/cataphract
 	title = "Cataphract"
-	flag = KNIGHT
+	flag = CATAPHRACT
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 3

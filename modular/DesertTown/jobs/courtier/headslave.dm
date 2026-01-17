@@ -1,6 +1,6 @@
 /datum/job/roguetown/headslave // really need to re-name all these when the codebase isn't a fork and search will update for the peasants...
 	title = "Head Slave"
-	flag = BUTLER
+	flag = HEADSLAVE
 	department_flag = COURTIERS
 	faction = "Station"
 	total_positions = 1

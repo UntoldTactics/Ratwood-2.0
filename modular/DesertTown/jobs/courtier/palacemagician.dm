@@ -1,6 +1,6 @@
 /datum/job/roguetown/dtmagician
 	title = "Palace Magician"
-	flag = WIZARD
+	flag = DTWIZARD
 	department_flag = COURTIERS
 	selection_color = JCOLOR_COURTIER
 	faction = "Station"

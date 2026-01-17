@@ -9,13 +9,12 @@
 	realm_name = "Al-Ashur"
 	slot_adjust = list(
 		/datum/job/roguetown/mercenary = 7, //haha fuck you one less slot!!
-	// 	/datum/job/roguetown/adventurer = 69
 	)
 	title_adjust = list(
 		/datum/job/roguetown/marshal = list(display_title = "Mayor"),
 		/datum/job/roguetown/priest =  list(display_title = "High Priest", f_title = "High Priestess"),
 		/datum/job/roguetown/captain = list(display_title = "Cataphract Captain"),
-		/datum/job/roguetown/physician = list(display_title = "Court Physician"),
+		/datum/job/roguetown/physician = list(display_title = "Palace Physician"),
 	)
 	tutorial_adjust = list(
 		/datum/job/roguetown/marshal = "CHANGE THIS LATER. Manage the town outside of the palace. Hang out in the mayor building!!!"

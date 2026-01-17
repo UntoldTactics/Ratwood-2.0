@@ -182,7 +182,6 @@
 #define ADVENTURER      (1<<3)
 #define BANDIT		    (1<<4)
 #define COURTAGENT	    (1<<5)
-#define COURTSLAVE	    (1<<5) //desert
 #define WRETCH          (1<<6)
 #define TRADER			(1<<7)
 
@@ -330,7 +329,10 @@
 	/datum/job/roguetown/servant,\
 	/datum/job/roguetown/butler,\
 	/datum/job/roguetown/apothecary,\
-	/datum/job/roguetown/magician
+	/datum/job/roguetown/magician,\
+	/datum/job/roguetown/dtmagician,\
+	/datum/job/roguetown/headslave,\
+	/datum/job/roguetown/slave,\
 
 #define NOBLE_ROLES \
 	/datum/job/roguetown/prince,\
@@ -342,7 +344,12 @@
 	/datum/job/roguetown/knight,\
 	/datum/job/roguetown/lady,\
 	/datum/job/roguetown/lord,\
-	/datum/job/roguetown/steward
+	/datum/job/roguetown/steward,\
+	/datum/job/roguetown/sultan,\
+	/datum/job/roguetown/dtprince,\
+	/datum/job/roguetown/cataphract,\
+	/datum/job/roguetown/vizier,\
+	/datum/job/roguetown/sheikh,\
 
 #define KING_QUEEN_ROLES \
 	/datum/job/roguetown/lady,\
@@ -357,6 +364,7 @@
 
 #define PEASANT_ROLES \
 	/datum/job/roguetown/villager,\
+	/datum/job/roguetown/dtvillager,\
 	/datum/job/roguetown/nightmaiden,\
 	/datum/job/roguetown/beggar,\
 	/datum/job/roguetown/cook,\
@@ -384,6 +392,7 @@
 
 #define WANDERER_ROLES \
 	/datum/job/roguetown/pilgrim,\
+	/datum/job/roguetown/nomad,\
 	/datum/job/roguetown/adventurer,\
 	/datum/job/roguetown/mercenary/desert_rider,\
 	/datum/job/roguetown/mercenary/grenzelhoft,\
@@ -398,7 +407,10 @@
 	/datum/job/roguetown/manorguard,\
 	/datum/job/roguetown/sheriff,\
 	/datum/job/roguetown/squire,\
-	/datum/job/roguetown/guardsman
+	/datum/job/roguetown/guardsman,\
+	/datum/job/roguetown/mamluk,\
+	/datum/job/roguetown/janissary,\
+	/datum/job/roguetown/slavemaster,\
 
 #define INQUISITION_ROLES \
 	/datum/job/roguetown/puritan,\

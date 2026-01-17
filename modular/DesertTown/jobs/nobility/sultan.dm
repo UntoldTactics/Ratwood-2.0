@@ -1,7 +1,7 @@
 /datum/job/roguetown/sultan
 	title = "Sultan"
 	f_title = "Sultana"
-	flag = LORD
+	flag = SULTAN
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 1

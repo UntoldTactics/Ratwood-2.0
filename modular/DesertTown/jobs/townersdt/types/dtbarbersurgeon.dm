@@ -5,7 +5,7 @@
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/adventurer/dtdoctor
 	subclass_social_rank = SOCIAL_RANK_YEOMAN
-	category_tags = list(CTAG_DTPILGRIM, CTAG_DTTOWNER)
+	category_tags = list(CTAG_NOMAD, CTAG_DTTOWNER)
 	traits_applied = list(TRAIT_EMPATH, TRAIT_NOSTINK, TRAIT_MEDICINE_EXPERT, TRAIT_ALCHEMY_EXPERT)
 	cmode_music = 'sound/music/combat_physician.ogg'
 	subclass_stats = list(

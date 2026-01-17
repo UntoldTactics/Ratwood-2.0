@@ -58,9 +58,9 @@
 		peopleiknow += X*/
 
 
-/datum/job/roguetown/dtpilgrim
+/datum/job/roguetown/nomad
 	title = "Nomad"
-	flag = PILGRIM
+	flag = NOMAD
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 40
@@ -93,7 +93,7 @@
 	)
 
 
-	advclass_cat_rolls = list(CTAG_DTPILGRIM = 20)
+	advclass_cat_rolls = list(CTAG_NOMAD = 20)
 	PQ_boost_divider = 10
 
 	announce_latejoin = FALSE

@@ -7,7 +7,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/dtpotter
 	subclass_social_rank = SOCIAL_RANK_YEOMAN
 	traits_applied = list(TRAIT_HOMESTEAD_EXPERT)
-	category_tags = list(CTAG_DTPILGRIM, CTAG_DTTOWNER)
+	category_tags = list(CTAG_NOMAD, CTAG_DTTOWNER)
 	subclass_stats = list(
 		STATKEY_PER = 2,
 		STATKEY_WIL = 2,

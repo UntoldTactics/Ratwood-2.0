@@ -7,7 +7,7 @@
 	subclass_social_rank = SOCIAL_RANK_PEASANT
 	traits_applied = list(TRAIT_OUTDOORSMAN, TRAIT_SURVIVAL_EXPERT)
 	cmode_music = 'sound/music/cmode/towner/combat_towner2.ogg'
-	category_tags = list(CTAG_DTPILGRIM, CTAG_DTTOWNER)
+	category_tags = list(CTAG_NOMAD, CTAG_DTTOWNER)
 	subclass_stats = list(
 		STATKEY_PER = 3,
 		STATKEY_INT = 1,

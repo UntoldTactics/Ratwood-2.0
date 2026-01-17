@@ -1,6 +1,6 @@
 /datum/job/roguetown/vizier
 	title = "Vizier"
-	flag = HAND
+	flag = VIZIER
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 1

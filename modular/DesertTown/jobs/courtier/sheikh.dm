@@ -1,6 +1,6 @@
 /datum/job/roguetown/sheikh
 	title = "Sheikh"
-	flag = COUNCILLOR
+	flag = SHEIKH
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 3

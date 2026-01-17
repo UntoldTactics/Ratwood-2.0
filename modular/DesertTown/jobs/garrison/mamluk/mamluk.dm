@@ -1,6 +1,6 @@
 /datum/job/roguetown/mamluk
 	title = "Mamluk"
-	flag = MANATARMS
+	flag = MAMLUK
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 8

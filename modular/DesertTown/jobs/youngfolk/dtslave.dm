@@ -1,7 +1,7 @@
 /datum/job/roguetown/slave
 	title = "Palace Slave"
 	f_title = "Palace Slave"
-	flag = SERVANT
+	flag = SLAVE
 	department_flag = YOUNGFOLK
 	faction = "Station"
 	total_positions = 6

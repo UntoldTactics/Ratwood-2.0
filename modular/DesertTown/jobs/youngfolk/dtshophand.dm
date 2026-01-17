@@ -1,6 +1,6 @@
 /datum/job/roguetown/dtshophand
 	title = "Shophand"
-	flag = SHOPHAND
+	flag = DTSHOPHAND
 	department_flag = YOUNGFOLK
 	faction = "Station"
 	total_positions = 1
