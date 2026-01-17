@@ -36,10 +36,10 @@
 	vice_restrictions = list(/datum/charflaw/mute, /datum/charflaw/unintelligible)
 
 	job_subclasses = list(
-		/datum/advclass/sultan/warrior,
-		/datum/advclass/sultan/merchant,
-		/datum/advclass/sultan/wizard,
-		/datum/advclass/sultan/inbred
+		/datum/advclass/sultan/dtwarrior,
+		/datum/advclass/sultan/dtmerchant,
+		/datum/advclass/sultan/dtwizard,
+		/datum/advclass/sultan/dtinbred
 	)
 
 /datum/outfit/job/roguetown/sultan
@@ -109,7 +109,7 @@
 /**
 	Warrior Lord subclass. An evolution from the Daring Twit. This is the original Lord Class.
 */
-/datum/advclass/sultan/warrior
+/datum/advclass/sultan/dtwarrior
 	name = "Iron-fisted Warlord"
 	tutorial = "You're a noble warrior. You rose to your rank through your own strength and skill, whether by leading your men or by fighting alongside them. Or perhaps you are none of that, but simply a well-trained heir elevated to the position of Lord. You're trained in the usage of heavy armor, and knows swordsmanship well."
 	outfit = /datum/outfit/job/roguetown/sultan/warrior
@@ -150,7 +150,7 @@
 	Weapon skills are worse across the board compared to the warrior lord, apprentice only.
 	Has a high noble income plus a starting pouch with insane amount of money.
 */
-/datum/advclass/sultan/merchant
+/datum/advclass/sultan/dtmerchant
 	name = "Wise Dealer"
 	tutorial = "You were always talented with coins and trade. And your talents have brought you to the position of the Lord of Rotwood Vale. You could be a merchant who bought his way into nobility and power, or an exceptionally talented noble who were inclined to be good with coins. Fighting directly is not your forte\
 	But you have plenty of wealth, keen ears, and know a good deal from a bad one."
@@ -189,7 +189,7 @@
 	Wizard duke! We still want the court mage to be the most powerful wizard,
 	but if a warrior duke can be about as strong as a Knight, then a wizard duke could probably afford to be as strong as a mage's associate. They'll get T3, no armor prof.
 */
-/datum/advclass/sultan/wizard
+/datum/advclass/sultan/dtwizard
 	name = "Sorcerous Sultan"
 	tutorial = "A good ruler is backed with force. You just happen to have a keen amount of mastery over the world's strongest forces: Magic. Of course, having to manage your realm has meant that you aren't as studied as the realm's greatest wizards- but your cunning sorcery is what has you sat upon the throne."
 	outfit = /datum/outfit/job/roguetown/sultan/wizard
@@ -227,7 +227,7 @@
 	The fact that the inbred wastrel with 20 fortune and critical weakness
 	can get into heavy armor and try to fight is hilarious.
 */
-/datum/advclass/sultan/inbred
+/datum/advclass/sultan/dtinbred
 	name = "Inbred Sultan"
 	tutorial = "Psydon and Astrata smiles upon you. For despite your inbred and weak body, and your family's conspiracies to remove you from succession, you have somehow become the Sultan of Al Ashur. May your reign lasts a hundred years."
 	outfit = /datum/outfit/job/roguetown/sultan/inbred

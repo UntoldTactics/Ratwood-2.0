@@ -1,5 +1,5 @@
 /datum/job/roguetown/vizier
-	title = "Vizier - TESTING TESTING IS THIS BROKEN?!!!"
+	title = "Vizier"
 	flag = HAND
 	department_flag = NOBLEMEN
 	faction = "Station"
@@ -26,9 +26,9 @@
 	social_rank = SOCIAL_RANK_NOBLE
 	job_traits = list(TRAIT_NOBLE)
 	job_subclasses = list(
-		/datum/advclass/vizier/blademaster,
-		/datum/advclass/vizier/spymaster,
-		/datum/advclass/vizier/advisor
+		/datum/advclass/vizier/dtblademaster,
+		/datum/advclass/vizier/dtspymaster,
+		/datum/advclass/vizier/dtadvisor
 	)
 	spells = list(/obj/effect/proc_holder/spell/self/convertrole/agent)//Hiring court agents
 
@@ -69,7 +69,7 @@
 ///////////
 
 //Blademaster Hand start
-/datum/advclass/vizier/blademaster
+/datum/advclass/vizier/dtblademaster
 	name = "Blademaster"
 	tutorial = "You have played blademaster and strategist to the Noble-Family for so long that you are a master tactician, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with swords than any spymaster could ever claim to."
 	outfit = /datum/outfit/job/roguetown/vizier/blademaster
@@ -116,7 +116,7 @@
 
 
 //Spymaster start
-/datum/advclass/vizier/spymaster
+/datum/advclass/vizier/dtspymaster
 	name = "Spymaster"
 	tutorial = " You have played spymaster and confidant to the Noble-Family for so long that you are a vault of intrigue, something you exploit with potent conviction. Let no man ever forget whose ear you whisper into. You've killed more men with those lips than any blademaster could ever claim to."
 	extra_context = "This subclass recieves 'Perfect Tracker' and 'Keen Ears' for free."
@@ -175,7 +175,7 @@
 		H.adjust_skillrank_up_to(/datum/skill/misc/lockpicking, 6, TRUE)
 
 //Advisor Start
-/datum/advclass/vizier/advisor
+/datum/advclass/vizier/dtadvisor
 	name = "Advisor"
 	tutorial = "You serve as both scholar and advisor to the Noble-Family, wielding knowledge and magicks with potent ability. Let no man forget whose ear you whisper into, your sage advice has saved more lives than any strategist’s orders or spymaster’s schemes could ever claim to."
 	outfit = /datum/outfit/job/roguetown/vizier/advisor
@@ -259,21 +259,21 @@
 		to_chat(usr, span_greentext(name))
 	return
 
-/obj/effect/proc_holder/spell/self/convertrole/agent
-	name = "Recruit Agent"
-	new_role = "Court Agent"//They get shown as adventurers either way.
-	overlay_state = "recruit_servant"
-	recruitment_faction = "Agents"
-	recruitment_message = "Serve the crown, %RECRUIT!"
-	accept_message = "FOR THE CROWN!"
-	refuse_message = "I refuse."
-	recharge_time = 100
+// /obj/effect/proc_holder/spell/self/convertrole/agent
+// 	name = "Recruit Agent"
+// 	new_role = "Court Agent"//They get shown as adventurers either way.
+// 	overlay_state = "recruit_servant"
+// 	recruitment_faction = "Agents"
+// 	recruitment_message = "Serve the crown, %RECRUIT!"
+// 	accept_message = "FOR THE CROWN!"
+// 	refuse_message = "I refuse."
+// 	recharge_time = 100
 
-/obj/effect/proc_holder/spell/self/convertrole/agent/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
-	. = ..()
-	if(!.)
-		return
-	GLOB.court_agents += recruit.real_name
+// /obj/effect/proc_holder/spell/self/convertrole/agent/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
+// 	. = ..()
+// 	if(!.)
+// 		return
+// 	GLOB.court_agents += recruit.real_name
 
 
 
