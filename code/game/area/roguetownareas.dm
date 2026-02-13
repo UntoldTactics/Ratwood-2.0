@@ -1068,16 +1068,16 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 
 /area/rogue/outdoors/banditcamp/desert
 	name = "Bandit Camp"
-	droning_sound = 'sound/music/area/faithless.ogg'
-	droning_sound_dusk = 'sound/music/area/faithless.ogg'
-	droning_sound_night = 'sound/music/area/faithless.ogg'
+	droning_sound = 'sound/music/area/desert/faithless.ogg'
+	droning_sound_dusk = 'sound/music/area/desert/faithless.ogg'
+	droning_sound_night = 'sound/music/area/desert/faithless.ogg'
 	first_time_text = "A Gathering of Thieves"
 	deathsight_message = "hidden among thieves, in the hoard of a dragon"
 
 
 /area/rogue/indoors/banditcamp/desert
 	name = "Bandit Camp"
-	droning_sound = 'sound/music/area/faithless.ogg'
-	droning_sound_dusk = 'sound/music/area/faithless.ogg'
-	droning_sound_night = 'sound/music/area/faithless.ogg'
+	droning_sound = 'sound/music/area/desert/faithless.ogg'
+	droning_sound_dusk = 'sound/music/area/desert/faithless.ogg'
+	droning_sound_night = 'sound/music/area/desert/faithless.ogg'
 	deathsight_message = "hidden among thieves, in the hoard of a dragon"
