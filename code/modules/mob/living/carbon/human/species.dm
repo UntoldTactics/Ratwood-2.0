@@ -2058,30 +2058,6 @@ GLOBAL_VAR_INIT(cold_breath_overlay, mutable_appearance(
 	icon_state = "breath_m",
 	layer = MOB_LAYER + 0.1
 ))
-/datum/species/proc/heat_warn(mob/living/carbon/human/H)
-	if(hascall(H, /mob/living/carbon/human/proc/heat_warning_cooldown))
-		if(H.has_timer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, heat_warning_cooldown))))
-			return FALSE
-
-	addtimer(
-		CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, heat_warning_cooldown)),
-		10 SECONDS,
-		TIMER_UNIQUE
-	)
-	return TRUE
-
-
-/datum/species/proc/can_cold_warn(mob/living/carbon/human/H)
-	if(hascall(H, /mob/living/carbon/human/proc/cold_warning_cooldown))
-		if(H.has_timer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, cold_warning_cooldown))))
-			return FALSE
-
-	addtimer(
-		CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, cold_warning_cooldown)),
-		10 SECONDS,
-		TIMER_UNIQUE
-	)
-	return TRUE
 
 //This has been redesigned for new Temperature system. We have 5 temperature 'blocks' signifying Very Cold, Cold, Normal, Hot, and Very hot.
 //Homeostasis effect has been removed entirely, simplifying temperature. Tiles have set temperatures, and mobs will slowly move towards those temperatures when on those tiles.
@@ -2144,16 +2120,47 @@ GLOBAL_VAR_INIT(cold_breath_overlay, mutable_appearance(
 
 		if(env_adjust)
 			H.adjust_bodytemperature(env_adjust)
+	if(H.on_fire && !HAS_TRAIT(H, TRAIT_RESISTHEAT))	//fire damage
+		var/burn_damage = 0
+
+		var/datum/status_effect/fire_handler/fire_stacks/pure_stacks = H.has_status_effect(/datum/status_effect/fire_handler/fire_stacks)
+
+		if(pure_stacks)
+			var/firemodifier = pure_stacks.stacks / 50
+
+			if(pure_stacks.on_fire)
+				// Classic "you're actively burning" damage
+				burn_damage = 10 + (pure_stacks.stacks * 3)
+			else
+				// Residual heat damage scaling with temp
+				firemodifier = min(firemodifier, 0)
+				burn_damage = round(max(log(2-firemodifier,(H.bodytemperature-BODYTEMP_NORMAL))-5,0))
+
+		if(burn_damage > 0)
+			switch(burn_damage)
+				if(0 to 2)
+					H.throw_alert("temp", /atom/movable/screen/alert/hot, 1)
+				if(2 to 4)
+					H.throw_alert("temp", /atom/movable/screen/alert/hot, 2)
+				else
+					H.throw_alert("temp", /atom/movable/screen/alert/hot, 3)
+
+			burn_damage *= heatmod * H.physiology.heat_mod
+
+			if(H.stat < UNCONSCIOUS && (prob(burn_damage) * 10) / 4)
+				H.emote("pain")
+
+			H.apply_damage(burn_damage, BURN, spread_damage = TRUE)
 
 	if(H.bodytemperature > BODYTEMP_NORMAL_MAX && !HAS_TRAIT(H, TRAIT_RESISTHEAT))	//either level one or level two heat
 		//Body temperature is too hot.
 		H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
-		if(H.body_temperature >= BODYTEMP_HEAT_LEVEL_ONE_MAX)
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, heat_warning_cooldown)),10 SECONDS,TIMER_UNIQUE)
+		if(H.bodytemperature >= BODYTEMP_HEAT_LEVEL_ONE_MAX)
+			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, heat_warn)),20 SECONDS,TIMER_UNIQUE)
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, apply_heatstroke)),2 MINUTES ,TIMER_UNIQUE | TIMER_STOPPABLE)
 
 		else	//level 1 heat
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, heat_warning_cooldown)),10 SECONDS,TIMER_UNIQUE)
+			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, heat_warn)),20 SECONDS,TIMER_UNIQUE)
 			H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
 
 
@@ -2163,7 +2170,7 @@ GLOBAL_VAR_INIT(cold_breath_overlay, mutable_appearance(
 			//FIRE_STACKS Human damage taken from fire is determined here.
 			if(prob(30))
 				H.emote(pick("shiver"))
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, cold_warning_cooldown)),10 SECONDS,TIMER_UNIQUE)
+			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, cold_warn)),20 SECONDS,TIMER_UNIQUE)
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, apply_frostbite)),2 MINUTES, TIMER_UNIQUE | TIMER_STOPPABLE)
 			H.add_movespeed_modifier(MOVESPEED_ID_COLD, override = TRUE, multiplicative_slowdown = ((BODYTEMP_COLD_LEVEL_ONE_MAX - H.bodytemperature) / COLD_SLOWDOWN_FACTOR), blacklisted_movetypes = FLOATING)
 
@@ -2171,10 +2178,12 @@ GLOBAL_VAR_INIT(cold_breath_overlay, mutable_appearance(
 			H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
 			if(prob(15))
 				H.emote(pick("shiver"))
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, cold_warning_cooldown)),10 SECONDS,TIMER_UNIQUE)
+			H.relieve_heatstroke_from_cold()	//if has heatstroke, body chill fixes it
+			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, cold_warn)),20 SECONDS,TIMER_UNIQUE)
 	else
 		H.clear_alert("temp")
 		H.remove_movespeed_modifier(MOVESPEED_ID_COLD)
+	H.update_health_hud()
 // A general-purpose proc used to centralise checks to skip turf, movement, step, etc.
 // For if a mob is floating, flying, intangible, etc.
 /datum/species/proc/is_floor_hazard_immune(mob/living/carbon/human/owner)

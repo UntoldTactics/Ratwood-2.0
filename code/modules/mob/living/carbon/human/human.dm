@@ -634,7 +634,19 @@
 					hud_used.energy.icon_state = "energy20"
 				else if(energy > 0)
 					hud_used.energy.icon_state = "energy10"
-
+		if(hud_used.temperature)
+			if(stat != DEAD)
+				. = 1
+				if(bodytemperature >= BODYTEMP_NORMAL_MIN && bodytemperature <= BODYTEMP_NORMAL_MAX)
+					hud_used.temperature.icon_state = "tempnormal"
+				else if(bodytemperature < BODYTEMP_NORMAL_MIN && bodytemperature >= BODYTEMP_COLD_LEVEL_ONE_MAX)
+					hud_used.temperature.icon_state = "tempcold"
+				else if(bodytemperature < BODYTEMP_COLD_LEVEL_ONE_MAX)
+					hud_used.temperature.icon_state = "tempverycold"
+				else if(bodytemperature >= BODYTEMP_NORMAL_MAX && bodytemperature <= BODYTEMP_HEAT_LEVEL_ONE_MAX)
+					hud_used.temperature.icon_state = "temphot"
+				else if(bodytemperature > BODYTEMP_HEAT_LEVEL_ONE_MAX)
+					hud_used.temperature.icon_state = "tempveryhot"
 		if(hud_used.zone_select)
 			hud_used.zone_select.update_icon()
 
@@ -1036,13 +1048,13 @@
 		dropItemToGround(mouth, silent = FALSE)
 
 /mob/living/carbon/human/proc/cold_warn()
-	if(src.body_temperature >= BODYTEMP_COLD_LEVEL_ONE_MAX)
+	if(src.bodytemperature <= BODYTEMP_COLD_LEVEL_ONE_MAX)
 		to_chat(src, span_danger("I feel so cold and numb, I can't stop shivering."))
 	else
 		to_chat(src, span_warning("Everything is cold."))
 	return
 /mob/living/carbon/human/proc/heat_warn()
-	if(src.body_temperature >= BODYTEMP_HEAT_LEVEL_ONE_MAX)
+	if(src.bodytemperature >= BODYTEMP_HEAT_LEVEL_ONE_MAX)
 		to_chat(src, span_danger("My lips feel cracked and dry, and it is unbearably hot."))
 	else
 		to_chat(src, span_warning("Sweat drips down my brow."))
@@ -1051,16 +1063,39 @@
 
 /mob/living/carbon/human/proc/apply_frostbite()
 	var/mob/living/carbon/human/H = src
-	if(H.body_temperature >= BODYTEMP_COLD_LEVEL_ONE_MAX)	//if not cold enough after timer, kill
+	if(H.bodytemperature >= BODYTEMP_COLD_LEVEL_ONE_MAX)
 		return
 
-	var/def_zone = BODY_ZONE_CHEST
-	def_zone = pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
-	// Check if frostbite already exists on this bodypart
+	var/list/zones = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_LEG,
+		BODY_ZONE_L_LEG
+	)
+
+	var/list/valid_zones = list()
+
+	for(var/zone in zones)
+		var/obj/item/bodypart/BP = H.get_bodypart(zone)
+		if(!BP)
+			continue
+
+		var/has_frostbite = FALSE
+		for(var/datum/wound/W in BP.wounds)
+			if(istype(W, /datum/wound/frostbite))
+				has_frostbite = TRUE
+
+		if(!has_frostbite)
+			valid_zones += zone
+
+	if(!length(valid_zones))
+		return
+
+	var/def_zone = pick(valid_zones)
 	var/obj/item/bodypart/BP = H.get_bodypart(def_zone)
-	for(var/datum/wound/W in BP.wounds)
-		if(istype(W, /datum/wound/frostbite))
-			return
+
 	if(BP)
 		to_chat(H, span_userdanger("I feel pins and needles in [BP]!"))
 		BP.add_wound(/datum/wound/frostbite)
@@ -1068,7 +1103,7 @@
 
 /mob/living/carbon/human/proc/apply_heatstroke()
 	var/mob/living/carbon/human/H = src
-	if(H.body_temperature <= BODYTEMP_HEAT_LEVEL_ONE_MAX)	//if not hot enough after timer, kill
+	if(H.bodytemperature <= BODYTEMP_HEAT_LEVEL_ONE_MAX)	//if not hot enough after timer, kill
 		return
 
 	var/def_zone = BODY_ZONE_HEAD
@@ -1077,9 +1112,27 @@
 		if(istype(W, /datum/wound/heatstroke))
 			return
 	if(BP)
-		to_chat(H, span_userdanger("I feel pins and needles in [BP]!"))
+		to_chat(H, span_userdanger("My head is spinning and I feel terrible!"))
 		BP.add_wound(/datum/wound/heatstroke)
 		BP.update_disabled()
+
+/mob/living/carbon/human/proc/relieve_heatstroke_from_cold()
+	var/found = FALSE
+
+	for(var/obj/item/bodypart/BP in bodyparts)
+		if(!length(BP.wounds))
+			continue
+
+		for(var/datum/wound/W in BP.wounds)
+			if(istype(W, /datum/wound/heatstroke))
+				W.remove_from_bodypart()
+				found = TRUE
+
+	if(found)
+		visible_message(
+			span_notice("[src]'s breathing steadies as the heat leaves their body."),
+			span_notice("The cold helps draw the heat out of your body.")
+		)
 
 /*/mob/living/carbon/human/proc/update_heretic_commune()
 	if(HAS_TRAIT(src, TRAIT_COMMIE) || HAS_TRAIT(src, TRAIT_CABAL) || HAS_TRAIT(src, TRAIT_HORDE) || HAS_TRAIT(src, TRAIT_DEPRAVED))

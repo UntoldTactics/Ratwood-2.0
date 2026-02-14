@@ -485,8 +485,17 @@
 		return
 	var/mob/living/carbon/carbon_owner = owner
 	if(!carbon_owner.stat && prob(5))
-		carbon_owner.vomit(1, blood = TRUE, stun = TRUE)
+		if(prob(5))
+			carbon_owner.vomit(1, blood = FALSE, stun = TRUE)
 		to_chat(owner, span_warning("The world is spinning!"))
+		carbon_owner.Dizzy(10)
+/datum/wound/heatstroke/on_mob_loss()
+	. = ..()
+	if(!iscarbon(owner))
+		return
+	var/mob/living/carbon/carbon_owner = owner
+	to_chat(owner, span_warning("The world has stopped spinning."))
+	carbon_owner.set_dizziness(0)
 
 /datum/wound/frostbite
 	name = "frostbite"
@@ -511,4 +520,4 @@
 		return
 	var/mob/living/carbon/carbon_owner = owner
 	if(!carbon_owner.stat && prob(30))
-		carbon_owner.apply_damage(10, BURN)
+		carbon_owner.apply_damage(5, BURN)

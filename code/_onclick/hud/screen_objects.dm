@@ -1873,10 +1873,17 @@
 	screen_loc = rogueui_fat
 	layer = HUD_LAYER+0.1
 
+/atom/movable/screen/tempbase
+	name = ""
+	mouse_opacity = 0
+	icon_state = "tempbase"
+	icon = 'icons/mob/rogueheat.dmi'
+	screen_loc = rogueui_temperature
+
+
 /atom/movable/screen/temperature
 	name = "Temperature"
-	mouse_opacity = 0
-	icon_state = "temp50"
+	icon_state = "tempnormal"
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = rogueui_temperature
 	layer = HUD_LAYER+0.1
