@@ -23,6 +23,9 @@ type Message = {
 type OverwatchEvent = {
   timestamp: string;
   location: string;
+  x?: number;
+  y?: number;
+  z?: number;
   type: string;
   summary: string;
   details?: string;
@@ -625,12 +628,32 @@ export const AdminTicketPanel = (props) => {
                                       </Stack.Item>
                                       <Stack.Item grow />
                                       <Stack.Item>
-                                        <Box
-                                          fontSize="0.85em"
-                                          color="label"
-                                        >
-                                          {event.location}
-                                        </Box>
+                                        {event.x && event.y && event.z ? (
+                                          <Box
+                                            fontSize="0.85em"
+                                            color="label"
+                                            style={{
+                                              cursor: 'pointer',
+                                              textDecoration: 'underline',
+                                            }}
+                                            onClick={() =>
+                                              act('overwatch_teleport', {
+                                                x: event.x,
+                                                y: event.y,
+                                                z: event.z,
+                                              })
+                                            }
+                                          >
+                                            {event.location}
+                                          </Box>
+                                        ) : (
+                                          <Box
+                                            fontSize="0.85em"
+                                            color="label"
+                                          >
+                                            {event.location}
+                                          </Box>
+                                        )}
                                       </Stack.Item>
                                       <Stack.Item>
                                         <Button

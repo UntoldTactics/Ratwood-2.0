@@ -134,7 +134,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	for(var/datum/admin_help/ticket in active_tickets)
 		var/list/ticket_data = list()
 		ticket_data["id"] = ticket.id
-		ticket_data["name"] = ticket.name
+		ticket_data["name"] = html_decode(ticket.name)
 		ticket_data["state"] = "ACTIVE"
 		ticket_data["initiator_ckey"] = ticket.initiator_ckey
 		ticket_data["initiator_name"] = ticket.initiator_key_name
@@ -147,7 +147,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	for(var/datum/admin_help/ticket in closed_tickets)
 		var/list/ticket_data = list()
 		ticket_data["id"] = ticket.id
-		ticket_data["name"] = ticket.name
+		ticket_data["name"] = html_decode(ticket.name)
 		ticket_data["state"] = "CLOSED"
 		ticket_data["initiator_ckey"] = ticket.initiator_ckey
 		ticket_data["initiator_name"] = ticket.initiator_key_name
@@ -160,7 +160,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	for(var/datum/admin_help/ticket in resolved_tickets)
 		var/list/ticket_data = list()
 		ticket_data["id"] = ticket.id
-		ticket_data["name"] = ticket.name
+		ticket_data["name"] = html_decode(ticket.name)
 		ticket_data["state"] = "RESOLVED"
 		ticket_data["initiator_ckey"] = ticket.initiator_ckey
 		ticket_data["initiator_name"] = ticket.initiator_key_name
@@ -188,6 +188,9 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 						var/list/event_data = list()
 						event_data["timestamp"] = event.get_timestamp_text()
 						event_data["location"] = event.get_location_text()
+						event_data["x"] = event.x_coord
+						event_data["y"] = event.y_coord
+						event_data["z"] = event.z_coord
 						event_data["type"] = event.event_type
 						if(istype(event, /datum/overwatch_event/attack))
 							var/datum/overwatch_event/attack/A = event
@@ -346,6 +349,23 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 				return FALSE
 
 			usr.client.overwatch_show_attack_event_from_ticket(ckey, event_index)
+			return TRUE
+
+		if("overwatch_teleport")
+			var/x = text2num(params["x"])
+			var/y = text2num(params["y"])
+			var/z = text2num(params["z"])
+			if(isnull(x) || isnull(y) || isnull(z) || !usr.client)
+				return FALSE
+
+			var/client/C = usr.client
+			if(!isobserver(usr))
+				if(!C.holder)
+					return FALSE
+				C.admin_ghost()
+				sleep(2)
+
+			C.jumptocoord(x, y, z)
 			return TRUE
 		
 		if("ticket_pp")
@@ -616,17 +636,20 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 //message from the initiator without a target, all admins will see this
 //won't bug irc
-/datum/admin_help/proc/MessageNoRecipient(msg)
+/datum/admin_help/proc/MessageNoRecipient(msg, play_sound = TRUE)
 	msg = copytext_char(msg, 1, MAX_MESSAGE_LEN)
 	var/ref_src = "[REF(src)]"
 	// Simplified message to be sent to all admins, including title and a handle button
-	var/admin_msg = span_adminnotice("<span class='adminhelp'>Ticket #[id]: [name] ([initiator_ckey]) - [TicketHref("Show Ticket", ref_src)] [TicketHref("Handle", ref_src, "handleissue")]</span>")
+	var/admin_msg = span_adminnotice("<span class='adminhelp'>Ticket #[id]: [name] ([initiator_ckey]) - [TicketHref("Show Ticket", ref_src)] [TicketHref("Handle", ref_src, "handleissue")]<br><span class='linkify'>[msg]</span></span>")
 
 	AddInteraction("<font color='red'>[LinkedReplyName(ref_src)]: [msg]</font>")
 
+	// Log full player message content in addition to title
+	log_admin_private("Ticket #[id]: [initiator_key_name] -> Admins: [msg]")
+
 	//send this msg to all admins
 	for(var/client/X in GLOB.admins)
-		if(X.prefs.toggles & SOUND_ADMINHELP)
+		if(play_sound && (X.prefs.toggles & SOUND_ADMINHELP))
 			SEND_SOUND(X, sound('sound/adminhelp.ogg'))
 		window_flash(X, ignorepref = TRUE)
 		to_chat(X, admin_msg)
@@ -816,7 +839,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	var/list/data = list()
 	
 	data["ticket_id"] = id
-	data["ticket_name"] = name
+	data["ticket_name"] = html_decode(name)
 	data["ticket_state"] = state == AHELP_ACTIVE ? "ACTIVE" : (state == AHELP_CLOSED ? "CLOSED" : "RESOLVED")
 	data["can_send"] = (state == AHELP_ACTIVE)
 	data["initiator_ckey"] = initiator_ckey
@@ -867,6 +890,9 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			
 			// Remove this tag
 			clean_text = copytext_char(clean_text, 1, tag_start) + copytext_char(clean_text, tag_end + 1)
+
+		// Decode HTML entities so special characters like ', <, > display correctly
+		clean_text = html_decode(clean_text)
 		
 		// Detect message type and parse accordingly
 		if(findtext(rest, "<font color='red'>"))
@@ -948,7 +974,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 				return FALSE
 			
 			// Send the message
-			MessageNoRecipient(message)
+			MessageNoRecipient(message, FALSE)
 			TimeoutVerb()
 			
 			return TRUE
@@ -1037,7 +1063,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	if(current_ticket)
 		if(alert(usr, "You already have a ticket open. Is this for the same issue?",,"Yes","No") != "No")
 			if(current_ticket)
-				current_ticket.MessageNoRecipient(msg)
+				current_ticket.MessageNoRecipient(msg, FALSE)
 				current_ticket.TimeoutVerb()
 				return
 			else
@@ -1073,12 +1099,15 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	else
 		C = what
 	if(istype(C) && C.current_ticket)
-		C.current_ticket.AddInteraction(message)
-		return C.current_ticket
+		var/datum/admin_help/AH = C.current_ticket
+		// Only log to admin logs; do not expose as a ticket chat message
+		log_admin_private("Ticket #[AH.id]: [message]")
+		return AH
 	if(istext(what))	//ckey
 		var/datum/admin_help/AH = GLOB.ahelp_tickets.CKey2ActiveTicket(what)
 		if(AH)
-			AH.AddInteraction(message)
+			// Only log to admin logs; do not expose as a ticket chat message
+			log_admin_private("Ticket #[AH.id]: [message]")
 			return AH
 
 //
