@@ -8,7 +8,6 @@
 	chargetime = 0
 	penfactor = BLUNT_DEFAULT_PENFACTOR
 	damfactor = 1.1
-	intent_intdamage_factor = 1.15
 	swingdelay = 0
 	icon_state = "instrike"
 	item_d_type = "blunt"
