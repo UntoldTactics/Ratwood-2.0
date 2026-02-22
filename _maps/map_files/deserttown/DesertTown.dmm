@@ -1739,8 +1739,6 @@
 /obj/structure/closet/crate/roguecloset/inn/south{
 	keylock = 1;
 	layer = 4.1;
-	locked = 1;
-	lockid = "nightman";
 	name = "Dressing Closet"
 	},
 /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy/black{
@@ -11725,7 +11723,7 @@
 "gjZ" = (
 /obj/structure/mineral_door/wood/red{
 	locked = 1;
-	lockid = "nightman";
+	lockid = "nightmaiden";
 	name = "Nightmaiden's Quarters"
 	},
 /turf/open/floor/rogue/ruinedwood,
@@ -13586,7 +13584,7 @@
 "hmb" = (
 /obj/structure/mineral_door/wood/red{
 	locked = 1;
-	lockid = "nightman";
+	lockid = "nightmaiden";
 	name = "PRIVATE Quarters"
 	},
 /turf/open/floor/rogue/blocks/stonered,
@@ -17234,8 +17232,8 @@
 "jrA" = (
 /obj/structure/mineral_door/wood/donjon{
 	locked = 1;
-	lockid = "nightman";
-	name = "Pleasure Room"
+	name = "Pleasure Room";
+	lockid = "nightmaiden"
 	},
 /turf/open/floor/rogue/blocks/stonered,
 /area/rogue/indoors/deserttown/bath)
@@ -22946,6 +22944,16 @@
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/manor)
+"mBX" = (
+/obj/structure/mineral_door/wood/red{
+	locked = 1;
+	lockid = "nightmaiden";
+	name = "PRIVATE Quarters"
+	},
+/turf/open/floor/rogue/darkpath{
+	color = "#c4abff"
+	},
+/area/rogue/indoors/deserttown/bath)
 "mCb" = (
 /obj/structure/closet/crate/chest,
 /obj/effect/spawner/lootdrop/roguetown/sewers,
@@ -23393,7 +23401,7 @@
 "mPo" = (
 /obj/structure/mineral_door/wood/donjon{
 	locked = 1;
-	lockid = "nightman";
+	lockid = "nightmaiden";
 	name = "Pleasure Room";
 	dir = 1
 	},
@@ -24721,7 +24729,7 @@
 "nxi" = (
 /obj/structure/mineral_door/wood/red{
 	locked = 1;
-	lockid = "nightman";
+	lockid = "nightmaiden";
 	name = "Negotiations"
 	},
 /turf/open/floor/rogue/blocks/stonered,
@@ -25156,8 +25164,8 @@
 "nJf" = (
 /obj/structure/mineral_door/wood/donjon{
 	dir = 4;
-	lockid = "nightman";
-	name = "Whitevein Lounge"
+	lockid = "nightmaiden";
+	name = "Mirage Lounge"
 	},
 /turf/open/floor/rogue/blocks/stonered,
 /area/rogue/indoors/deserttown/bath)
@@ -38560,8 +38568,8 @@
 /obj/structure/drape/zybantine,
 /obj/structure/mineral_door/wood/donjon{
 	dir = 0;
-	lockid = "nightman";
-	name = "Whitevein Lounge"
+	lockid = "nightmaiden";
+	name = "Mirage Lounge"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/bath)
@@ -42216,7 +42224,7 @@
 /area/rogue/indoors/deserttown/shop)
 "wNj" = (
 /obj/structure/mineral_door/bars{
-	lockid = "nightman";
+	lockid = "nightmaiden";
 	name = "Cell Door"
 	},
 /turf/open/floor/rogue/sandbrick{
@@ -44203,8 +44211,6 @@
 /obj/structure/closet/crate/roguecloset/inn/south{
 	keylock = 1;
 	layer = 4.1;
-	locked = 1;
-	lockid = "nightman";
 	name = "Dressing Closet"
 	},
 /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy/black{
@@ -118487,8 +118493,8 @@ wtb
 saX
 saX
 jAJ
-saX
-saX
+iDI
+jAJ
 jAJ
 dHi
 uHZ
@@ -118788,10 +118794,10 @@ iDI
 jAJ
 saX
 saX
-saX
-jAJ
-saX
 xyf
+mBX
+xyf
+saX
 dHi
 uHZ
 iDI
