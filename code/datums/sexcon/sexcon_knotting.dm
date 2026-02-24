@@ -333,7 +333,7 @@
 				creampie.refresh_cum()
 			if(!btm.has_status_effect(/datum/status_effect/knot_gaped))
 				var/obj/item/organ/testicles/testes = top.getorganslot(ORGAN_SLOT_TESTICLES)
-				if(testes && testes.ball_size > DEFAULT_TESTICLES_SIZE)
+				if(testes?.ball_size > DEFAULT_TESTICLES_SIZE)
 					btm.apply_status_effect(/datum/status_effect/creampie_leak/long)
 				else
 					btm.apply_status_effect(/datum/status_effect/creampie_leak)

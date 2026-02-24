@@ -336,7 +336,7 @@
 	log_combat(user, target, "Came onto the target")
 	playsound(target, 'sound/misc/mat/endout.ogg', 50, TRUE, ignore_walls = FALSE)
 	var/obj/item/organ/testicles/testes = user.getorganslot(ORGAN_SLOT_TESTICLES)
-	add_cum_floor(get_turf(target), do_big_puddle = testes && testes.ball_size > DEFAULT_TESTICLES_SIZE)
+	add_cum_floor(get_turf(target), do_big_puddle = testes?.ball_size > DEFAULT_TESTICLES_SIZE)
 	if(splashed_user)
 		var/datum/status_effect/facial/facial = splashed_user.has_status_effect(/datum/status_effect/facial)
 		if(!facial)
@@ -362,7 +362,7 @@
 			splashed_type.refresh_cum()
 		if(!oral)
 			var/obj/item/organ/testicles/testes = user.getorganslot(ORGAN_SLOT_TESTICLES)
-			if(testes && testes.ball_size > DEFAULT_TESTICLES_SIZE)
+			if(testes?.ball_size > DEFAULT_TESTICLES_SIZE)
 				splashed_user.apply_status_effect(/datum/status_effect/creampie_leak/long)
 			else
 				splashed_user.apply_status_effect(/datum/status_effect/creampie_leak)
@@ -428,7 +428,7 @@
 	user.visible_message(span_love("[user] makes a mess!"))
 	playsound(user, 'sound/misc/mat/endout.ogg', 50, TRUE, ignore_walls = FALSE)
 	var/obj/item/organ/testicles/testes = user.getorganslot(ORGAN_SLOT_TESTICLES)
-	add_cum_floor(get_turf(user), do_big_puddle = testes && testes.ball_size > DEFAULT_TESTICLES_SIZE)
+	add_cum_floor(get_turf(user), do_big_puddle = testes?.ball_size > DEFAULT_TESTICLES_SIZE)
 	after_ejaculation()
 
 /datum/sex_controller/proc/ejaculate_container(obj/item/reagent_containers/glass/C)
@@ -438,7 +438,7 @@
 		playsound(user, 'sound/misc/mat/endout.ogg', 50, TRUE, ignore_walls = FALSE)
 		if(user.getorganslot(ORGAN_SLOT_PENIS))
 			var/obj/item/organ/testicles/testes = user.getorganslot(ORGAN_SLOT_TESTICLES)
-			C.reagents.add_reagent(/datum/reagent/erpjuice/cum, testes && testes.ball_size > DEFAULT_TESTICLES_SIZE ? 6 : 3)
+			C.reagents.add_reagent(/datum/reagent/erpjuice/cum, testes?.ball_size > DEFAULT_TESTICLES_SIZE ? 6 : 3)
 		else
 			C.reagents.add_reagent(/datum/reagent/erpjuice/femcum, 2)
 	after_ejaculation()
