@@ -625,6 +625,9 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 							// Allow NODROP items (body modifications like skin_armor)
 							if(HAS_TRAIT(I, TRAIT_NODROP))
 								continue
+							// Allow items approved for nude sleepers
+							if(I.nudist_approved)
+								continue
 							// Found clothing that blocks sleeping
 							armor_blocked = TRUE
 							break
@@ -664,6 +667,9 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 								continue
 							// Allow NODROP items (body modifications like skin_armor)
 							if(HAS_TRAIT(I, TRAIT_NODROP))
+								continue
+							// Allow items approved for nude sleepers
+							if(I.nudist_approved)
 								continue
 							// Found clothing that blocks sleeping
 							armor_blocked = TRUE
