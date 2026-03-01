@@ -23,9 +23,9 @@
 		/datum/skill/craft/carpentry = SKILL_LEVEL_JOURNEYMAN, //Build your gooncave 
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/misc/medicine = SKILL_LEVEL_EXPERT, //Disgraced medicine man. 
+		/datum/skill/misc/medicine = SKILL_LEVEL_LEGENDARY, //Disgraced medicine man. 
 		/datum/skill/craft/sewing = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/craft/alchemy = SKILL_LEVEL_MASTER, // This is literally their whole thing
+		/datum/skill/craft/alchemy = SKILL_LEVEL_LEGENDARY, // This is literally their whole thing
 		/datum/skill/labor/farming = SKILL_LEVEL_JOURNEYMAN, // Farm ingredients so you have something to do that isn't grinding skills
 	)
 
