@@ -73,8 +73,37 @@
 
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
 	target.apply_damage(5, BRUTE, target_zone)
+
+	// Remove frostbite from treated limb
 	if(bodypart)
 		for(var/datum/wound/frostbite/F in bodypart.wounds)
 			qdel(F)
+
+	// Check if ANY frostbite wounds remain for overlay reasons
+	var/has_frostbite = FALSE
+	var/list/zones = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_LEG,
+		BODY_ZONE_L_LEG
+	)
+
+	for(var/zone in zones)
+		var/obj/item/bodypart/BP = target.get_bodypart(zone)
+		if(!BP)
+			continue
+
+		for(var/datum/wound/W in BP.wounds)
+			if(istype(W, /datum/wound/frostbite))
+				has_frostbite = TRUE
+				break
+
+		if(has_frostbite)
+			break
+	// Only clear frostbite overlay if theres no other frostbites left
+	if(!has_frostbite)
+		target.clear_fullscreen("frostbite")
 
 	return TRUE

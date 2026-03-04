@@ -1,6 +1,6 @@
 //Snow - goes down and swirls
 /particles/weather/snow
-	icon_state             = list("cross"=2, "snow_1"=5, "snow_2"=2, "snow_3"=2,)
+	icon_state             = list("cross"=2, "snow_1"=5, "snow_2"=2, "snow_3"=2)
 	color                  = "#ffffff"
 	position               = generator("box", list(-500,-256,5), list(500,500,0))
 	spin                   = generator("num",-10,10)
@@ -9,10 +9,25 @@
 	friction               = 0.3  // shed 30% of velocity and drift every 0.1s
 	transform 			   = null // Looks weird without it
 	//Weather effects, max values
-	maxSpawning           = 50
+	maxSpawning           = 30
+	minSpawning           = 5
+	wind                  = 2
+	count                  = 150 // 15 particles
+
+/particles/weather/snow/storm
+	icon_state             = list("cross"=2, "snow_1"=5, "snow_2"=2, "snow_3"=2, "puff"= 1)
+	color                  = "#ffffff"
+	position               = generator("box", list(-500,-256,5), list(500,500,0))
+	spin                   = generator("num",-10,10)
+	gravity                = list(0, -4, 0.5)
+	drift                  = generator("circle", 0, 3) // Some random movement for variation
+	friction               = 0.3  // shed 30% of velocity and drift every 0.1s
+	transform 			   = null // Looks weird without it
+	//Weather effects, max values
+	maxSpawning           = 80
 	minSpawning           = 10
 	wind                  = 2
-
+	count                  = 3000
 /datum/particle_weather/snow_gentle
 	name = "Snowfall"
 	desc = "Gentle Snow, la la description."
@@ -43,7 +58,7 @@
 /datum/particle_weather/snow_storm
 	name = "Snow storm"
 	desc = "Snow storm, la la description."
-	particleEffectType = /particles/weather/snow
+	particleEffectType = /particles/weather/snow/storm
 	warning_message = span_greenannounce("Heavy clouds build in the sky as the air chills across the realm, soft white specs appearing near warm breaths.")
 	late_warning_message = span_greenannounce("Heavy snow begins to fall thick and fast.")
 	scale_vol_with_severity = TRUE
@@ -66,9 +81,9 @@
 /datum/particle_weather/snow_storm/weather_act(mob/living/L)
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		H.apply_weather_temperature(-rand(1.5,3))
+		H.apply_weather_temperature(-rand(1.5,5))
 	else
-		L.adjust_bodytemperature(-rand(1.5,3))
+		L.adjust_bodytemperature(-rand(1.5,5))
 
 /turf
 	var/turf_flags = TURF_EFFECT_AFFECTABLE

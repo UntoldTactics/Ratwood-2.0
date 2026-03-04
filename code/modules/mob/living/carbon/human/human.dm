@@ -1107,7 +1107,7 @@
 
 		var/has_hypo = FALSE
 		for(var/datum/wound/W in BP.wounds)
-			if(istype(W, /datum/wound/hypothermia))
+			if(istype(W, /datum/wound/hypothermia) || istype(W, /datum/wound/frostbite))
 				has_hypo = TRUE
 
 		if(!has_hypo)
@@ -1124,7 +1124,7 @@
 		BP.add_wound(/datum/wound/hypothermia)
 
 
-/mob/living/carbon/human/proc/apply_heatstroke()
+/mob/living/carbon/human/proc/apply_heatexhaust()
 	var/mob/living/carbon/human/H = src
 	if(H.bodytemperature <= BODYTEMP_HEAT_LEVEL_ONE_MAX)	//if not hot enough after timer, kill
 		return
@@ -1132,16 +1132,16 @@
 	var/def_zone = BODY_ZONE_HEAD
 	var/obj/item/bodypart/BP = H.get_bodypart(def_zone)
 	for(var/datum/wound/W in BP.wounds)
-		if(istype(W, /datum/wound/heatstroke))
+		if(istype(W, /datum/wound/heatexhaustion)||istype(W, /datum/wound/heatstroke))
 			return
 	if(BP)
 		to_chat(H, span_userdanger("My head is spinning and I feel terrible!"))
-		BP.add_wound(/datum/wound/heatstroke)
+		BP.add_wound(/datum/wound/heatexhaustion)
 		BP.update_disabled()
 
 /mob/living/carbon/human/proc/relieve_heatstroke_from_cold()
 	var/found = FALSE
-
+	clear_fullscreen("heatstroke")
 	for(var/obj/item/bodypart/BP in bodyparts)
 		if(!length(BP.wounds))
 			continue

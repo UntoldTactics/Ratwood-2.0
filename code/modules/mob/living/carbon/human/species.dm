@@ -2212,7 +2212,7 @@ GLOBAL_VAR_INIT(cold_breath_overlay, mutable_appearance(
 		if(H.bodytemperature >= BODYTEMP_HEAT_LEVEL_ONE_MAX)
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, heat_warn)),20 SECONDS,TIMER_UNIQUE | TIMER_STOPPABLE | TIMER_NO_HASH_WAIT)
 			if(!H.heatstroke_timer_id)
-				H.heatstroke_timer_id = addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, apply_heatstroke)),3 MINUTES ,TIMER_STOPPABLE)
+				H.heatstroke_timer_id = addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, apply_heatexhaust)),2 MINUTES ,TIMER_STOPPABLE)
 
 		else	//level 1 heat
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, heat_warn)),20 SECONDS,TIMER_UNIQUE | TIMER_STOPPABLE | TIMER_NO_HASH_WAIT)

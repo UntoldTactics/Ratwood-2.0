@@ -462,6 +462,61 @@
 		return FALSE
 	return TRUE
 
+/datum/wound/heatexhaustion
+	name = "heat exhaustion"
+	check_name = span_warning("HEATEXHAUSTION")
+	severity = 0
+	crit_message = ""
+	whp = null
+	woundpain = 0
+	mob_overlay = "cut"
+	can_sew = FALSE
+	can_cauterize = FALSE
+	critical = FALSE
+	sleep_healing = 0
+	bleed_rate = 0
+	clotting_threshold = 0
+	clotting_rate = 0
+	bypass_bloody_wound_check = TRUE
+
+	var/start_time
+	var/duration = 1 MINUTES
+
+/datum/wound/heatexhaustion/on_mob_gain(mob/living/affected)
+	. = ..()
+	start_time = world.time
+	if(!owner.stat)
+		to_chat(owner, span_warning("A wave of heat washes over me... I feel faint."))
+	owner.overlay_fullscreen("heatexhaust", /atom/movable/screen/fullscreen/heatexhaust)
+
+/datum/wound/heatexhaustion/on_life()
+	. = ..()
+
+	if(!iscarbon(owner))
+		return
+
+	var/mob/living/carbon/C = owner
+
+	// If cooled off, remove heat exhaustion
+	if(C.bodytemperature <= BODYTEMP_NORMAL_MAX)
+		to_chat(C, span_notice("Cool air steadies me. The worst of the heat passes."))
+		C.clear_fullscreen("heatexhaust")
+		qdel(src)
+		return
+
+	// Occasional discomfort message
+	if(!C.stat && prob(5))
+		to_chat(C, span_warning("My vision swims from the heat..."))
+
+	// After 1 minute, convert to heatstroke
+	if(world.time >= start_time + duration)
+		var/obj/item/bodypart/BP = bodypart_owner
+		if(BP)
+			to_chat(C, span_userdanger("The heat overwhelms me!"))
+			BP.add_wound(/datum/wound/heatstroke)
+		C.clear_fullscreen("heatexhaust")
+		qdel(src)
+
 /datum/wound/heatstroke
 	name = "heatstroke"
 	check_name = span_warning("HEATSTROKE")
@@ -479,6 +534,10 @@
 	clotting_rate = 0
 	bypass_bloody_wound_check = TRUE
 
+/datum/wound/heatstroke/on_mob_gain(mob/living/affected)
+	. = ..()
+	owner.overlay_fullscreen("heatstroke", /atom/movable/screen/fullscreen/heatstroke)
+
 /datum/wound/heatstroke/on_life()
 	. = ..()
 	if(!iscarbon(owner))
@@ -489,6 +548,7 @@
 			carbon_owner.vomit(1, blood = FALSE, stun = TRUE)
 		to_chat(owner, span_warning("The world is spinning!"))
 		carbon_owner.Dizzy(10)
+
 /datum/wound/heatstroke/on_mob_loss()
 	. = ..()
 	if(!iscarbon(owner))
@@ -521,6 +581,7 @@
 	. = ..()
 	last_stage_tick = world.time
 	update_stage_name()
+	owner.overlay_fullscreen("frostbite", /atom/movable/screen/fullscreen/frostbite)
 
 /datum/wound/frostbite/on_life()
 	. = ..()
@@ -539,6 +600,7 @@
 
 			if(stage >= 1)
 				to_chat(C, span_notice("The feeling slowly returns to my [BP]..."))
+				disabling = FALSE
 				update_stage_name()
 			else
 				stage = 1
@@ -554,6 +616,7 @@
 				to_chat(C, span_userdanger("My [BP] is completely numb..."))
 			if(3)
 				to_chat(C, span_userdanger("My [BP] feels dead and brittle!"))
+				disabling = TRUE
 
 	// Damage scaling per stage
 	if(!C.stat && prob(30))
@@ -583,6 +646,7 @@
 
 	check_name = span_blue("FROSTBITE ([stage_text])")
 
+
 /datum/wound/hypothermia
 	name = "hypothermia"
 	check_name = span_blue("HYPOTHERMIA")
@@ -606,6 +670,7 @@
 /datum/wound/hypothermia/on_mob_gain(mob/living/affected)
 	. = ..()
 	start_time = world.time
+	owner.overlay_fullscreen("hypothermia", /atom/movable/screen/fullscreen/hypothermia)
 
 /datum/wound/hypothermia/on_life()
 	. = ..()
@@ -618,6 +683,7 @@
 	// If warmed up, remove hypothermia
 	if(C.bodytemperature >= BODYTEMP_NORMAL_MIN)
 		to_chat(C, span_notice("Feeling returns to my body as I warm up."))
+		C.clear_fullscreen("hypothermia")
 		qdel(src)
 		return
 
