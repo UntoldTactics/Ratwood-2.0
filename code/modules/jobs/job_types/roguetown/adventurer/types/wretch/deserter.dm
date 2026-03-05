@@ -345,7 +345,7 @@
 				ADD_TRAIT(H, TRAIT_EQUESTRIAN, TRAIT_GENERIC)
 				H.adjust_skillrank_up_to(/datum/skill/misc/riding, SKILL_LEVEL_EXPERT, TRUE)
 				cloak = /obj/item/clothing/cloak/stabard/surcoat
-				to_chat(H, span_warning("You and your steed are partners in crime. Foregoing pretense and preludes, you swiftly attack travellers on roads and leave them penniless and stunned."))
+				to_chat(H, span_warning("You and your steed are partners in crime. Forgoing pretense and preludes, you swiftly attack travellers on roads and leave them penniless and stunned."))
 			if("Raider - Strength & Brutality") //Alternative stat spread focused on STR and CON, can safely rob graves and has strong bites.
 				ADD_TRAIT(H, TRAIT_STRONGBITE, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
