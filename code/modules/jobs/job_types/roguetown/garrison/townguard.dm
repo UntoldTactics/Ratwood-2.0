@@ -61,13 +61,6 @@
 	backr = /obj/item/storage/backpack/rogue/satchel
 	id = /obj/item/scomstone/bad/garrison
 
-	backpack_contents = list(
-		/obj/item/rogueweapon/huntingknife/idagger/steel = 1,
-		/obj/item/rope/chain = 1,
-		/obj/item/storage/keyring/guardcastle = 1,
-		/obj/item/rogueweapon/scabbard/sheath = 1,
-		)
-
 /datum/advclass/guardsman/cityguard
 	name = "City Guard"
 	tutorial = "Responsible for the safety of the city and the enforcement of the law, \
@@ -116,7 +109,7 @@
 		switch(weapon_choice)
 			if("Stunmace & Shield")
 				r_hand = /obj/item/rogueweapon/mace/stunmace
-				backl = /obj/item/rogueweapon/shield/iron
+				backl = /obj/item/rogueweapon/shield/heater
 				H.adjust_skillrank_up_to(/datum/skill/combat/maces, SKILL_LEVEL_EXPERT, TRUE)
 			if("Maul - 14STR Minimum")
 				r_hand = /obj/item/rogueweapon/mace/maul
@@ -127,5 +120,12 @@
 				backl = /obj/item/quiver/bolts
 				H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_MASTER, TRUE)
 				H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_MASTER, TRUE)
+
+		backpack_contents = list(
+			/obj/item/rogueweapon/huntingknife/idagger/steel = 1,
+			/obj/item/rope/chain = 1,
+			/obj/item/storage/keyring/guardcastle = 1,
+			/obj/item/rogueweapon/scabbard/sheath = 1,
+			)
 
 	H.verbs |= /mob/proc/haltyell
