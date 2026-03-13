@@ -403,7 +403,7 @@ GLOBAL_LIST_EMPTY(round_join_times)
 #define CLASS_CAT_ETRUSCA "Etrusca"
 #define CLASS_CAT_GRENZELHOFT "Grenzelhoft"
 #define CLASS_CAT_NALEDI "Naledi"
-#define CLASS_CAT_ZYBANTU "Zybantu"
+#define CLASS_CAT_ZYBANTU "Zybantium"
 #define CLASS_CAT_AAVNR "Aavnr"
 #define CLASS_CAT_HAMMERHOLD "Hammerhold"
 #define CLASS_CAT_GRONN "Gronn"
