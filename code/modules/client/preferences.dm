@@ -111,6 +111,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/phobia = "spiders"
 	var/shake = TRUE
 	var/sexable = FALSE
+	var/chastenable = FALSE
+	var/chastity_hardmode = CHASTITY_HARDMODE_DISABLED
 	var/compliance_notifs = TRUE
 	var/restricted_species_pref = null
 	var/wildshape_name = TRUE

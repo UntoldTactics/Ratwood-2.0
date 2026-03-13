@@ -9,6 +9,8 @@
 		return FALSE
 	if(!target.getorganslot(ORGAN_SLOT_PENIS))
 		return FALSE
+	if(target.sexcon.has_chastity_penis())
+		return FALSE
 	return TRUE
 
 /datum/sex_action/force_titjob/can_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -21,6 +23,8 @@
 	if(!target.getorganslot(ORGAN_SLOT_PENIS))
 		return FALSE
 	if(!user.getorganslot(ORGAN_SLOT_BREASTS))
+		return FALSE
+	if(target.sexcon.has_chastity_penis())
 		return FALSE
 	return TRUE
 

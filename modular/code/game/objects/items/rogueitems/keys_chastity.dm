@@ -6,31 +6,9 @@
 	icon_state = "mazekey" // Puritanical type key, Astrata smiles on the abstinent.
 
 /obj/item/roguekey/chastity/attack_self(mob/user)
-	if(!hardmode_indestructible)
+	if(!ishuman(user))
 		return ..()
-	
-	// Hard mode keys require confirmation to destroy
-	var/confirm = alert(user,
-		"This key bears the mark of a permanent binding.\n\n\
-		Destroying it may condemn someone to eternal chastity.\n\n\
-		Do you truly wish to destroy this key?",
-		"Destroy Binding Key",
-		"Yes, destroy it forever",
-		"No, preserve it")
-	
-	if(confirm != "Yes, destroy it forever")
-		to_chat(user, span_notice("You decide the key is too important to destroy."))
-		return
-	
-	user.visible_message(
-		span_boldwarning("[user] snaps [src] in half with deliberate finality!"),
-		span_boldwarning("You destroy [src]. Someone's fate is now sealed..."))
-	
-	log_game("[key_name(user)] destroyed hard mode chastity key [src] (hash: [lockhash]).")
-	message_admins("[key_name_admin(user)] destroyed hard mode chastity key (hash: [lockhash]).")
-	
-	playsound(src, 'sound/items/gem.ogg', 50, TRUE)
-	qdel(src)
+	return attack(user, user, user.zone_selected)
 
 /obj/item/roguekey/chastity/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(target == user && ishuman(user))
@@ -43,15 +21,16 @@
 		return ..()
 
 	var/mob/living/carbon/human/H = M
-	var/obj/item/chastity/device = H.chastity_device
 	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 		to_chat(user, span_warning("[H]'s groin is covered. I can't see a cage let alone unlock one!"))
 		return
-	if(!device)
+	if(!H.chastity_device)
 		to_chat(user, span_warning("[H] isn't wearing a chastity device. Against Astrata's Will their genitals are free ranged."))
 		return TRUE
+
+	var/obj/item/chastity/device = H.chastity_device
 	if(!device.lockable)
-		to_chat(user, span_warning("[H]'s chastity device cannot be manipulated with a key."))
+		to_chat(user, span_warning(device.chastity_cursed ? pick(GLOB.chastity_cursed_lock) : pick(GLOB.chastity_lock_denial)))
 		playsound(src, 'sound/foley/doors/lockrattle.ogg', 100)
 		return TRUE
 
@@ -71,12 +50,6 @@
 			playsound(src, 'sound/foley/doors/lockrattle.ogg', 100)
 			return TRUE
 
-	var/new_locked_state = !device.locked
-	if(SEND_SIGNAL(H, COMSIG_CARBON_CHASTITY_LOCK_INTERACT, user, src, new_locked_state, "key") & COMPONENT_CHASTITY_LOCK_INTERACT_BLOCK)
-		to_chat(user, span_warning("[H]'s chastity lock resists [src]."))
-		playsound(src, 'sound/foley/doors/lockrattle.ogg', 100)
-		return TRUE
-
 	if(device.locked)
 		// Optional fumble: low luck users can snap the key in the lock.
 		var/break_chance = 0
@@ -93,10 +66,10 @@
 
 		user.visible_message(span_notice("[user] unlocks [H]'s chastity device with [src]."))
 		playsound(src, 'sound/foley/doors/lock.ogg', 100)
+		device.set_chastity_locked_state(H, FALSE, user, src, "key")
 	else
 		user.visible_message(span_notice("[user] locks [H]'s chastity device with [src]."))
 		playsound(src, 'sound/foley/doors/lock.ogg', 100)
-
-	device.set_chastity_locked_state(H, new_locked_state, user, src, "key", "lock_changed_key")
+		device.set_chastity_locked_state(H, TRUE, user, src, "key")
 
 	return TRUE

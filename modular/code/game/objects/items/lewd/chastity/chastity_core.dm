@@ -259,6 +259,7 @@ GLOBAL_LIST_INIT(chastity_standard_traits, list(
 
 	SEND_SIGNAL(H, COMSIG_CARBON_CHASTITY_LOCK_CHANGED, user, interaction_item, new_locked_state, interaction_source)
 	notify_chastity_state_change(H, state_change_reason)
+	to_chat(H, new_locked_state ? span_warning(pick(GLOB.chastity_lock_click)) : span_notice(pick(GLOB.chastity_unlock_click)))
 	return TRUE
 
 // Our checks for whether the wearer has traits that would cause them to have mood effects related to wearing a chastity device, like the devout or masochist traits, are all based on checking for the presence of the relevant chastity traits that should be applied with each device type, so we need to make sure those traits are applied correctly according to the device type. This proc handles applying those traits on equip and removing them on unequip for standard devices, while cursed devices will handle it separately since their traits can change dynamically based on their cursed state.

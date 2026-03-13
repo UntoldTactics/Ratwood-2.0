@@ -149,7 +149,7 @@
 	locked = !locked
 	apply_cursed_state(H)
 	playsound(H, locked ? 'sound/foley/doors/lock.ogg' : 'sound/foley/doors/unlock.ogg', 50, TRUE)
-	to_chat(H, locked ? span_warning(pick(GLOB.chastity_lock_click)) : span_notice(pick(GLOB.chastity_unlock_click)))
+	to_chat(H, locked ? span_warning(pick(GLOB.chastity_remote_lock)) : span_notice(pick(GLOB.chastity_remote_unlock)))
 	log_cursed_chastity_command(H, CHASTITY_LOG_LOCK, "locked=[locked]")
 	return TRUE
 
@@ -164,7 +164,7 @@
 	locked = new_state
 	apply_cursed_state(H)
 	playsound(H, locked ? 'sound/foley/doors/lock.ogg' : 'sound/foley/doors/unlock.ogg', 50, TRUE)
-	to_chat(H, locked ? span_warning(pick(GLOB.chastity_lock_click)) : span_notice(pick(GLOB.chastity_unlock_click)))
+	to_chat(H, locked ? span_warning(pick(GLOB.chastity_remote_lock)) : span_notice(pick(GLOB.chastity_remote_unlock)))
 	log_cursed_chastity_command(H, CHASTITY_LOG_LOCK, "locked=[locked] changed=TRUE")
 	return TRUE
 

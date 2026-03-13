@@ -30,7 +30,6 @@
     user.visible_message(user.sexcon.spanify_force("[user] [user.sexcon.get_generic_force_adjective()] prods [target]'s anal shield with [user.p_their()] tail."))
     user.sexcon.perform_sex_action(target, 1.1, 3, TRUE)
     target.sexcon.handle_passive_ejaculation(user)
-    apply_silver_intimate_contact("rear", target, user)
 
 /datum/sex_action/chastityplay/tailprod_cage_anal/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
     user.visible_message(span_warning("[user] slips [user.p_their()] tail out from under [target]'s anal shield."))

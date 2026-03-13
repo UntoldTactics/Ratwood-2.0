@@ -58,9 +58,9 @@
 
 	if(pain_amt >= PAIN_HIGH_EFFECT)
 		if(masochist_spiked)
-			to_chat(user, span_love(pick("The chastity spikes bite deep, and a sinful thrill jolts through me!", "Pain blooms hot as the spikes sink in, and I crave more.", "The spikes carve into me, and the agony makes my pulse race.")))
+			to_chat(user, span_love(pick(GLOB.chastity_pain_high_masochist)))
 		else
-			to_chat(user, span_boldwarning("The chastity spikes dig painfully into your flesh!"))
+			to_chat(user, span_boldwarning(pick(GLOB.chastity_pain_high)))
 		user.flash_fullscreen("redflash3")
 		if(prob(70) && user.stat == CONSCIOUS)
 			if(masochist_spiked)
@@ -71,9 +71,9 @@
 
 	if(pain_amt >= PAIN_MED_EFFECT)
 		if(masochist_spiked)
-			to_chat(user, span_love(pick("The spikes press in hard, and I melt into the ache.", "Each jab of the spikes sends a twisted pleasure through me.", "The pressure of the spikes hurts so good.")))
+			to_chat(user, span_love(pick(GLOB.chastity_pain_medium_masochist)))
 		else
-			to_chat(user, span_boldwarning("The chastity spikes dig into your flesh!"))
+			to_chat(user, span_boldwarning(pick(GLOB.chastity_pain_medium)))
 		user.flash_fullscreen("redflash2")
 		if(prob(50) && user.stat == CONSCIOUS)
 			if(masochist_spiked)
@@ -84,9 +84,9 @@
 
 	if(pain_amt >= PAIN_MILD_EFFECT)
 		if(masochist_spiked)
-			to_chat(user, span_love(pick("A light prick from the spikes makes me ache for more.", "The tiny bite of the spikes sends a guilty shiver through me.", "The spikes tease my skin, and I lean into the sting.")))
+			to_chat(user, span_love(pick(GLOB.chastity_pain_low)))
 		else
-			to_chat(user, span_boldwarning("The chastity spikes dig slightly into your flesh!"))
+			to_chat(user, span_boldwarning(pick(GLOB.chastity_pain_low)))
 		user.flash_fullscreen("redflash1")
 		if(prob(30) && user.stat == CONSCIOUS)
 			if(masochist_spiked)
@@ -183,8 +183,6 @@
 	if(HAS_TRAIT(action_target, TRAIT_CHASTITY_SPIKED))
 		arousal_amt *= 0.75
 		pain_amt *= 1.25
-	if(istype(action_target?.intimate_genital, /obj/item/intimate_accessory/piercing/genital/psydonic))
-		pain_amt *= 0.1
 	return list(arousal_amt, pain_amt)
 
 /datum/sex_controller/proc/modular_should_play_chastitycourse_noise(mob/living/carbon/human/action_target)

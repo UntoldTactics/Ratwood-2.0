@@ -5,38 +5,33 @@
 		return null
 
 	var/mob/living/carbon/human/H = M
-	var/obj/item/chastity/device = H.chastity_device
 	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 		to_chat(user, span_warning("[H]'s groin is covered. I can't see a cage let alone unlock one!"))
 		return TRUE
-	if(!device)
+	if(!H.chastity_device)
 		to_chat(user, span_warning("[H] isn't wearing a chastity device. Against Astrata's Will their genitals are free ranged."))
 		return TRUE
-	if(!device.lockable)
-		to_chat(user, span_warning("[H]'s chastity device rejects ordinary lock manipulation."))
-		playsound(src, 'sound/foley/doors/lockrattle.ogg', 100)
-		return TRUE
 
-	// HARD MODE: Duke's key does not work
-	if(device.is_hardmode_active())
-		to_chat(user, span_warning("The lock refuses your key. This is a permanent binding - even ducal authority holds no sway here."))
+	var/obj/item/chastity/device = H.chastity_device
+	if(!device.lockable)
+		to_chat(user, span_warning(device.chastity_cursed ? pick(GLOB.chastity_cursed_lock) : pick(GLOB.chastity_lock_denial)))
 		playsound(src, 'sound/foley/doors/lockrattle.ogg', 100)
 		return TRUE
 
 	var/new_locked_state = !device.locked
 	if(SEND_SIGNAL(H, COMSIG_CARBON_CHASTITY_LOCK_INTERACT, user, src, new_locked_state, "key") & COMPONENT_CHASTITY_LOCK_INTERACT_BLOCK)
-		to_chat(user, span_warning("[H]'s chastity lock resists [src]."))
+		to_chat(user, span_warning(device.chastity_cursed ? pick(GLOB.chastity_cursed_lock) : pick(GLOB.chastity_lock_denial)))
 		playsound(src, 'sound/foley/doors/lockrattle.ogg', 100)
 		return TRUE
 
 	if(device.locked)
 		user.visible_message(span_notice("[user] unlocks [H]'s chastity device with [src]."))
 		playsound(src, 'sound/foley/doors/lock.ogg', 100)
+		device.set_chastity_locked_state(H, FALSE, user, src, "key")
 	else
 		user.visible_message(span_notice("[user] locks [H]'s chastity device with [src]."))
 		playsound(src, 'sound/foley/doors/lock.ogg', 100)
-
-	device.set_chastity_locked_state(H, new_locked_state, user, src, "key", "lock_changed_key")
+		device.set_chastity_locked_state(H, TRUE, user, src, "key")
 
 	return TRUE
 
@@ -48,51 +43,59 @@
 		return TRUE
 
 	var/mob/living/carbon/human/H = M
-	var/obj/item/chastity/device = H.chastity_device
 	if(!get_location_accessible(H, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
-		to_chat(user, span_warning("[H]'s groin is covered. I can't see a cage let alone pick one!"))
+		to_chat(user, span_warning("[H]'s groin is covered. I can't reach the lock."))
 		return TRUE
-	if(!device)
+	if(!H.chastity_device)
 		to_chat(user, span_warning("[H] isn't wearing a chastity device."))
 		return TRUE
+
+	var/obj/item/chastity/device = H.chastity_device
 	if(!device.lockable)
-		to_chat(user, span_warning("[H]'s chastity device cannot be picked."))
+		to_chat(user, span_warning(device.chastity_cursed ? pick(GLOB.chastity_cursed_lock) : pick(GLOB.chastity_lock_denial)))
 		playsound(src, 'sound/items/pickbad.ogg', 40, TRUE)
 		return TRUE
 	if(!device.locked)
-		to_chat(user, span_warning("[H]'s chastity device is already unlocked."))
-		return TRUE
-
-	// HARD MODE: Lockpicking does not work
-	if(device.is_hardmode_active())
-		to_chat(user, span_warning("The mechanism is sealed beyond your skill. This binding cannot be picked."))
-		playsound(src, 'sound/items/pickbad.ogg', 40, TRUE)
+		to_chat(user, span_notice("[H]'s chastity device is already unlocked."))
 		return TRUE
 
 	var/mob/living/carbon/human/U = user
-	var/lockpick_skill = (U.get_skill_level(/datum/skill/misc/lockpicking) || 1)
-	var/base_difficulty = 3
-	var/difficulty_modifier = max(0, base_difficulty - lockpick_skill)
-	var/pick_time = 80 + (difficulty_modifier * 20)
-	var/success_chance = min(90, 30 + (lockpick_skill * 15))
+	var/pickskill = U.get_skill_level(/datum/skill/misc/lockpicking)
+	var/perbonus = U.STAPER / 5
+	var/picktime = clamp(60 - (pickskill * 8), 15, 60)
+	var/pickchance = 25 + (pickskill * 10) + perbonus
+	pickchance *= picklvl
+	pickchance = clamp(pickchance, 5, 95)
 
-	user.visible_message(span_notice("[user] begins picking [H]'s chastity lock..."))
-	playsound(src, 'sound/items/pickgood1.ogg', 40, TRUE)
-
-	if(!do_after(user, pick_time, needhand = TRUE, target = H))
-		to_chat(user, span_warning("I stop picking the lock."))
+	user.visible_message(span_notice("[user] starts picking the lock on [H]'s chastity device..."), span_notice("I start picking the lock on [H]'s chastity device..."))
+	if(!do_after(user, picktime, target = H))
 		return TRUE
 
-	if(prob(success_chance))
-		user.visible_message(span_notice("[user] successfully picks [H]'s chastity lock!"))
-		playsound(src, 'sound/foley/doors/lock.ogg', 100)
-		device.set_chastity_locked_state(H, FALSE, user, src, "lockpick", "lock_changed_lockpick")
-		U.adjust_experience(/datum/skill/misc/lockpicking, round(base_difficulty * 5))
+	// Re-validate after the timed action in case state changed mid-pick.
+	var/obj/item/chastity/current_device = H.chastity_device
+	if(!current_device || !current_device.lockable)
+		to_chat(user, span_warning("The lock is no longer there."))
+		return TRUE
+	if(!current_device.locked)
+		to_chat(user, span_notice("[H]'s chastity device is already unlocked."))
+		return TRUE
+
+	if(prob(pickchance))
+		if(SEND_SIGNAL(H, COMSIG_CARBON_CHASTITY_LOCK_INTERACT, user, src, FALSE, "lockpick") & COMPONENT_CHASTITY_LOCK_INTERACT_BLOCK)
+			playsound(src, 'sound/items/pickbad.ogg', 40, TRUE)
+			to_chat(user, span_warning(current_device.chastity_cursed ? pick(GLOB.chastity_cursed_lock) : pick(GLOB.chastity_lock_denial)))
+			return TRUE
+
+		playsound(src, pick('sound/items/pickgood1.ogg', 'sound/items/pickgood2.ogg'), 30, TRUE)
+		to_chat(user, span_green("The lock gives way."))
+		current_device.set_chastity_locked_state(H, FALSE, user, src, "lockpick")
+		if(U.mind)
+			add_sleep_experience(U, /datum/skill/misc/lockpicking, U.STAINT / 2)
 	else
-		to_chat(user, span_warning("I fail to pick the lock."))
 		playsound(src, 'sound/items/pickbad.ogg', 40, TRUE)
-		if(prob(10))
-			to_chat(user, span_warning("My lockpick breaks!"))
-			qdel(src)
+		take_damage(1, BRUTE, "blunt")
+		to_chat(user, span_warning("Clack."))
+		if(U.mind)
+			add_sleep_experience(U, /datum/skill/misc/lockpicking, U.STAINT / 4)
 
 	return TRUE

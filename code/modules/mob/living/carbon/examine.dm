@@ -76,6 +76,10 @@
 
 	if(HAS_TRAIT(src, TRAIT_DUMB))
 		msg += "[t_He] seem[p_s()] to be clumsy and unable to think.\n"
+	
+	var/list/modular_lines = carbon_modular_examine_lines(user, t_He, m1, m2, m3)
+	if(length(modular_lines))
+		msg += modular_lines
 
 	if(has_status_effect(/datum/status_effect/fire_handler/fire_stacks))
 		msg += "[t_He] [t_is] covered in something flammable.\n"
@@ -112,3 +116,10 @@
 	. += "✠ ------------ ✠</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
+
+/mob/living/carbon/proc/carbon_modular_examine_lines(mob/user, t_He, m1, m2, m3)
+	var/list/lines = list()
+	var/list/ext_lines = carbon_modular_examine_extension(user, t_He, m1, m2, m3)
+	if(length(ext_lines))
+		lines += ext_lines
+	return lines

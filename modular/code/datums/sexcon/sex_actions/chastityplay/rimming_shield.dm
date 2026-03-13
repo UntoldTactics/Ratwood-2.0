@@ -28,8 +28,6 @@
 	user.visible_message(user.sexcon.spanify_force("[user] [user.sexcon.get_generic_force_adjective()] wriggles their tongue under [target]'s anal shield..."))
 	user.sexcon.oralcourse_noise(user)
 	user.sexcon.do_thrust_animate(target)
-	apply_silver_intimate_contact("rear", target, user)
-	apply_silver_intimate_contact("mouth", user, target)
 
 	user.sexcon.perform_sex_action(target, 2, 0, TRUE)
 	if(target.sexcon.check_active_ejaculation())

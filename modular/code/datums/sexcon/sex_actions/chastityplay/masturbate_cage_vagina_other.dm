@@ -30,7 +30,6 @@
     user.visible_message(user.sexcon.spanify_force("[user] [user.sexcon.get_generic_force_adjective()] rubs and presses over [target]'s locked slit..."))
     user.sexcon.perform_sex_action(target, 1.8, 0.5, TRUE)
     target.sexcon.handle_passive_ejaculation(user)
-    apply_silver_intimate_contact("genital", target, user)
 
 /datum/sex_action/chastityplay/masturbate_cage_vagina_other/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
     user.visible_message(span_warning("[user] stops rubbing [target]'s locked slit."))

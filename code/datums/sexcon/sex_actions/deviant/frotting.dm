@@ -10,6 +10,10 @@
 		return FALSE
 	if(!target.getorganslot(ORGAN_SLOT_PENIS))
 		return FALSE
+	if(user.sexcon.has_chastity_penis())
+		return FALSE
+	if(target.sexcon.has_chastity_penis())
+		return FALSE
 	return TRUE
 
 /datum/sex_action/frotting/can_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -22,6 +26,10 @@
 	if(!user.getorganslot(ORGAN_SLOT_PENIS))
 		return FALSE
 	if(!target.getorganslot(ORGAN_SLOT_PENIS))
+		return FALSE
+	if(target.sexcon.has_chastity_penis())
+		return FALSE
+	if(user.sexcon.has_chastity_penis())
 		return FALSE
 	return TRUE
 

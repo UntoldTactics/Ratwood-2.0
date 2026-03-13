@@ -8,7 +8,11 @@
 		return FALSE
 	if(!target.getorganslot(ORGAN_SLOT_PENIS) && !target.getorganslot(ORGAN_SLOT_VAGINA))
 		return FALSE
-	return TRUE
+	if(target.getorganslot(ORGAN_SLOT_PENIS) && !target.sexcon.has_chastity_penis())
+		return TRUE
+	if(target.getorganslot(ORGAN_SLOT_VAGINA) && !target.sexcon.has_chastity_vagina())
+		return TRUE
+	return FALSE
 
 /datum/sex_action/force_milk_genitals/can_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	var/holding = user.get_active_held_item()
@@ -20,7 +24,11 @@
 		return FALSE
 	if(!target.getorganslot(ORGAN_SLOT_PENIS) && !target.getorganslot(ORGAN_SLOT_VAGINA))
 		return FALSE
-	return TRUE
+	if(target.getorganslot(ORGAN_SLOT_PENIS) && !target.sexcon.has_chastity_penis())
+		return TRUE
+	if(target.getorganslot(ORGAN_SLOT_VAGINA) && !target.sexcon.has_chastity_vagina())
+		return TRUE
+	return FALSE
 
 /datum/sex_action/force_milk_genitals/on_start(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	user.visible_message(span_warning("[user] starts masturbating [target] over [user.get_active_held_item()]..."))

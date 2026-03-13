@@ -27,8 +27,6 @@
 /datum/sex_action/chastityplay/cage_cunnilingus/on_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
     user.visible_message(user.sexcon.spanify_force("[user] [user.sexcon.get_generic_force_adjective()] laps at [target]'s belt through the front slits..."))
     user.sexcon.oralcourse_noise(target)
-    apply_silver_intimate_contact("genital", target, user)
-    apply_silver_intimate_contact("mouth", user, target)
 
     user.sexcon.perform_sex_action(target, 1.8, 0, TRUE)
     target.sexcon.handle_passive_ejaculation(user)

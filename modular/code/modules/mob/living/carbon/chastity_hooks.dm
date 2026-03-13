@@ -6,38 +6,53 @@
 		return TRUE
 	if(!chastity_device)
 		return TRUE
-	
-	// HARD MODE: Locked devices cannot be removed at all
-	if(chastity_device.is_hardmode_active() && HAS_TRAIT(src, TRAIT_CHASTITY_LOCKED))
-		to_chat(user, span_warning("The device is sealed by a permanent binding. No amount of force will break it - only the key."))
-		return TRUE
-	
 	if(HAS_TRAIT(src, TRAIT_CHASTITY_LOCKED))
 		to_chat(user, span_warning("I can't remove [src]'s chastity device while it's locked!"))
 		return TRUE
-	
-	user.visible_message(span_notice("[user] removes [src]'s chastity device."))
-	chastity_device.remove_chastity(src)
-	if(!user.put_in_hands(chastity_device))
-		chastity_device.forceMove(get_turf(src))
+	user.visible_message(span_warning("[user] starts removing [src]'s [chastity_device.name]."),span_warning("I start removing [src]'s [chastity_device.name]..."))
+	if(do_after(user, 50, needhand = 1, target = src))
+		var/obj/item/chastity/device = chastity_device
+		if(!device)
+			return TRUE
+		device.remove_chastity(src)
+		if(iscarbon(user))
+			var/mob/living/carbon/carbon_user = user
+			if(!carbon_user.put_in_hands(device))
+				device.forceMove(get_turf(src))
+		else
+			device.forceMove(get_turf(src))
 	return TRUE
 
 /mob/living/carbon/human/proc/modular_handle_chastity_middleclick_strip(mob/user)
 	if(!user)
 		return TRUE
-	if(chastity_device && !chastity_device.locked)
-		return modular_handle_chastitything(user)
 
 	if(chastity_device && chastity_device.locked)
-		// HARD MODE: Chisel removal blocked
-		if(chastity_device.is_hardmode_active())
-			to_chat(user, span_warning("The metal refuses to yield. This binding cannot be broken by mortal tools."))
-			playsound(src, 'sound/items/pickbad.ogg', 40, TRUE)
-			return TRUE
-		
-		if(chastity_device.attempt_forced_removal(src, user))
-			return TRUE
-	return FALSE
+		var/has_hammer = FALSE
+		var/has_chisel = FALSE
+		for(var/obj/item/held_item in user.held_items)
+			if(istype(held_item, /obj/item/rogueweapon/hammer))
+				has_hammer = TRUE
+			if(istype(held_item, /obj/item/rogueweapon/chisel))
+				has_chisel = TRUE
+		if(has_hammer && has_chisel)
+			var/obj/item/chastity/locked_device = chastity_device
+			if(locked_device)
+				locked_device.attempt_forced_removal(src, user)
+
+	if(chastity_device && !chastity_device.locked)
+		if(src == user)
+			src.visible_message(span_notice("[user] begins to take off [chastity_device]..."))
+		else
+			src.visible_message(span_notice("[user] begins to take off [src]'s [chastity_device]..."))
+		if(do_after(user, 30, needhand = 1, target = src))
+			var/obj/item/chastity/device = chastity_device
+			if(device)
+				device.remove_chastity(src)
+				if(!user.put_in_hands(device))
+					device.forceMove(get_turf(src))
+
+	return TRUE
 
 /mob/living/carbon/human/proc/modular_strippanel_chastity_row()
 	if(!get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
@@ -77,16 +92,7 @@
 		return
 	var/mob/living/carbon/human/human_mob = mob
 	var/obj/item/chastity/device = human_mob.chastity_device
-	if(!device)
-		return
-	
-	// HARD MODE: Toggle does not remove device
-	if(device.is_hardmode_active() && device.locked)
-		to_chat(src, span_warning("The device remains locked upon you. Even divine will cannot break a permanent binding."))
-		to_chat(src, span_notice("You remain bound. Only the key can grant freedom."))
-		return
-	
-	// Normal mode: remove device
-	device.remove_chastity(human_mob)
-	device.forceMove(get_turf(human_mob))
-	human_mob.visible_message(span_notice("the divine hand of Eora slipped [device] free from [human_mob]'s loins!"))
+	if(device)
+		device.remove_chastity(human_mob)
+		device.forceMove(get_turf(human_mob))
+		human_mob.visible_message(span_notice("the divine hand of Eora slipped [device] free from [human_mob]'s loins!"))

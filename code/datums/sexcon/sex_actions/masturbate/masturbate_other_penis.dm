@@ -10,6 +10,8 @@
 		return FALSE
 	if(!target.getorganslot(ORGAN_SLOT_PENIS))
 		return FALSE
+	if(target.sexcon.has_chastity_penis())
+		return FALSE
 	return TRUE
 
 /datum/sex_action/masturbate_penis_other/can_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -18,6 +20,8 @@
 	if(!check_location_accessible(user, target, BODY_ZONE_PRECISE_GROIN, TRUE))
 		return FALSE
 	if(!target.getorganslot(ORGAN_SLOT_PENIS))
+		return FALSE
+	if(target.sexcon.has_chastity_penis())
 		return FALSE
 	return TRUE
 

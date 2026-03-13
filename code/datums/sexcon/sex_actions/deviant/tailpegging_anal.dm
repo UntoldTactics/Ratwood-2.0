@@ -9,6 +9,8 @@
 		return FALSE
 	if(!user.getorganslot(ORGAN_SLOT_TAIL))
 		return FALSE
+	if(target.sexcon.has_chastity_anal())
+		return FALSE
 	return TRUE
 
 /datum/sex_action/tailpegging_anal/can_perform(mob/living/carbon/human/user, mob/living/carbon/human/target)
@@ -17,6 +19,8 @@
 	if(!check_location_accessible(user, target, BODY_ZONE_PRECISE_GROIN, TRUE))
 		return FALSE
 	if(!user.getorganslot(ORGAN_SLOT_TAIL))
+		return FALSE
+	if(target.sexcon.has_chastity_anal())
 		return FALSE
 	return TRUE
 

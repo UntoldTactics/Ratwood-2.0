@@ -6,6 +6,8 @@
 /datum/sex_action/rimming/shows_on_menu(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	if(user == target)
 		return FALSE
+	if(target.sexcon.has_chastity_anal())
+		return FALSE
 	return TRUE
 
 /datum/sex_action/rimming/can_perform(mob/living/user, mob/living/target)
@@ -14,6 +16,8 @@
 	if(!check_location_accessible(user, target, BODY_ZONE_PRECISE_GROIN, TRUE))
 		return FALSE
 	if(!check_location_accessible(user, user, BODY_ZONE_PRECISE_MOUTH))
+		return FALSE
+	if(target.sexcon.has_chastity_anal())
 		return FALSE
 	return TRUE
 

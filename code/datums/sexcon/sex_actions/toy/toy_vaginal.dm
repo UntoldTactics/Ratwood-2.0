@@ -11,6 +11,8 @@
 		return FALSE
 	if(!get_dildo_in_either_hand(user))
 		return FALSE
+	if(user.sexcon.has_chastity_vagina())
+		return FALSE
 	return TRUE
 
 /datum/sex_action/toy_vagina/can_perform(mob/living/user, mob/living/target)
@@ -21,6 +23,8 @@
 	if(!user.getorganslot(ORGAN_SLOT_VAGINA))
 		return FALSE
 	if(!get_dildo_in_either_hand(user))
+		return FALSE
+	if(user.sexcon.has_chastity_vagina())
 		return FALSE
 	return TRUE
 

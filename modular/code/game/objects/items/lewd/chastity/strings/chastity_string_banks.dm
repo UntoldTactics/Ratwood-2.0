@@ -1,10 +1,12 @@
+#include "arousal_messages.dm"
+#include "lock_messages.dm"
+#include "mode_messages.dm"
+#include "movement_messages.dm"
+#include "pain_messages.dm"
+
 GLOBAL_LIST_INIT(chastity_imprint, list("You feel the device being imprinted with your will."))
-GLOBAL_LIST_INIT(chastity_lock_click, list("Your cursed chastity device locks shut."))
-GLOBAL_LIST_INIT(chastity_unlock_click, list("Your cursed chastity device unlocks."))
 GLOBAL_LIST_INIT(chastity_front_shift, list("Your cursed chastity front shifts to %STATE%."))
 GLOBAL_LIST_INIT(chastity_anal_open, list("The anal shield opens."))
 GLOBAL_LIST_INIT(chastity_anal_closed, list("The anal shield seals shut."))
 GLOBAL_LIST_INIT(chastity_spikes_extend, list("Spikes extend inside your cursed chastity device!"))
 GLOBAL_LIST_INIT(chastity_spikes_retract, list("The spikes retract."))
-GLOBAL_LIST_INIT(chastity_flat_enable, list("Your cursed chastity reshapes into a restrictive flat cage!"))
-GLOBAL_LIST_INIT(chastity_flat_disable, list("Your cursed chastity relaxes into a standard cage."))

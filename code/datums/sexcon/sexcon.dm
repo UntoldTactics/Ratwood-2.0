@@ -336,7 +336,26 @@
 	set_target(new_target)
 	show_ui()
 
+// Try to resist orgasm, returns TRUE if we resisted, FALSE if we didn't. ENDVRE. EDGE. WEEP.
+/datum/sex_controller/proc/try_resist_orgasm()
+	if(!HAS_TRAIT(user, TRAIT_PSYDONIAN_GRIT) || !prob(40))
+		return FALSE
+	var/resist_msg = pick(
+		"[user] trembles and hisses, \"With every broken bone, I swore I lyved... HE hath gifted me the strength to ENDURE!\"",
+		"[user] bows [user.p_their()] head and forces the urge back, clinging to faith as the night closes in.",
+		"[user] gasps, \"PSYDON yet LYVES and PSYDON yet ENDURES,\" and denies [user.p_them()]self release.",
+		"[user] clenches hard and steadies [user.p_their()] breathing, choosing the Saints' discipline over indulgence.",
+		"[user] shudders and whispers a penitent prayer, meeting suffering with patience instead of surrender.",
+	)
+	user.visible_message(span_boldwarning(resist_msg), vision_distance = (suppress_moan ? 1 : DEFAULT_MESSAGE_RANGE))
+	to_chat(user, span_notice("PSYDON, grant me silence and endurance; I will not yield."))
+	set_arousal(60)
+	user.emote("groan", forced = TRUE)
+	return TRUE
+
 /datum/sex_controller/proc/cum_onto(mob/living/carbon/human/splashed_user = null)
+	if(try_resist_orgasm())
+		return
 	log_combat(user, target, "Came onto the target")
 	playsound(target, 'sound/misc/mat/endout.ogg', 50, TRUE, ignore_walls = FALSE)
 	var/obj/item/organ/testicles/testes = user.getorganslot(ORGAN_SLOT_TESTICLES)
@@ -435,9 +454,25 @@
 	cum_chalice.reagents.add_reagent(contents_to_drip,1)
 
 /datum/sex_controller/proc/ejaculate()
+	if(try_resist_orgasm())
+		return
 	SEND_SIGNAL(user, COMSIG_MOB_EJACULATED)
 	log_combat(user, user, "Ejaculated")
-	user.visible_message(span_love("[user] makes a mess!"), vision_distance = (suppress_moan ? 1 : DEFAULT_MESSAGE_RANGE))
+	if(modular_try_handle_chastity_ejaculation())
+		return
+	if((has_chastity_cage() || has_chastity_anal()) && prob(50))
+		var/self_mess_msg = "[user] spills over [user.p_their()] own chastity!"
+		user.visible_message(span_love(self_mess_msg), vision_distance = (suppress_moan ? 1 : DEFAULT_MESSAGE_RANGE))
+		cum_onto(user)
+		return
+	var/climax_msg = "[user] makes a mess!"
+	var/modular_climax_msg = modular_get_chastity_climax_message(climax_msg)
+	if(istext(modular_climax_msg))
+		climax_msg = modular_climax_msg
+	else
+		if(has_chastity_cage() || has_chastity_anal())
+			climax_msg = "[user] climaxes and makes a mess in their chastity device!"
+	user.visible_message(span_love(climax_msg), vision_distance = (suppress_moan ? 1 : DEFAULT_MESSAGE_RANGE))
 	playsound(user, 'sound/misc/mat/endout.ogg', suppress_moan ? 12 : 50, TRUE, ignore_walls = FALSE)
 	var/obj/item/organ/testicles/testes = user.getorganslot(ORGAN_SLOT_TESTICLES)
 	add_cum_floor(get_turf(user), do_big_puddle = testes?.ball_size > DEFAULT_TESTICLES_SIZE)
@@ -455,6 +490,8 @@
 		cum_chalice.reagents.add_reagent(/datum/reagent/erpjuice/cum,2)
 
 /datum/sex_controller/proc/ejaculate_container(obj/item/reagent_containers/glass/C)
+	if(try_resist_orgasm())
+		return
 	if(C && istype(C))
 		log_combat(user, user, "Ejaculated into a container")
 		user.visible_message(span_love("[user] spills into [C]!"))
@@ -592,7 +629,13 @@
 	if(HAS_TRAIT(user, TRAIT_DEATHBYSNUSNU))
 		if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 			pain_amt *= 2
+	var/list/modular_adjustments = modular_adjust_action_for_target_chastity(action_target, arousal_amt, pain_amt)
+	if(islist(modular_adjustments) && modular_adjustments.len >= 2)
+		arousal_amt = modular_adjustments[1]
+		pain_amt = modular_adjustments[2]
 	action_target.sexcon.receive_sex_action(arousal_amt, pain_amt, giving, force, speed)
+	if(modular_should_play_chastitycourse_noise(action_target))
+		chastitycourse_noise(action_target)
 
 /datum/sex_controller/proc/receive_sex_action(arousal_amt, pain_amt, giving, applied_force, applied_speed)
 	arousal_amt *= get_force_pleasure_multiplier(applied_force, giving)
@@ -655,6 +698,13 @@
 	last_moan = world.time
 	user.emote(chosen_emote, forced = TRUE)
 
+/datum/sex_controller/proc/is_masochist_in_spiked_chastity()
+	var/modular_result = modular_is_masochist_in_spiked_chastity()
+	if(!isnull(modular_result))
+		return modular_result
+
+	return FALSE
+
 /datum/sex_controller/proc/try_do_pain_effect(pain_amt, giving)
 	if(pain_amt < PAIN_MILD_EFFECT)
 		return
@@ -663,6 +713,9 @@
 	if(prob(50))
 		return
 	last_pain = world.time
+	var/masochist_spiked = (current_action && is_masochist_in_spiked_chastity())
+	if(modular_try_do_chastity_pain_effect(pain_amt, giving, masochist_spiked))
+		return
 	if(pain_amt >= PAIN_HIGH_EFFECT)
 		var/pain_msg = pick(list("IT HURTS!!!", "IT NEEDS TO STOP!!!", "I CAN'T TAKE IT ANYMORE!!!"))
 		to_chat(user, span_boldwarning(pain_msg))
@@ -675,7 +728,7 @@
 		user.flash_fullscreen("redflash1")
 		if(prob(40) && user.stat == CONSCIOUS)
 			user.visible_message(span_warning("[user] shudders in pain!"))
-	else
+	else if(pain_amt >= PAIN_MILD_EFFECT)
 		var/pain_msg = pick(list("It hurts a little...", "It stings...", "I'm aching..."))
 		to_chat(user, span_warning(pain_msg))
 
@@ -756,7 +809,13 @@
 	ejaculate_container(milker.get_active_held_item())
 
 /datum/sex_controller/proc/can_use_penis()
+	var/modular_result = modular_can_use_penis()
+	if(!isnull(modular_result))
+		return modular_result
+
 	if(HAS_TRAIT(user, TRAIT_LIMPDICK))
+		return FALSE
+	if(has_chastity_penis())
 		return FALSE
 	var/obj/item/organ/penis/penor = user.getorganslot(ORGAN_SLOT_PENIS)
 	if(!penor)
@@ -764,6 +823,52 @@
 	if(!penor.functional)
 		return FALSE
 	return TRUE
+
+/datum/sex_controller/proc/can_use_vagina()
+	var/modular_result = modular_can_use_vagina()
+	if(!isnull(modular_result))
+		return modular_result
+
+	if(has_chastity_vagina())
+		return FALSE
+	if(!user.getorganslot(ORGAN_SLOT_VAGINA))
+		return FALSE
+	return TRUE
+
+/datum/sex_controller/proc/has_chastity_penis() // used for sex actions which specifically involve the penis 
+	var/modular_result = modular_has_chastity_penis()
+	if(!isnull(modular_result))
+		return modular_result
+
+	return FALSE
+
+/datum/sex_controller/proc/has_chastity_vagina() // used for sex actions which specifically involve the vagina
+	var/modular_result = modular_has_chastity_vagina()
+	if(!isnull(modular_result))
+		return modular_result
+
+	return FALSE
+
+/datum/sex_controller/proc/has_chastity_cage() // used to broadly disallow sex actions regardless of genital configuration
+	var/modular_result = modular_has_chastity_cage()
+	if(!isnull(modular_result))
+		return modular_result
+
+	return FALSE
+
+/datum/sex_controller/proc/has_chastity_flat()
+	var/modular_result = modular_has_chastity_flat()
+	if(!isnull(modular_result))
+		return modular_result
+
+	return FALSE
+
+/datum/sex_controller/proc/has_chastity_anal() // same as above but specifically for anal related sex_actions
+	var/modular_result = modular_has_chastity_anal()
+	if(!isnull(modular_result))
+		return modular_result
+
+	return FALSE
 
 /datum/sex_controller/proc/considered_limp()
 	if(arousal >= AROUSAL_HARD_ON_THRESHOLD)
@@ -836,6 +941,8 @@
 	for(var/action_type in GLOB.sex_actions)
 		var/datum/sex_action/action = SEX_ACTION(action_type)
 		if(!(action_category&action.category))
+			continue
+		if(istype(action, /datum/sex_action/chastityplay) && !chastity_content_enabled_for_pair())
 			continue
 		if(!action.shows_on_menu(user, target))
 			continue
@@ -995,9 +1102,33 @@
 	if(!action_type)
 		return FALSE
 	var/datum/sex_action/action = SEX_ACTION(action_type)
+	if(istype(action, /datum/sex_action/chastityplay) && !chastity_content_enabled_for_pair())
+		return FALSE
 	if(!inherent_perform_check(action_type, incapacitated))
 		return FALSE
 	if(!action.can_perform(user, target))
+		return FALSE
+	return TRUE
+
+/datum/sex_controller/proc/chastity_content_enabled_for(mob/living/carbon/human/H)
+	var/modular_result = modular_chastity_content_enabled_for(H)
+	if(!isnull(modular_result))
+		return modular_result
+
+	if(!H)
+		return FALSE
+	if(!H.client?.prefs)
+		return TRUE
+	return !!H.client.prefs.chastenable
+
+/datum/sex_controller/proc/chastity_content_enabled_for_pair()
+	var/modular_result = modular_chastity_content_enabled_for_pair()
+	if(!isnull(modular_result))
+		return modular_result
+
+	if(!chastity_content_enabled_for(user))
+		return FALSE
+	if(target && target != user && !chastity_content_enabled_for(target))
 		return FALSE
 	return TRUE
 
