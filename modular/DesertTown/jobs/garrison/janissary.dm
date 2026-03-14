@@ -95,7 +95,7 @@
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/zyb
 	pants = /obj/item/clothing/under/roguetown/trou/leather/pontifex/zyb
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/heavy/coat/zyb
-	cloak = /obj/item/clothing/cloak/raincloak/drab
+	cloak = /obj/item/clothing/cloak/dunestalker
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	gloves = /obj/item/clothing/gloves/roguetown/leather
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
@@ -161,7 +161,7 @@
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/zyb
 	pants = /obj/item/clothing/under/roguetown/trou/leather/pontifex/zyb
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/half/iron
-	cloak = /obj/item/clothing/cloak/raincloak/darkdrab
+	cloak = /obj/item/clothing/cloak/dunestalker
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	gloves = /obj/item/clothing/gloves/roguetown/leather
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather

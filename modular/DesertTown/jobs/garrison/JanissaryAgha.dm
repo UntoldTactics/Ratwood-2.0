@@ -51,7 +51,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/agha
 	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy
 	pants = /obj/item/clothing/under/roguetown/chainlegs/kilt
-	cloak = /obj/item/clothing/cloak/half/shadowcloak
+	cloak = /obj/item/clothing/cloak/dunestalker
 	neck = /obj/item/clothing/neck/roguetown/bevor
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver

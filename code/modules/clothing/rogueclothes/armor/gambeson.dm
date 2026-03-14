@@ -265,8 +265,7 @@
 	name = "desert coat"
 	desc = "A slim-fitting sherwani, a Zybantine-styled coat meant to endure in the desert's climate."
 	icon_state = "sherwani"
-	color = DARK_DRAB
-	shiftable = FALSE
+	color = CLOTHING_DARKDRAB
 
 /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/zyb
 	name = "padded desert coat"
