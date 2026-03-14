@@ -23,7 +23,7 @@
 	round_contrib_points = 2
 	allowed_maps = list("Desert Town")
 
-	cmode_music = 'sound/music/combat_knight.ogg'
+	cmode_music = 'sound/music/combat_desert1.ogg'
 	social_rank = SOCIAL_RANK_MINOR_NOBLE
 	job_subclasses = list(
 		/datum/advclass/cataphract/greatweapon,

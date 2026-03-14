@@ -23,7 +23,7 @@
 	round_contrib_points = 2
 	allowed_maps = list("Desert Town")
 	social_rank = SOCIAL_RANK_YEOMAN
-	cmode_music = 'sound/music/combat_ManAtArms.ogg'
+	cmode_music = 'sound/music/combat_desert1.ogg'
 	job_subclasses = list(
 		/datum/advclass/mamluk/footman,
 		/datum/advclass/mamluk/zephyr,

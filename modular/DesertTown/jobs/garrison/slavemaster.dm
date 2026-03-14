@@ -13,7 +13,7 @@
 	display_order = JDO_DUNGEONEER
 	advclass_cat_rolls = list(CTAG_SLAVEMASTER = 2)
 
-	tutorial = "CHANGE THIS!! something something WHIPS something something keeping the rabble in line something something sterin guiding hand"
+	tutorial = "CHANGE THIS!! something something WHIPS something something keeping the rabble in line something something sterin guiding hand. You have a swanky room in the keep, you catch escaped slaves, and you put existing slaves to work. Check the jails for prisoners to enslave."
 
 	announce_latejoin = FALSE
 	outfit = /datum/outfit/job/roguetown/slavemaster
