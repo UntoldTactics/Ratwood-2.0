@@ -214,9 +214,31 @@
 		step(AM, direction)
 		if(AM.loc != next)
 			var/can_force = !next.density
+			if(can_force && (!current.CanPass(AM, next) || !next.CanPass(AM, current)))
+				can_force = FALSE
+			if(can_force)
+				for(var/atom/movable/blocker in current)
+					if((blocker.flags_1 & ON_BORDER_1) && blocker.dir == direction && !blocker.CanPass(AM, next))
+						can_force = FALSE
+						break
+			if(can_force)
+				for(var/atom/movable/blocker in next)
+					if((blocker.flags_1 & ON_BORDER_1) && blocker.dir == turn(direction, 180) && !blocker.CanPass(AM, current))
+						can_force = FALSE
+						break
+			if(can_force)
+				for(var/atom/movable/blocker in current)
+					if(blocker.density && (blocker.flags_1 & ON_BORDER_1) && blocker.dir == direction)
+						can_force = FALSE
+						break
 			if(can_force)
 				for(var/atom/movable/blocker in next)
 					if(blocker.density)
+						can_force = FALSE
+						break
+			if(can_force)
+				for(var/atom/movable/blocker in next)
+					if(blocker.density && (blocker.flags_1 & ON_BORDER_1) && blocker.dir == turn(direction, 180))
 						can_force = FALSE
 						break
 			if(can_force)

@@ -68,6 +68,25 @@ GLOBAL_LIST_INIT(virtue_mount_choices_noble, (list(
 	/// Weakref to our bespoke Saddleborn mount (added by the virtue)
 	var/datum/weakref/saddleborn_mount
 
+/proc/setup_saddleborn_mount_move_delay(mob/living/carbon/human/user, mob/living/simple_animal/mount)
+	if(!user || !istype(mount, /mob/living/simple_animal/hostile))
+		return
+	var/mob/living/simple_animal/hostile/hostile_mount = mount
+	var/datum/component/riding/riding_datum = hostile_mount.GetComponent(/datum/component/riding)
+	if(!riding_datum)
+		return
+	var/base_delay = hostile_mount.vars["move_to_delay"]
+	if(!isnum(base_delay))
+		base_delay = 3
+	var/new_delay = base_delay
+	if(user.mind)
+		var/amt = user.get_skill_level(/datum/skill/misc/riding)
+		if(amt)
+			new_delay -= 5 + amt/6
+		else
+			new_delay -= 3
+	riding_datum.vehicle_move_delay = max(1, new_delay)
+
 /obj/effect/proc_holder/spell/self/choose_riding_virtue_mount
 	name = "Choose Mount"
 	desc = "Recall the form of your treasured Saddleborn mount."
@@ -127,6 +146,7 @@ GLOBAL_LIST_INIT(virtue_mount_choices_noble, (list(
 	playsound(user, 'sound/magic/saddleborn-call.ogg', 150, FALSE, 5)
 	if (!user.buckled)
 		the_real_honse.buckle_mob(user, TRUE)
+		setup_saddleborn_mount_move_delay(user, the_real_honse)
 		playsound(the_real_honse, 'sound/magic/saddleborn-summoned.ogg', 100, FALSE, 2)
 	
 	// give us all the saddleborn summon/send-away spells and all that jazz
@@ -291,6 +311,7 @@ GLOBAL_LIST_INIT(virtue_mount_choices_noble, (list(
 		honse.forceMove(user.loc)
 		if (!user.buckled)
 			honse.buckle_mob(user, TRUE)
+			setup_saddleborn_mount_move_delay(user, honse)
 		playsound(honse, 'sound/magic/saddleborn-summoned.ogg', 100, FALSE, 2)
 
 		if (dangerous_summon) // the horse dragged some attention uh-oh

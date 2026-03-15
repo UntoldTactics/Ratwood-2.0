@@ -63,7 +63,8 @@
 	if(m_intent == MOVE_INTENT_RUN)
 		if(animal_mount)
 			animal_mount.emote("leap", forced = TRUE)
-		emote("leap", forced = TRUE)
+		else
+			emote("leap", forced = TRUE)
 		OffBalance(30)
 		jadded = 45
 		jrange = 3
