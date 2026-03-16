@@ -782,7 +782,7 @@
 
 /atom/movable/screen/alert/status_effect/debuff/mesmerised
 	name = "Mesmerised"
-	desc = span_warning("Their beauty is otherwordly..")
+	desc = span_warning("Their beauty is otherworldly..")
 	icon_state = "acid"
 
 /////////////////////////

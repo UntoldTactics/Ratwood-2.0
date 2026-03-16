@@ -230,6 +230,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Witch Hat"
 	path = /obj/item/clothing/head/roguetown/witchhat
 
+/datum/loadout_item/witchhat/old
+	name = "Witch Hat (Old)"
+	path = /obj/item/clothing/head/roguetown/witchhat/old
+
 /datum/loadout_item/bardhat
 	name = "Bard Hat"
 	path = /obj/item/clothing/head/roguetown/bardhat
@@ -875,6 +879,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
 /datum/loadout_item/leather_black
 	name = "Black Leather Belt"
 	path = /obj/item/storage/belt/rogue/leather/black
+
+/datum/loadout_item/doublebelt
+	name = "Paired slim belts"
+	path = /obj/item/storage/belt/rogue/leather/double
 
 /datum/loadout_item/belt_cloth
 	name = "Cloth Sash"
@@ -1880,6 +1888,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Naledi Psicross"
 	path = /obj/item/clothing/neck/roguetown/psicross/naledi
 
+/datum/loadout_item/woolencollar
+	name = "Woolen Collar"
+	path = /obj/item/clothing/neck/roguetown/collar/woolen
+
 // MASKS (Alphabetically Ordered)
 
 // SHIRTS & ROBES (Alphabetically Ordered)
@@ -1892,6 +1904,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Pontifex Robe"
 	path = /obj/item/clothing/suit/roguetown/shirt/robe/pointfex
 	triumph_cost = 2
+
+/datum/loadout_item/slitteddress
+	name = "Slitted dress"
+	path = /obj/item/clothing/suit/roguetown/shirt/dress/slit
 
 // POLEARMS & STAVES
 /datum/loadout_item/tri_naledi_staff

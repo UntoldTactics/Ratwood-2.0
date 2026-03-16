@@ -1588,7 +1588,7 @@
 
 /datum/reagent/cellulose
 	name = "Cellulose Fibers"
-	description = "A crystaline polydextrose polymer, plants swear by this stuff."
+	description = "A crystalline polydextrose polymer, plants swear by this stuff."
 	reagent_state = SOLID
 	color = "#E6E6DA"
 	taste_mult = 0

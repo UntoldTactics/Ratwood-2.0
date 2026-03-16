@@ -453,9 +453,19 @@
 	desc = ""
 	icon_state = "witch"
 	item_state = "witch"
+	detail_tag = "_detail"
 	icon = 'icons/roguetown/clothing/head.dmi'
 	sewrepair = TRUE
 	nudist_approved = TRUE
+	color = CLOTHING_BLACK
+	detail_color = CLOTHING_BROWN
+
+/obj/item/clothing/head/roguetown/witchhat/old
+	name = "decrepit witch hat"
+	desc = "When shall we three meet again; in thunder lightning or in rain."
+	icon_state = "witchold"
+	item_state = "witchold"
+	color = CLOTHING_WHITE
 
 /obj/item/clothing/head/roguetown/archercap
 	name = "archer's cap"
