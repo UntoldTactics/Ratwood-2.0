@@ -85,54 +85,6 @@
 		else
 			return "antagonist"
 
-/datum/mob_descriptor/stature/patriarch
-	name = "Patriarch/Matriarch"
-
-/datum/mob_descriptor/stature/patriarch/get_description(mob/living/described)
-	switch(described.pronouns)
-		if(SHE_HER)
-			return "matriarch"
-		if(HE_HIM)
-			return "patriarch"
-		if(THEY_THEM)
-			return "hierarch"
-		if(THEY_THEM_F)
-			return "hierarch"
-		else
-			return "hierarch"
-
-/datum/mob_descriptor/stature/hag
-	name = "Hag/Codger"
-
-/datum/mob_descriptor/stature/hag/get_description(mob/living/described)
-	switch(described.pronouns)
-		if(SHE_HER)
-			return "hag"
-		if(HE_HIM)
-			return "codger"
-		if(THEY_THEM)
-			return "senior"
-		if(THEY_THEM_F)
-			return "senior"
-		else
-			return "elder"
-
-/datum/mob_descriptor/stature/villain
-	name = "Villain/Villainess"
-
-/datum/mob_descriptor/stature/villain/get_description(mob/living/described)
-	switch(described.pronouns)
-		if(SHE_HER)
-			return "villainess"
-		if(HE_HIM)
-			return "villain"
-		if(THEY_THEM)
-			return "antagonist"
-		if(THEY_THEM_F)
-			return "antagonist"
-		else
-			return "antagonist"
-
 /datum/mob_descriptor/stature/thug
 	name = "Thug"
 /datum/mob_descriptor/stature/knave
