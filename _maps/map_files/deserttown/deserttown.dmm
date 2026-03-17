@@ -9741,7 +9741,6 @@
 	dir = 4
 	},
 /obj/item/cushion/desert1,
-/obj/effect/landmark/start/dt/dttowner,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/tavern)
 "eRY" = (
@@ -12320,7 +12319,6 @@
 	dir = 4
 	},
 /obj/item/cushion/desert2,
-/obj/effect/landmark/start/dt/dttowner,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/tavern)
 "geS" = (
@@ -24061,7 +24059,6 @@
 /area/rogue/indoors/inq)
 "mpT" = (
 /obj/structure/chair/bench,
-/obj/effect/landmark/start/dt/dttowner,
 /turf/open/floor/rogue/citybrick/citybrick1,
 /area/rogue/outdoors/deserttown)
 "mqo" = (
@@ -31397,11 +31394,6 @@
 	icon = 'icons/turf/roguefloor.dmi'
 	},
 /area/rogue/indoors/deserttown/manor)
-"qbR" = (
-/obj/item/cushion/desert1,
-/obj/effect/landmark/start/dt/dttowner,
-/turf/open/floor/carpet/purple,
-/area/rogue/indoors/deserttown/tavern)
 "qbX" = (
 /turf/open/floor/rogue/sandbrick,
 /area/rogue/indoors/deserttown/warden)
@@ -31553,10 +31545,6 @@
 	},
 /turf/open/floor/rogue/darkpath,
 /area/rogue/under/deserttown/basement/town)
-"qfz" = (
-/obj/effect/landmark/start/dt/dttowner,
-/turf/open/floor/rogue/lightpath,
-/area/rogue/outdoors/desert)
 "qfI" = (
 /obj/machinery/gear_painter,
 /turf/open/floor/rogue/blocks/stonered/tiny,
@@ -35591,10 +35579,6 @@
 /area/rogue/outdoors/deserttown/roofs{
 	tavern_area = 1
 	})
-"sac" = (
-/obj/effect/landmark/start/dt/dttowner,
-/turf/open/floor/rogue/dunes,
-/area/rogue/outdoors/desert)
 "saC" = (
 /mob/living/carbon/human/species/dwarfskeleton/ambush/knight,
 /turf/open/floor/rogue/sandbrick,
@@ -45772,7 +45756,6 @@
 "xbG" = (
 /obj/effect/landmark/start/villager,
 /obj/item/cushion/desert2,
-/obj/effect/landmark/start/dt/dttowner,
 /turf/open/floor/carpet/red,
 /area/rogue/indoors/deserttown/tavern)
 "xbJ" = (
@@ -357540,7 +357523,7 @@ fib
 nkl
 bCr
 bCr
-qbR
+tHY
 eal
 hYi
 cLQ
@@ -384152,7 +384135,7 @@ dTM
 pmY
 hQx
 hQx
-qfz
+hQx
 hQx
 kok
 iSE
@@ -387173,7 +387156,7 @@ mxL
 hQx
 hQx
 hQx
-qfz
+hQx
 rBb
 cCo
 ato
@@ -391703,7 +391686,7 @@ sSj
 hQx
 hQx
 hQx
-sac
+gUs
 ato
 ato
 ato
@@ -393511,7 +393494,7 @@ gUs
 gUs
 gUs
 hQx
-qfz
+hQx
 hQx
 hQx
 asG
