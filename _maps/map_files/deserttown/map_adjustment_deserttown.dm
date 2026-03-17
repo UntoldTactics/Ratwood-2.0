@@ -52,7 +52,6 @@
 
 		/datum/job/roguetown/manorguard,//  mamaluk
 		/datum/job/roguetown/guardsman,//  mamaluk
-		/datum/job/roguetown/townguard,//  mamaluk
 		/datum/job/roguetown/vanguard,//  jannissary
 		/datum/job/roguetown/warden,//  jannissary
 		/datum/job/roguetown/dungeoneer,// Slavemaster. Okay it's a bit different but it's nice to cut bloat y'know!
