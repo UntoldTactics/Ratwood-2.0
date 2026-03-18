@@ -95,3 +95,8 @@ GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/rt/wisdoms.txt"))
 	if(icon_state == "clear_bottle1")
 		icon_state = "clear_bottle[rand(1,4)]"
 	update_icon()
+
+/obj/item/reagent_containers/glass/bottle/attack_self(mob/user)
+	. = ..()
+	if(closed) // Most of the times you'll want to open the bottle rather than close it
+		rmb_self(user) //so this is here to avoid accidentally closing the bottle and then trying to drink from it
