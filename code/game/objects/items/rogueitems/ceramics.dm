@@ -430,43 +430,43 @@
 		return
 	return ..()
 
-/obj/item/roguestatue/clay/Initialize()
-	. = ..()
+/obj/item/roguestatue/clay/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "claystatuecooked[pick(1,2,3,4,5)]"
 
 /obj/item/roguestatue/clay/design1
 	icon_state = "claystatuecooked1"
 
-/obj/item/roguestatue/clay/design1/Initialize()
-	. = ..()
+/obj/item/roguestatue/clay/design1/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "claystatuecooked1"
 
 /obj/item/roguestatue/clay/design2
 	icon_state = "claystatuecooked2"
 
-/obj/item/roguestatue/clay/design2/Initialize()
-	. = ..()
+/obj/item/roguestatue/clay/design2/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "claystatuecooked2"
 
 /obj/item/roguestatue/clay/design3
 	icon_state = "claystatuecooked3"
 
-/obj/item/roguestatue/clay/design3/Initialize()
-	. = ..()
+/obj/item/roguestatue/clay/design3/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "claystatuecooked3"
 
 /obj/item/roguestatue/clay/design4
 	icon_state = "claystatuecooked4"
 
-/obj/item/roguestatue/clay/design4/Initialize()
-	. = ..()
+/obj/item/roguestatue/clay/design4/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "claystatuecooked4"
 
 /obj/item/roguestatue/clay/design5
 	icon_state = "claystatuecooked5"
 
-/obj/item/roguestatue/clay/design5/Initialize()
-	. = ..()
+/obj/item/roguestatue/clay/design5/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "claystatuecooked5"
 
 /obj/item/roguestatue/clay/examine(mob/user)
@@ -493,44 +493,44 @@
 	smeltresult = null	//No resource return
 	sellprice = 55		//Quality scales from here. Skill-gated artisan luxury.
 
-/obj/item/roguestatue/glass/Initialize()
-	. = ..()
+/obj/item/roguestatue/glass/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "statueglass[pick(1,2,3,4,5)]"
 
 // Named glass statue designs — each locks to a specific icon state
 /obj/item/roguestatue/glass/design1
 	icon_state = "statueglass1"
 
-/obj/item/roguestatue/glass/design1/Initialize()
-	. = ..()
+/obj/item/roguestatue/glass/design1/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "statueglass1"
 
 /obj/item/roguestatue/glass/design2
 	icon_state = "statueglass2"
 
-/obj/item/roguestatue/glass/design2/Initialize()
-	. = ..()
+/obj/item/roguestatue/glass/design2/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "statueglass2"
 
 /obj/item/roguestatue/glass/design3
 	icon_state = "statueglass3"
 
-/obj/item/roguestatue/glass/design3/Initialize()
-	. = ..()
+/obj/item/roguestatue/glass/design3/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "statueglass3"
 
 /obj/item/roguestatue/glass/design4
 	icon_state = "statueglass4"
 
-/obj/item/roguestatue/glass/design4/Initialize()
-	. = ..()
+/obj/item/roguestatue/glass/design4/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "statueglass4"
 
 /obj/item/roguestatue/glass/design5
 	icon_state = "statueglass5"
 
-/obj/item/roguestatue/glass/design5/Initialize()
-	. = ..()
+/obj/item/roguestatue/glass/design5/Initialize(mapload)
+	. = ..(mapload)
 	icon_state = "statueglass5"
 
 /obj/item/roguestatue/glass/examine(mob/user)
