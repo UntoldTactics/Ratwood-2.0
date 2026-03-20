@@ -414,6 +414,13 @@
 	color_keys = 3
 	color_key_names = list("Tail", "Tail Fluff", "Tail Barb")
 
+/datum/sprite_accessory/tail/scorpian
+	icon = 'modular/icons/mob/tails/manticore_tail.dmi'
+	name = "Scorpian"
+	icon_state = "scorpian"
+	color_keys = 2
+	color_key_names = list("Tail", "Stinger")
+
 /datum/sprite_accessory/tail/manticore
 	icon = 'modular/icons/mob/tails/manticore_tail.dmi'
 	name = "Manticore"
