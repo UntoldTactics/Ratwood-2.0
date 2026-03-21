@@ -6148,6 +6148,13 @@
 /obj/machinery/light/rogue/candle/green,
 /turf/open/floor/rogue/twig,
 /area/rogue/indoors/banditcamp)
+"Ca" = (
+/obj/structure/fluff/traveltile/dungeoneer{
+	aportalgoesto = "siberia2b";
+	aportalid = "siberia1b"
+	},
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/dietroyt)
 "Cc" = (
 /obj/machinery/light/rogue/candle,
 /turf/open/floor/rogue/herringbone,
@@ -6551,6 +6558,9 @@
 /area/rogue/indoors/banditcamp)
 "DS" = (
 /obj/machinery/light/rogue/torchholder/l,
+/obj/structure/stairs/stone{
+	dir = 1
+	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/dietroyt)
 "DT" = (
@@ -9309,7 +9319,7 @@
 	aportalid = "siberia1"
 	},
 /turf/open/floor/rogue/naturalstone,
-/area/rogue)
+/area/rogue/dietroyt)
 "RG" = (
 /obj/structure/bed/rogue/shit,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -10950,6 +10960,12 @@
 /obj/item/clothing/suit/roguetown/shirt/dress/gen/strapless/alt,
 /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy,
 /turf/open/floor/rogue/concrete,
+/area/rogue/dietroyt)
+"ZY" = (
+/obj/structure/stairs/stone{
+	dir = 8
+	},
+/turf/open/floor/rogue/naturalstone,
 /area/rogue/dietroyt)
 "ZZ" = (
 /obj/effect/decal/edge{
@@ -15384,11 +15400,11 @@ rQ
 "}
 (35,1,1) = {"
 rQ
-rQ
-rQ
-rQ
-rQ
-rQ
+qB
+qB
+qB
+qB
+qB
 rQ
 rQ
 rQ
@@ -15514,11 +15530,11 @@ rQ
 "}
 (36,1,1) = {"
 rQ
-rQ
-rQ
-rQ
-rQ
-rQ
+qB
+fV
+fV
+fV
+qB
 rQ
 rQ
 rQ
@@ -15645,9 +15661,9 @@ rQ
 (37,1,1) = {"
 qB
 qB
-qB
-qB
-qB
+fV
+Ca
+fV
 qB
 qB
 qB
@@ -15776,7 +15792,7 @@ rQ
 qB
 Qt
 Qt
-Qt
+ZY
 fV
 Qt
 Qt
