@@ -124,7 +124,6 @@
 	desc = "A leather vest. Not very protective when worn like this."
 	icon = 'modular/DesertTown/icons/clothing/armor.dmi'
 	mob_overlay_icon = 'modular/DesertTown/icons/clothing/onmob/armor.dmi'
-	icon_state = "mamaluke"
 	icon_state = "openvest"
 	body_parts_covered = CHEST|VITALS
 
