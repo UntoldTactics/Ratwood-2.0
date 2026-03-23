@@ -120,8 +120,8 @@
 	if(active_tornadoes >= max_tornadoes)
 		return
 
-	//if(!prob(5))	// Small spawn chance for tornadoes
-		//return
+	if(!prob(5))	// Small spawn chance for tornadoes
+		return
 
 	// Build viable outdoor players
 	var/list/viable_players = list()
