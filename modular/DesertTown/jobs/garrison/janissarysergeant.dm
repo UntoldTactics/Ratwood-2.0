@@ -123,7 +123,7 @@
 				beltr = /obj/item/quiver/bolts
 				backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 				r_hand = /obj/item/rogueweapon/sword/sabre
-				backl = /obj/item/rogueweapon/scabbard/sword
+				beltl = /obj/item/rogueweapon/scabbard/sword
 
 /obj/item/clothing/cloak/catcloak/jancap
 	name = "janissary sergeant's cloak"
