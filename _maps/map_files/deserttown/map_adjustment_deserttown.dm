@@ -67,6 +67,8 @@
 		/datum/job/roguetown/sergeant,//janissary sergeant
 		// /datum/job/roguetown/squire,
 		// /datum/job/roguetown/veteran,
+		/datum/job/roguetown/watchcaptain,//remember to untick this when that's merged
+		/datum/job/roguetown/wardenmaster,//
 
 		//trader (probably fine to keep as it is)
 
