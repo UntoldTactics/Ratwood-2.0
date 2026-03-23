@@ -4299,10 +4299,15 @@
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/deserttown/warden)
 "cqM" = (
-/obj/structure/drape/desert{
-	layer = 3
-	},
 /obj/structure/fluff/railing/border,
+/obj/structure/curtain/drab{
+	layer = 2;
+	plane = -6
+	},
+/obj/structure/drape/desert{
+	plane = -3;
+	layer = 4.2
+	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/deserttown)
 "cqS" = (
@@ -21605,7 +21610,7 @@
 /obj/structure/mineral_door/wood{
 	icon_state = "wcr";
 	locked = 1;
-	lockid = "sheriff"
+	lockid = "sergeant"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/garrison)
@@ -31005,7 +31010,7 @@
 /area/rogue/indoors/deserttown/warden)
 "pLw" = (
 /obj/structure/mineral_door/wood/window{
-	lockid = "sheriff"
+	lockid = "sergeant"
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/deserttown/garrison)
@@ -35135,6 +35140,12 @@
 "rQk" = (
 /turf/open/floor/rogue/citybrick/citybrick2,
 /area/rogue/indoors/deserttown/warden)
+"rQv" = (
+/obj/machinery/light/rogue/candle/red,
+/turf/open/floor/rogue/tile/brownbrick{
+	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
+	},
+/area/rogue/under/deserttown/basement/town)
 "rQI" = (
 /obj/machinery/light/rogue/firebowl/standing/green,
 /turf/open/floor/rogue/twig,
@@ -46329,7 +46340,11 @@
 /turf/open/floor/rogue/wood,
 /area/rogue/outdoors/deserttown)
 "xjX" = (
-/obj/structure/drape/desert,
+/obj/structure/curtain/drab,
+/obj/structure/drape/desert{
+	plane = -3;
+	layer = 4.2
+	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/deserttown)
 "xka" = (
@@ -246358,7 +246373,7 @@ riQ
 riQ
 ozY
 sKD
-vwW
+rQv
 vpb
 sKD
 sKD
