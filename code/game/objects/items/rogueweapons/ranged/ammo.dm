@@ -49,7 +49,7 @@
 	desc = "A crossbow bolt with a fat metal head. Built to break bones."
 	projectile_type = /obj/projectile/bullet/reusable/bolt/heavyblunt
 	possible_item_intents = list(/datum/intent/mace/strike)
-	icon_state = "bolt_blunt"
+	icon_state = "bolt_blunt_heavy"
 	force = 10
 
 /obj/projectile/bullet/reusable/bolt
@@ -91,7 +91,9 @@
 	armor_penetration = 50
 	embedchance = 5
 	woundclass = BCLASS_BLUNT
-	speed = 0.4
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/bolt/heavyblunt
+	icon_state = "bolt_blunt_proj"
+	speed = 0.3
 
 /obj/projectile/bullet/reusable/bolt/on_hit(atom/target)
 	. = ..()
