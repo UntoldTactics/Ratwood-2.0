@@ -37,6 +37,7 @@
 		TRAIT_BASHDOORS,
 		TRAIT_STRONGBITE,
 		TRAIT_GNARLYDIGITS,
+		TRAIT_LEAPER,
 		TRAIT_NUDIST,
 		TRAIT_HERESIARCH, //Just because I'm putting their spawns here, that's all.
 		TRAIT_ZURCH,

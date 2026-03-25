@@ -68,7 +68,7 @@
 	var/obj/item/organ/penis/penis = getorganslot(ORGAN_SLOT_PENIS)
 	if(wants_penis)
 		if(!penis)
-			penis = new()
+			penis = new /obj/item/organ/penis/knotted/big()
 			penis.Insert(src, TRUE, FALSE)
 		var/obj/item/organ/testicles/testicles = getorganslot(ORGAN_SLOT_TESTICLES)
 		if(!testicles)
@@ -85,7 +85,8 @@
 	var/obj/item/organ/vagina/vagina = getorganslot(ORGAN_SLOT_VAGINA)
 	if(wants_vagina)
 		if(!vagina)
-			vagina = new()
+			vagina = new /obj/item/organ/vagina()
+			vagina.accessory_type = /datum/sprite_accessory/vagina/furred
 			vagina.Insert(src, TRUE, FALSE)
 	else if(vagina)
 		vagina.Remove(src)

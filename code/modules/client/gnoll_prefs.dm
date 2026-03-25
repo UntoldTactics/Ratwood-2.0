@@ -19,41 +19,61 @@
 
 	var/list/dat = list()
 	dat += "<html><head><title>Gnoll Customization</title></head><body>"
-	dat += "<center><h2>Gnoll Customization</h2></center><br>"
+	dat += "<center><h2>Spill their guts!</h2></center><br>"
 
 	// Name section
-	dat += "<b>Name:</b> [gnoll_name] "
+	dat += "<b>Current Name:</b> [gnoll_name] "
 	dat += "<a href='?_src_=gnoll_prefs;action=set_name'>Set Custom Name</a> | "
-	dat += "<a href='?_src_=gnoll_prefs;action=random_name'>Random Name</a><br><br>"
+	dat += "<a href='?_src_=gnoll_prefs;action=random_name'>Random Gnoll Name</a><br><br>"
 
 	// Pronouns section
 	dat += "<b>Pronouns:</b> "
 	var/list/pronoun_options = list(HE_HIM, SHE_HER, THEY_THEM, IT_ITS)
+	var/list/pronoun_display = list(
+		HE_HIM = "He/Him",
+		SHE_HER = "She/Her",
+		THEY_THEM = "They/Them",
+		IT_ITS = "It/Its"
+	)
 	for(var/pronoun in pronoun_options)
+		var/display_pronoun = pronoun_display[pronoun] ? pronoun_display[pronoun] : pronoun
 		if(gnoll_pronouns == pronoun)
-			dat += "<b>[pronoun]</b> "
+			dat += "<b>[display_pronoun]</b> "
 		else
-			dat += "<a href='?_src_=gnoll_prefs;action=set_pronouns;pronouns=[pronoun]'>[pronoun]</a> "
+			dat += "<a href='?_src_=gnoll_prefs;action=set_pronouns;pronouns=[pronoun]'>[display_pronoun]</a> "
 	dat += "<br><br>"
 
 	// Pelt type section
-	dat += "<b>Pelt Type:</b> "
-	var/list/pelt_options = list("firepelt", "rotpelt", "whitepelt", "bloodpelt", "nightpelt", "darkpelt")
-	for(var/pelt in pelt_options)
-		if(pelt_type == pelt)
-			dat += "<b>[pelt]</b> "
+	dat += "<b>Pelt Pattern:</b> "
+	var/list/pelt_options = list(
+		"Firepelt" = "firepelt",
+		"Rotpelt" = "rotpelt",
+		"Whitepelt" = "whitepelt",
+		"Bloodpelt" = "bloodpelt",
+		"Nightpelt" = "nightpelt",
+		"Darkpelt" = "darkpelt"
+	)
+	for(var/pelt_label in pelt_options)
+		var/pelt_id = pelt_options[pelt_label]
+		if(pelt_type == pelt_id)
+			dat += "<b>[pelt_label]</b> "
 		else
-			dat += "<a href='?_src_=gnoll_prefs;action=set_pelt;pelt=[pelt]'>[pelt]</a> "
+			dat += "<a href='?_src_=gnoll_prefs;action=set_pelt;pelt=[pelt_id]'>[pelt_label]</a> "
 	dat += "<br><br>"
 
 	// Genitals section
 	dat += "<b>Genitals:</b><br>"
-	var/list/genital_types = list("penis", "vagina", "breasts")
-	for(var/genital in genital_types)
-		var/status = genitals[genital] ? "Yes" : "No"
-		var/toggle_action = genitals[genital] ? "disable" : "enable"
-		dat += "&nbsp;&nbsp;[genital]: [status] "
-		dat += "<a href='?_src_=gnoll_prefs;action=toggle_genital;genital=[genital];toggle=[toggle_action]'>[toggle_action == "enable" ? "Enable" : "Disable"]</a><br>"
+	var/list/genital_options = list(
+		"Penis" = "penis",
+		"Vagina" = "vagina",
+		"Breasts" = "breasts"
+	)
+	for(var/genital_label in genital_options)
+		var/genital_id = genital_options[genital_label]
+		var/status = genitals[genital_id] ? "Yes" : "No"
+		var/toggle_action = genitals[genital_id] ? "disable" : "enable"
+		dat += "&nbsp;&nbsp;[genital_label]: [status] "
+		dat += "<a href='?_src_=gnoll_prefs;action=toggle_genital;genital=[genital_id];toggle=[toggle_action]'>[toggle_action == "enable" ? "Enable" : "Disable"]</a><br>"
 	dat += "<br>"
 
 	dat += "<center><a href='?_src_=gnoll_prefs;action=close'>Close</a></center>"

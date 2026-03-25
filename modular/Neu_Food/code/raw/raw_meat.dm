@@ -356,7 +356,7 @@
 
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak/vilespawn
 	name = "vilespawn flesh"
-	desc = "Meat that can be used to bring forth some vile creature."
+	desc = "A disgusting chunk of flesh, an abberation to all that is good...legends say it can be used to bring forth some vile creature."
 	icon_state = "vilespawn"
 	slice_path = null
 	fried_type = null
@@ -364,23 +364,42 @@
 	rotprocess = 0
 	sellprice = 118
 
+//Gnoll summoning item, crafted from gnoll meat AND a gem, both only obtainable from dead gnolls.  
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak/vilespawn/attack_self(mob/living/user)
 	to_chat(user, span_notice("You offer the [src.name] to the void, chanting for a host..."))
 	var/list/candidates = pollGhostCandidates("Do you want to play as an Impure Gnoll? You'll be subservient to a master.", "Impure Gnoll", null, null, 10 SECONDS, "impure_gnoll")
 	if(!LAZYLEN(candidates))
 		to_chat(user, span_warning("The meat remains cold. No echoes of violence are hungry enough."))
 		return
+	user.flash_fullscreen("redflash3")
+	to_chat(user, span_userdanger("The echoes of millions of screams assault your ears, visions of raining blood, mountains of skulls! THE GORESTAR HEARS YOUR UNHOLY PRAYER!"))
+	user.playsound_local(get_turf(user), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
+	user.emote("agony", forced = TRUE)
+	user.Paralyze(4 SECONDS, ignore_canstun = TRUE)
+	user.Knockdown(4 SECONDS)
 
+	sleep(3.5 SECONDS)
+	
 	var/mob/C = pick(candidates)
+	if(istype(C, /mob/dead/new_player))
+		var/mob/dead/new_player/N = C
+		N.close_spawn_windows()
 	var/mob/living/carbon/human/H = new(get_turf(user))
 	H.key = C.key
 
 	H.set_species(/datum/species/gnoll)
 	var/datum/advclass/gnoll_impure/G = new()
 	G.equipme(H)
+	var/datum/gnoll_prefs/summoned_prefs = C.client?.prefs?.gnoll_prefs
+	if(summoned_prefs?.gnoll_name)
+		H.fully_replace_character_name(null, summoned_prefs.gnoll_name)
+	H.regenerate_icons()
 
-	src.visible_message(span_warning("The [src.name] bloats and tears open as a gnoll claw bursts through!"))
-	playsound(H.loc, 'sound/magic/slimesquish.ogg', 100, TRUE)
+	//The summoned gnoll now has its name assigned before the howl plays
+	src.visible_message(span_warning("The [src.name] bloats and tears open. An explosion of blood and gore heralds the arrival of an Impure Gnoll!"))
+	H.emote("howl", TRUE)
+	playsound(H.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 80, FALSE, 3)
+	H.spawn_gibs(TRUE)
 	qdel(C)
 	qdel(src)
 
@@ -393,7 +412,14 @@
 		to_chat(user, "You need to be a human to test this.")
 		return
 
-	to_chat(user, span_boldnotice("I feel dreadful!"))
+	user.flash_fullscreen("redflash3")
+	to_chat(user, span_userdanger("The echoes of millions of screams assault your ears, visions of raining blood, mountains of skulls! THE GORESTAR HEARS YOUR UNHOLY PRAYER!"))
+	user.playsound_local(get_turf(user), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
+	user.emote("agony", forced = TRUE)
+	user.Paralyze(4 SECONDS, ignore_canstun = TRUE)
+	user.Knockdown(4 SECONDS)
+
+	sleep(3.5 SECONDS)
 
 	var/mob/living/carbon/human/H = new(get_turf(user))
 	H.key = user.key
@@ -401,9 +427,15 @@
 	H.set_species(/datum/species/gnoll)
 	var/datum/advclass/gnoll_impure/C = new()
 	C.equipme(H)
+	var/datum/gnoll_prefs/summoned_prefs = user.client?.prefs?.gnoll_prefs
+	if(summoned_prefs?.gnoll_name)
+		H.fully_replace_character_name(null, summoned_prefs.gnoll_name)
+	H.regenerate_icons()
 
 	user.visible_message(span_warning("The [src.name] melds into [user]'s flesh as they transform into an Impure Gnoll!"))
-	playsound(user.loc, 'sound/magic/slimesquish.ogg', 100, TRUE)
+	H.emote("howl", TRUE)
+	playsound(H.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 80, FALSE, 3)
+	H.spawn_gibs(TRUE)
 
 	qdel(user)
 	qdel(src)
