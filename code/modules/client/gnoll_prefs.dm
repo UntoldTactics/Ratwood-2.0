@@ -19,7 +19,7 @@
 
 	var/list/dat = list()
 	dat += "<html><head><title>Gnoll Customization</title></head><body>"
-	dat += "<center><h2>Spill their guts!</h2></center><br>"
+	dat += "<center><h2>Choose your form to spread terror in the name of the GORESTAR!!</h2></center><br>"
 
 	// Name section
 	dat += "<b>Current Name:</b> [gnoll_name] "
