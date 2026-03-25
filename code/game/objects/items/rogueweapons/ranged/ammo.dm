@@ -44,10 +44,10 @@
 	icon_state = "bolt_blunt"
 	force = 5
 
-/obj/item/ammo_casing/caseless/rogue/bolt/blunt/heavy
+/obj/item/ammo_casing/caseless/rogue/bolt/heavyblunt
 	name = "heavy blunt bolt"
 	desc = "A crossbow bolt with a fat metal head. Built to break bones."
-	projectile_type = /obj/projectile/bullet/reusable/bolt/blunt/heavy
+	projectile_type = /obj/projectile/bullet/reusable/bolt/heavyblunt
 	possible_item_intents = list(/datum/intent/mace/strike)
 	icon_state = "bolt_blunt"
 	force = 10
@@ -86,7 +86,7 @@
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/bolt/blunt
 	hitsound = 'sound/combat/hits/blunt/woodblunt (2).ogg'
 
-/obj/projectile/bullet/reusable/bolt/blunt/heavy
+/obj/projectile/bullet/reusable/bolt/heavyblunt
 	damage = 75
 	armor_penetration = 50
 	embedchance = 5
