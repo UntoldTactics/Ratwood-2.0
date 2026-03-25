@@ -644,6 +644,11 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 /area/rogue/indoors/town/dwarfin/rockhill
 	first_time_text = "Rockhill Guild of Crafts"
 
+/area/rogue/indoors/town/dwarfin/desert//would normally use the desert base but the guildmaster announcment is coded really weirdly
+	first_time_text = "Al-Ashur Guild of Crafts"
+	name = "Guild Smithy"
+	droning_sound = 'sound/music/area/desert/Sandal.ogg'
+
 /area/rogue/outdoors/exposed/dwarf
 	icon_state = "dwarf"
 	droning_sound = 'sound/music/area/dwarf.ogg'
