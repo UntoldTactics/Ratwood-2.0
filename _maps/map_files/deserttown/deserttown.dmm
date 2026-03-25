@@ -4877,6 +4877,11 @@
 /obj/item/natural/feather,
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/church/basement)
+"cFc" = (
+/obj/item/cushion/desert2,
+/obj/machinery/light/rogue/candle/r,
+/turf/open/floor/carpet/royalblack,
+/area/rogue/indoors/deserttown/bath)
 "cFh" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/machinery/light/rogue/torchholder/l,
@@ -10711,16 +10716,6 @@
 /obj/structure/mineral_door/wood,
 /turf/open/floor/rogue/tile/harem1,
 /area/rogue/under/deserttown/basement/town)
-"fBM" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
-	dir = 1;
-	pixel_y = 8
-	},
-/obj/item/cushion/desert1,
-/obj/machinery/light/rogue/candle,
-/turf/open/floor/rogue/church,
-/area/rogue/indoors/town/church/chapel)
 "fBW" = (
 /obj/structure/flora/roguegrass/bush/desertshrub,
 /turf/open/floor/rogue/dirt/desert,
@@ -20132,14 +20127,10 @@
 	},
 /area/rogue/indoors/deserttown/magician)
 "kpd" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
-	dir = 1;
-	pixel_y = 8
-	},
-/obj/structure/roguemachine/scomm,
-/turf/open/floor/rogue/church,
-/area/rogue/indoors/town/church/chapel)
+/obj/item/cushion/desert1,
+/obj/machinery/light/rogue/candle/r,
+/turf/open/floor/carpet/purple,
+/area/rogue/indoors/deserttown/bath)
 "kpp" = (
 /obj/machinery/light/rogue/candle{
 	pixel_y = -32
@@ -23644,7 +23635,6 @@
 /obj/item/kitchen/spoon{
 	pixel_x = 5
 	},
-/obj/machinery/light/rogue/candle/l,
 /obj/item/millstone{
 	pixel_y = 36
 	},
@@ -24708,17 +24698,9 @@
 	},
 /area/rogue/under/deserttown/basement/town)
 "mwB" = (
-/obj/effect/decal/cobbleedge{
-	icon_state = "borderfall";
-	dir = 1;
-	pixel_y = 8
-	},
-/obj/structure/roguemachine/mail{
-	mailtag = "Temple"
-	},
-/obj/structure/rack/rogue/shelf/big,
-/turf/open/floor/rogue/church,
-/area/rogue/indoors/town/church/chapel)
+/obj/machinery/light/rogue/candle/l,
+/turf/open/floor/carpet/royalblack,
+/area/rogue/indoors/deserttown/bath)
 "mwC" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -26794,6 +26776,15 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/rogue/indoors/deserttown/manor)
+"nuH" = (
+/obj/effect/decal/cobbleedge{
+	icon_state = "borderfall";
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/roguemachine/scomm,
+/turf/open/floor/rogue/church,
+/area/rogue/indoors/town/church/chapel)
 "nuJ" = (
 /obj/structure/fluff/walldeco/fakewall{
 	icon = 'icons/turf/Rougewall_mossy.dmi';
@@ -31228,6 +31219,10 @@
 /obj/item/reagent_containers/glass/bottle/rogue/wine{
 	pixel_x = 7;
 	pixel_y = 0
+	},
+/obj/machinery/light/rogue/candle{
+	pixel_x = 5;
+	pixel_y = 31
 	},
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/deserttown/bath)
@@ -36302,6 +36297,18 @@
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/under/deserttown/basement/town)
+"ssR" = (
+/obj/effect/decal/cobbleedge{
+	icon_state = "borderfall";
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/structure/roguemachine/mail{
+	mailtag = "Temple"
+	},
+/obj/structure/rack/rogue/shelf/big,
+/turf/open/floor/rogue/church,
+/area/rogue/indoors/town/church/chapel)
 "ste" = (
 /obj/structure/roguemachine/drugmachine{
 	density = 0;
@@ -40329,6 +40336,10 @@
 	pixel_x = -4;
 	pixel_y = 2
 	},
+/obj/machinery/light/rogue/candle{
+	pixel_x = -7;
+	pixel_y = 32
+	},
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors/deserttown/bath)
 "uso" = (
@@ -41581,6 +41592,7 @@
 	})
 "uWB" = (
 /obj/structure/fluff/clock,
+/obj/machinery/light/rogue/candle,
 /turf/open/floor/rogue/tile/harem,
 /area/rogue/indoors/deserttown/bath)
 "uWO" = (
@@ -42065,6 +42077,7 @@
 /obj/item/clothing/cloak/matron,
 /obj/item/clothing/under/roguetown/skirt/red,
 /obj/item/clothing/suit/roguetown/shirt/undershirt/lowcut,
+/obj/machinery/light/rogue/candle,
 /turf/open/floor/rogue/tile/harem,
 /area/rogue/indoors/deserttown/bath)
 "vhc" = (
@@ -45382,6 +45395,16 @@
 	icon_state = "tilegreeny"
 	},
 /area/rogue/indoors/town/church)
+"wGK" = (
+/obj/effect/decal/cobbleedge{
+	icon_state = "borderfall";
+	dir = 1;
+	pixel_y = 8
+	},
+/obj/item/cushion/desert1,
+/obj/machinery/light/rogue/candle,
+/turf/open/floor/rogue/church,
+/area/rogue/indoors/town/church/chapel)
 "wGP" = (
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/cave)
@@ -45980,7 +46003,13 @@
 	},
 /area/rogue/indoors/town/dwarfin/desert)
 "wXv" = (
-/obj/structure/bondage/gloryhole,
+/obj/structure/bondage/gloryhole{
+	opacity = 1
+	},
+/obj/structure/drape/zybantine{
+	opacity = 1;
+	pixel_y = 5
+	},
 /turf/open/floor/rogue/tile/bath{
 	icon_state = "bathtileratwood"
 	},
@@ -47625,6 +47654,10 @@
 	},
 /turf/open/floor/rogue/desert_grass,
 /area/rogue/outdoors/desert)
+"xOY" = (
+/obj/machinery/light/rogue/candle/l,
+/turf/open/floor/carpet/purple,
+/area/rogue/indoors/deserttown/bath)
 "xPb" = (
 /obj/effect/decal/carpet,
 /obj/structure/table/wood/poor,
@@ -121472,11 +121505,11 @@ gXj
 gXj
 ucX
 ucX
-lAG
+xCv
 lLV
 iqW
 kTJ
-kTJ
+xOY
 kTJ
 ucX
 qKb
@@ -122393,7 +122426,7 @@ bOz
 ucX
 ucX
 byW
-byW
+mwB
 byW
 fKF
 lAG
@@ -123888,11 +123921,11 @@ gXj
 gXj
 ucX
 ucX
-lAG
+xCv
 lLV
 iqW
 mNT
-cIx
+kpd
 kTJ
 ucX
 pSw
@@ -124806,10 +124839,10 @@ dvY
 xQL
 nBR
 xQL
-dvY
+eQR
 ucX
 byW
-hZb
+cFc
 hZb
 fKF
 lAG
@@ -125108,7 +125141,7 @@ dvY
 xQL
 tKP
 oBm
-eQR
+dvY
 ucX
 ucX
 ucX
@@ -125410,7 +125443,7 @@ dvY
 xQL
 nBR
 xQL
-dvY
+eQR
 ucX
 gXj
 gXj
@@ -126012,11 +126045,11 @@ ucX
 ucX
 ucX
 ucX
-ucX
-ucX
 bCH
 ucX
 ucX
+ucX
+gXj
 gXj
 gXj
 gXj
@@ -126312,13 +126345,13 @@ fpk
 fpk
 vux
 ucX
-gXj
-gXj
 ucX
 pNe
 iqW
 iqW
 ucX
+gXj
+gXj
 gXj
 gXj
 gXj
@@ -126614,13 +126647,13 @@ fpk
 fpk
 fpk
 ucX
-gXj
-gXj
 ucX
 iWX
 iqW
 eAR
 ucX
+gXj
+gXj
 gXj
 gXj
 gXj
@@ -126917,12 +126950,12 @@ fpk
 plP
 ucX
 ucX
-gXj
-ucX
 pyC
 umj
 pyC
 ucX
+gXj
+gXj
 gXj
 gXj
 gXj
@@ -127219,12 +127252,12 @@ fpk
 fpk
 fpk
 ucX
+scM
+scM
+scM
+ucX
 gXj
-ucX
-scM
-scM
-scM
-ucX
+gXj
 gXj
 gXj
 gXj
@@ -127521,12 +127554,12 @@ fpk
 fpk
 fpk
 ucX
-gXj
-ucX
 rJF
 wpx
 scM
 ucX
+gXj
+gXj
 gXj
 gXj
 gXj
@@ -127823,12 +127856,12 @@ fpk
 fpk
 fpk
 ucX
-gXj
-ucX
 iYY
 kNv
 wsP
 ucX
+gXj
+gXj
 gXj
 gXj
 gXj
@@ -128125,12 +128158,12 @@ fpk
 plP
 ucX
 ucX
+ucX
+ucX
+ucX
+ucX
 gXj
-ucX
-ucX
-ucX
-ucX
-ucX
+gXj
 gXj
 gXj
 gXj
@@ -333753,7 +333786,7 @@ lBe
 uMQ
 uMQ
 jrd
-kpd
+nuH
 wvl
 kBp
 kBp
@@ -336169,7 +336202,7 @@ wNK
 qbW
 lyS
 iNu
-mwB
+ssR
 rov
 kBp
 kBp
@@ -336471,7 +336504,7 @@ wNK
 qbW
 uaG
 wNK
-fBM
+wGK
 dvX
 epY
 kBp
