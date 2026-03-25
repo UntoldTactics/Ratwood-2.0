@@ -68,6 +68,7 @@
 		/datum/language/gronnic,
 		/datum/language/beast,
 	)
+	public_examine_desc = span_red("Oh gods! What is that thing? Is that a GNOLL!?")
 	var/gnoll_armor_icon = "beserker"
 
 /datum/species/gnoll/send_voice(mob/living/carbon/human/H)

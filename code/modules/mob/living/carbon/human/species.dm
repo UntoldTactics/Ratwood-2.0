@@ -176,6 +176,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/gender_swapping = FALSE
 	var/stress_examine = FALSE
 	var/stress_desc = null
+	/// Optional species line shown during examine regardless of stress state.
+	var/public_examine_desc = null
 
 	var/punch_damage
 	/// WARNING - This is a very simple implementation. Not meant for carbons composed of limbs!

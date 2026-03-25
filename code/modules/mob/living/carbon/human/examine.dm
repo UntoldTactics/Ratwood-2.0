@@ -897,6 +897,9 @@
 						stress_type = /datum/stressevent/shunned_race_xenophobic
 					user.add_stress(stress_type)
 
+	if((user != src) && dna?.species?.public_examine_desc)
+		. += dna.species.public_examine_desc
+
 	if((user != src) && isliving(user))
 		var/mob/living/L = user
 		var/final_str = STASTR

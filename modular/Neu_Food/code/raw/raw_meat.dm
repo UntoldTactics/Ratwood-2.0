@@ -378,7 +378,7 @@
 	user.Paralyze(4 SECONDS, ignore_canstun = TRUE)
 	user.Knockdown(4 SECONDS)
 
-	sleep(3.5 SECONDS)
+	sleep(7 SECONDS)
 	
 	var/mob/C = pick(candidates)
 	if(istype(C, /mob/dead/new_player))
@@ -419,7 +419,7 @@
 	user.Paralyze(4 SECONDS, ignore_canstun = TRUE)
 	user.Knockdown(4 SECONDS)
 
-	sleep(3.5 SECONDS)
+	sleep(7 SECONDS)
 
 	var/mob/living/carbon/human/H = new(get_turf(user))
 	H.key = user.key
