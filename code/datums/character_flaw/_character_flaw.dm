@@ -525,11 +525,6 @@ GLOBAL_LIST_INIT(character_flaws, list(
 			log_hunted("[H.ckey] playing as [H.name] had the hunted flaw by vice.")
 			logged = TRUE
 
-/datum/charflaw/hunted/apply_post_equipment(mob/user)
-	..()
-	if(!ishuman(user))
-		return
-
 /datum/charflaw/unintelligible
 	name = "Unintelligible"
 	desc = "I cannot speak the common tongue!"

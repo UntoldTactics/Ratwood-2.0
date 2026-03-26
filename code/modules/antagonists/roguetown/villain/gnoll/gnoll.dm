@@ -35,9 +35,6 @@
 	if(owner)
 		owner.special_role = null
 
-/datum/antagonist/gnoll/greet()
-	return ..()
-
 /mob/living/carbon/human/proc/gnoll_feed(mob/living/carbon/human/target, healing_amount = 10)
 	if(!istype(target))
 		return
@@ -57,8 +54,6 @@
 
 	to_chat(src, span_warning("I feed on succulent flesh. I feel reinvigorated."))
 	return src.reagents.add_reagent(/datum/reagent/medicine/healthpot, healing_amount)
-
-/datum/intent/simple/werewolf/gnoll
 
 /obj/item/rogueweapon/werewolf_claw/gnoll
 	name = "Gnoll Claw"

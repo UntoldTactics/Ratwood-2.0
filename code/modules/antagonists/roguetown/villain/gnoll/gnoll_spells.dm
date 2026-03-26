@@ -44,11 +44,12 @@
 		"Knight Captain" = TRUE,
 		"Inquisitor" = TRUE
 	)
-	var/mob/living/tracked_target = null
+	var/datum/weakref/tracked_target_ref = null
 	var/shown_hunt_disclaimer = FALSE
 
 /obj/effect/proc_holder/spell/invoked/gnoll_sniff/cast(list/targets, mob/user)
 	var/mob/living/target = targets[1]
+	var/mob/living/tracked_target = tracked_target_ref?.resolve()
 
 	if(!tracked_target || QDELETED(tracked_target) || tracked_target.stat == DEAD || target == user)
 		select_new_target(user)
@@ -56,10 +57,10 @@
 		give_tracking_directions(user)
 
 	if(is_valid_hunted(target) && target != user)
-		tracked_target = target
+		tracked_target_ref = WEAKREF(target)
 		to_chat(user, span_notice("You catch the scent of [target.real_name]. The hunt begins!"))
 		user.playsound_local(get_turf(user), 'sound/vo/mobs/wwolf/sniff.ogg', 50, TRUE)
-	else if (!tracked_target)
+	else if(!tracked_target_ref?.resolve())
 		to_chat(user, span_warning("[target] isn't something you can hunt."))
 		revert_cast()
 		return FALSE
@@ -75,9 +76,9 @@
 			continue
 		var/entry_name = "[L.real_name]"
 		if(L.has_flaw(/datum/charflaw/hunted))
-			hunted_targets[entry_name] = L
+			hunted_targets[entry_name] = WEAKREF(L)
 		else if(L.job in combat_roles)
-			combat_targets[entry_name] = L
+			combat_targets[entry_name] = WEAKREF(L)
 
 	var/list/possible_targets = length(hunted_targets) ? hunted_targets : combat_targets
 
@@ -95,15 +96,21 @@
 		to_chat(user, span_boldwarning("(RP expectations are still valid as a Gnoll. You can always still do other gnoll things if targets are too difficult. Remember the rule of Interesting!)"))
 		shown_hunt_disclaimer = TRUE
 
+	var/datum/weakref/selected_target_ref = possible_targets[selection]
+	var/mob/living/selected_target = selected_target_ref?.resolve()
+	if(!is_valid_hunted(selected_target))
+		to_chat(user, span_warning("That scent slips away before you can lock onto it."))
+		return
 
-	tracked_target = possible_targets[selection]
-	to_chat(user, span_notice("You focus your senses on [tracked_target.real_name]."))
+	tracked_target_ref = WEAKREF(selected_target)
+	to_chat(user, span_notice("You focus your senses on [selected_target.real_name]."))
 	give_tracking_directions(user)
 
 /obj/effect/proc_holder/spell/invoked/gnoll_sniff/proc/give_tracking_directions(mob/user)
+	var/mob/living/tracked_target = tracked_target_ref?.resolve()
 	if(!tracked_target || QDELETED(tracked_target) || tracked_target.stat == DEAD)
 		to_chat(user, span_warning("The scent has gone cold... your target is no more."))
-		tracked_target = null
+		tracked_target_ref = null
 		return
 
 	var/turf/user_turf = get_turf(user)
@@ -316,3 +323,7 @@
 	addtimer(CALLBACK(target, TYPE_PROC_REF(/atom/movable, visible_message), span_warning("[target] lunges out of the shadows!"), span_notice("Your invisibility fades.")), base_dur)
 
 	return TRUE
+
+#undef GNOLL_STEALTH_TIMER
+#undef GNOLL_ABDUCT_TIMER
+#undef GNOLL_ABDUCT_DAMAGE_TRESHOLD

@@ -200,10 +200,12 @@
 
 /obj/item/roguegem/blood_diamond/examine(mob/user)
 	. = ..()
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.patron.type == /datum/patron/inhumen/graggar)
-			. += span_danger("You know this gem well. They are born out of great violence, but only if it involves the mightiest of warriors.")
+	if(!ishuman(user))
+		return
+
+	var/mob/living/carbon/human/human_user = user
+	if(human_user.patron.type == /datum/patron/inhumen/graggar)
+		. += span_danger("You know this gem well. They are born out of great violence, but only if it involves the mightiest of warriors.")
 
 /obj/item/roguegem/amethyst
 	name = "amythortz"
