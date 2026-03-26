@@ -223,6 +223,7 @@ LICH SKELETONS
 		if("Spear")
 			r_hand = /obj/item/rogueweapon/spear/paalloy
 			H.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+			l_hand = /obj/item/rogueweapon/shield/wood
 		if("Warhammer + Shield")
 			r_hand = /obj/item/rogueweapon/mace/warhammer/steel/paalloy
 			l_hand = /obj/item/rogueweapon/shield/wood
