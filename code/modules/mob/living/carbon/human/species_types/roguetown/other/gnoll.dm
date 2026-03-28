@@ -89,7 +89,6 @@
 /datum/species/gnoll/regenerate_icons(mob/living/carbon/human/H)
 	H.icon = 'icons/roguetown/mob/monster/gnoll.dmi'
 	H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
-	clear_extremity_overlays(H)
 	H.update_damage_overlays()
 	H.update_inv_armor_special()
 	return TRUE
@@ -114,30 +113,35 @@
 	UnregisterSignal(C, COMSIG_MOVABLE_BARK)
 
 /datum/species/gnoll/update_damage_overlays(mob/living/carbon/human/H)
-	clear_extremity_overlays(H)
-	H.remove_overlay(DAMAGE_LAYER)
-	H.remove_overlay(LEG_DAMAGE_LAYER)
-	H.remove_overlay(ARM_DAMAGE_LAYER)
+	clear_extremity_overlays(H, FALSE)
+	clear_layer_overlay(H, DAMAGE_LAYER, TRUE)
+	clear_layer_overlay(H, LEG_DAMAGE_LAYER, TRUE)
+	clear_layer_overlay(H, ARM_DAMAGE_LAYER, TRUE)
 	H.overlays_standing[DAMAGE_LAYER] = list()
 	H.overlays_standing[LEG_DAMAGE_LAYER] = list()
 	H.overlays_standing[ARM_DAMAGE_LAYER] = list()
-	H.apply_overlay(DAMAGE_LAYER)
-	H.apply_overlay(LEG_DAMAGE_LAYER)
-	H.apply_overlay(ARM_DAMAGE_LAYER)
+	if(H.client)
+		H.update_vision_cone()
 	return TRUE
 
-/datum/species/gnoll/proc/clear_extremity_overlays(mob/living/carbon/human/H)
+/datum/species/gnoll/proc/clear_layer_overlay(mob/living/carbon/human/H, layer_index, set_empty = FALSE)
+	var/I = H.overlays_standing[layer_index]
+	if(I)
+		H.cut_overlay(I)
+	if(set_empty)
+		H.overlays_standing[layer_index] = list()
+	else
+		H.overlays_standing[layer_index] = null
+
+/datum/species/gnoll/proc/clear_extremity_overlays(mob/living/carbon/human/H, update_vision = TRUE)
 	// Gnolls do not use humanoid hand/foot worn layers; clear them so bloodied extremity sprites never appear.
-	H.remove_overlay(SHOES_LAYER)
-	H.remove_overlay(SHOESLEEVE_LAYER)
-	H.remove_overlay(LEGSLEEVE_LAYER)
-	H.remove_overlay(GLOVES_LAYER)
-	H.remove_overlay(GLOVESLEEVE_LAYER)
-	H.overlays_standing[SHOES_LAYER] = null
-	H.overlays_standing[SHOESLEEVE_LAYER] = null
-	H.overlays_standing[LEGSLEEVE_LAYER] = null
-	H.overlays_standing[GLOVES_LAYER] = null
-	H.overlays_standing[GLOVESLEEVE_LAYER] = null
+	clear_layer_overlay(H, SHOES_LAYER)
+	clear_layer_overlay(H, SHOESLEEVE_LAYER)
+	clear_layer_overlay(H, LEGSLEEVE_LAYER)
+	clear_layer_overlay(H, GLOVES_LAYER)
+	clear_layer_overlay(H, GLOVESLEEVE_LAYER)
+	if(update_vision && H.client)
+		H.update_vision_cone()
 
 /datum/species/gnoll/random_name(gender,unique,lastname)
 	return "VEREWOLF"
