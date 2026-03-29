@@ -9533,6 +9533,12 @@
 "eWh" = (
 /turf/open/floor/rogue/sandbrick,
 /area/rogue/indoors/inq/basement)
+"eWp" = (
+/obj/structure/gate_vertical{
+	gid = "pyramidboss"
+	},
+/turf/open/floor/rogue/citybrick/citybrick1,
+/area/rogue/under/deserttown/basement/town)
 "eWy" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/rogue/blocks/stonered,
@@ -36734,8 +36740,9 @@
 /turf/open/floor/rogue/tile/harem1,
 /area/rogue/outdoors/deserttown)
 "sDO" = (
-/obj/effect/oneway/dragon,
-/obj/structure/mineral_door/wood/fancywood,
+/obj/structure/winch{
+	gid = "pyramidboss"
+	},
 /turf/open/floor/rogue/citybrick/citybrick1,
 /area/rogue/under/deserttown/basement/town)
 "sDQ" = (
@@ -51481,7 +51488,7 @@ jva
 vMg
 icS
 icS
-icS
+sDO
 xUx
 ktC
 icS
@@ -52085,7 +52092,7 @@ mef
 mef
 nfX
 icS
-icS
+jKm
 xUx
 smg
 icS
@@ -52387,7 +52394,7 @@ fcM
 eIh
 aEQ
 icS
-icS
+mNQ
 xUx
 hYF
 icS
@@ -52991,7 +52998,7 @@ icS
 icS
 icS
 icS
-mNQ
+icS
 xUx
 oNC
 xEI
@@ -53291,9 +53298,9 @@ icS
 icS
 sKD
 sKD
-sDO
-sDO
-sKD
+icS
+icS
+eWp
 xUx
 xUx
 xUx
@@ -53592,7 +53599,7 @@ icS
 pMj
 icS
 sKD
-mNQ
+sDO
 icS
 icS
 icS
@@ -53894,7 +53901,7 @@ icS
 mfJ
 bxA
 sKD
-icS
+mNQ
 icS
 riQ
 icS
