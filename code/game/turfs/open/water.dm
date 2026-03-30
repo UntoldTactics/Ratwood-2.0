@@ -351,6 +351,17 @@
 		return
 
 	if(do_after(L, 25, target = src))
+		if(ishuman(L))
+			var/mob/living/carbon/human/H = L
+			if(H.dna?.species?.id == "gnoll" && ispath(water_reagent, /datum/reagent/blood))
+				if(!H.gnoll_bloodpool_feed())
+					return
+				playsound(src, 'sound/misc/drink_blood.ogg', 100, FALSE, -4)
+				if(!mapped)
+					water_volume = max(water_volume - 2, 0)
+					if(water_volume <= 0)
+						water_reagent = water_reagent_purified
+				return
 		if (istype(src,/turf/open/water/sewer))
 			to_chat(user, span_userdanger("Have I gone mad!? Why am I drinking sewage!?"))
 		var/list/waterl = list(src.water_reagent = 5)
