@@ -71,15 +71,26 @@
 	return null
 
 /datum/antagonist/gnoll/proc/get_tracked_target()
-	var/obj/effect/proc_holder/spell/invoked/gnoll_sniff/sniff_spell = get_sniff_spell()
-	if(!sniff_spell)
+	var/mob/living/current_mob = owner?.current
+	if(!current_mob)
 		return null
 
-	var/mob/living/target = sniff_spell.tracked_target_ref?.resolve()
-	if(!target || !sniff_spell.is_valid_hunted(target))
-		return null
+	var/list/sniff_spells = list()
+	for(var/obj/effect/proc_holder/spell/invoked/gnoll_sniff/S as anything in current_mob.mob_spell_list)
+		if(!(S in sniff_spells))
+			sniff_spells += S
 
-	return target
+	if(current_mob.mind)
+		var/obj/effect/proc_holder/spell/invoked/gnoll_sniff/mind_sniff_spell = current_mob.mind.get_spell(/obj/effect/proc_holder/spell/invoked/gnoll_sniff)
+		if(mind_sniff_spell && !(mind_sniff_spell in sniff_spells))
+			sniff_spells += mind_sniff_spell
+
+	for(var/obj/effect/proc_holder/spell/invoked/gnoll_sniff/sniff_spell as anything in sniff_spells)
+		var/mob/living/target = sniff_spell.tracked_target_ref?.resolve()
+		if(target && sniff_spell.is_valid_hunted(target))
+			return target
+
+	return null
 
 /datum/antagonist/gnoll/proc/get_tracked_target_source(mob/living/target)
 	if(!target)
