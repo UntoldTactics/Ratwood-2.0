@@ -1,5 +1,6 @@
 /datum/advclass/gnoll/shaman
 	name = "Gnoll Shaman"
+	maximum_possible_slots = 1
 	tutorial = "Leader in faith, often the main source of wisdom within a gnoll pack. Few are closer to Graggar himself as you are. You may chose to waylay the hunt, in order to nurture fallen oppponents back to health, so they may grow stronger, providing a true challenge in a future fight."
 	outfit = /datum/outfit/job/roguetown/gnoll/shaman
 	applies_post_equipment = FALSE

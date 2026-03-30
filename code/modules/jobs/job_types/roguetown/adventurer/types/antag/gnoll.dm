@@ -39,7 +39,7 @@
 	..()
 	if(L)
 		var/mob/living/carbon/human/H = L
-		// Assign wretch antagonist datum so wretches appear in antag list
+		// Ensure gnolls are represented in the antagonist list.
 		if(H.mind && !H.mind.has_antag_datum(/datum/antagonist/gnoll))
 			var/datum/antagonist/new_antag = new /datum/antagonist/gnoll()
 			H.mind.add_antag_datum(new_antag)
@@ -141,7 +141,6 @@
 
 		var/obj/effect/proc_holder/spell/invoked/gnoll_sniff/F = new()
 		var/obj/effect/proc_holder/spell/invoked/invisibility/gnoll/I = new()
-		I.sniff_spell = F // Link them
 
 		var/obj/effect/proc_holder/spell/invoked/abduct/S = new /obj/effect/proc_holder/spell/invoked/abduct()
 		S.destination_turf = get_turf(H) // Set the anchor to where they spawn/don the outfit

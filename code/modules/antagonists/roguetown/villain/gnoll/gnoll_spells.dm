@@ -288,7 +288,6 @@
 /obj/effect/proc_holder/spell/invoked/invisibility/gnoll
 	name = "Stalk"
 	desc = "Fade from view. Lasts until you attack. Taking damage makes it impossible to go invisible for a minute."
-	var/obj/effect/proc_holder/spell/invoked/gnoll_sniff/sniff_spell
 	recharge_time = 2 MINUTES
 	overlay_icon = 'icons/mob/actions/gnollmiracles.dmi'
 	action_icon = 'icons/mob/actions/gnollmiracles.dmi'

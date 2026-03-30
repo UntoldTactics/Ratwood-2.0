@@ -1,5 +1,6 @@
 /datum/advclass/gnoll/knight
 	name = "Gnoll Knight"
+	maximum_possible_slots = 2
 	tutorial = "You were forged in the fires of the volcano, burn marks have long since healed, but the armor hammered against your muscle isn't so fleeting."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
@@ -7,8 +8,7 @@
 	category_tags = list(CTAG_GNOLL)
 	applies_post_equipment = FALSE
 	traits_applied = list(TRAIT_HEAVYARMOR) // Flavoring
-	
-	cmode_music = 'sound/music/cmode/antag/combat_thewall.ogg'
+
 	subclass_stats = list(
 		STATKEY_WIL = 5,
 		STATKEY_CON = 5,

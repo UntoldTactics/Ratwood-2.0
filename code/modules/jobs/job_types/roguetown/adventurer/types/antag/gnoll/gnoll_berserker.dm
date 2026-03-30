@@ -1,5 +1,6 @@
 /datum/advclass/gnoll/berserker
 	name = "Gnoll Berserker"
+	maximum_possible_slots = 2
 	tutorial = "You are a warrior feared for your brutality, dedicated to using your might for your own gain. Might equals right, and you are the reminder of such a saying."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS

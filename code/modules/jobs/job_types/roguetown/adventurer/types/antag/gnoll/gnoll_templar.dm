@@ -1,5 +1,6 @@
 /datum/advclass/gnoll/templar
 	name = "Gnoll Templar"
+	maximum_possible_slots = 2
 	tutorial = "None are as valued to protect graggarite worship as his gnoll champions themselves."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
