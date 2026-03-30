@@ -35,11 +35,16 @@
 	if(owner)
 		owner.special_role = null
 
+/mob/living/carbon/human/proc/gnoll_can_feed_heal()
+	if(has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder) || has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed))
+		to_chat(src, span_notice("My power is weakened, I cannot heal!"))
+		return FALSE
+	return TRUE
+
 /mob/living/carbon/human/proc/gnoll_feed(mob/living/carbon/human/target, healing_amount = 10)
 	if(!istype(target))
 		return
-	if(has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder) || has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed))
-		to_chat(src, span_notice("My power is weakened, I cannot heal!"))
+	if(!gnoll_can_feed_heal())
 		return
 	if(target.mind)
 		if(target.mind.has_antag_datum(/datum/antagonist/zombie))
@@ -56,11 +61,10 @@
 	return src.reagents.add_reagent(/datum/reagent/medicine/healthpot, healing_amount)
 
 /mob/living/carbon/human/proc/gnoll_bloodpool_feed(healing_amount = 6)
-	if(has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder) || has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder/blessed))
-		to_chat(src, span_notice("My power is weakened, I cannot heal!"))
+	if(!gnoll_can_feed_heal())
 		return FALSE
 
-	to_chat(src, span_warning("I lap from the blood, through Graggar's grace I am renewed!."))
+	to_chat(src, span_warning("I lap from the blood. Through Graggar's grace I am renewed."))
 	src.reagents.add_reagent(/datum/reagent/medicine/healthpot, healing_amount)
 	return TRUE
 

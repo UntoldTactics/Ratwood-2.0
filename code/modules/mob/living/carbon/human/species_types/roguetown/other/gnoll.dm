@@ -24,8 +24,8 @@
 		TRAIT_LONGSTRIDER,
 		TRAIT_IGNORESLOWDOWN,
 		TRAIT_IGNOREDAMAGESLOWDOWN,
-		TRAIT_CRITICAL_RESISTANCE, 
-		TRAIT_NOFALLDAMAGE1, 
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_NOFALLDAMAGE1,
 		TRAIT_STRENGTH_UNCAPPED,
 		TRAIT_PIERCEIMMUNE,
 		TRAIT_HARDDISMEMBER,
@@ -63,7 +63,7 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		)
+	)
 	languages = list(
 		/datum/language/common,
 		/datum/language/gronnic,
@@ -77,7 +77,6 @@
 	examine_stress_ignores_tolerant = TRUE
 	examine_relief_patron = /datum/patron/inhumen/graggar
 	examine_relief_event = /datum/stressevent/gnoll_graggar
-	var/gnoll_armor_icon = "beserker"
 
 /datum/species/gnoll/send_voice(mob/living/carbon/human/H)
 	playsound(get_turf(H), pick('sound/vo/mobs/wwolf/wolftalk1.ogg','sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
@@ -146,4 +145,4 @@
 		H.update_vision_cone()
 
 /datum/species/gnoll/random_name(gender,unique,lastname)
-	return "VEREWOLF"
+	return "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"

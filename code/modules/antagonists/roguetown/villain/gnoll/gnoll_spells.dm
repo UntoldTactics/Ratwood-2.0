@@ -1,7 +1,6 @@
 #define GNOLL_STEALTH_TIMER 60 SECONDS
 #define GNOLL_ABDUCT_TIMER 20 SECONDS
-#define GNOLL_ABDUCT_DAMAGE_TRESHOLD 100
-
+#define GNOLL_ABDUCT_DAMAGE_THRESHOLD 100
 /obj/effect/proc_holder/spell/self/claws/gnoll
 	name = "Gnoll claws"
 	claw_type = /obj/item/rogueweapon/werewolf_claw/gnoll
@@ -24,14 +23,14 @@
 	invocation_type = "none"
 	action_icon_state = "sniff"
 	var/static/list/combat_roles = list(
-		"Orthodoxist" = TRUE, 
-		"Absolver" = TRUE, 
-		"Templar" = TRUE, 
-		"Sergeant" = TRUE, 
-		"Man at Arms" = TRUE, 
-		"Knight" = TRUE, 
-		"Squire" = TRUE, 
-		"Mercenary" = TRUE, 
+		"Orthodoxist" = TRUE,
+		"Absolver" = TRUE,
+		"Templar" = TRUE,
+		"Sergeant" = TRUE,
+		"Man at Arms" = TRUE,
+		"Knight" = TRUE,
+		"Squire" = TRUE,
+		"Mercenary" = TRUE,
 		"Warden" = TRUE,
 		"Acolyte" = TRUE,
 		"Adventurer" = TRUE,
@@ -183,7 +182,7 @@
 	if(!tracker)
 		tracker = user.AddComponent(/datum/component/gnoll_combat_tracker)
 
-	if(tracker.get_recent_damage() > GNOLL_ABDUCT_DAMAGE_TRESHOLD)
+	if(tracker.get_recent_damage() > GNOLL_ABDUCT_DAMAGE_THRESHOLD)
 		to_chat(user, span_warning("You've taken too much punishment recently to focus on the abduction, you flinch!"))
 		revert_cast()
 		return FALSE
@@ -204,7 +203,7 @@
 		return FALSE
 
 	// Extra safety check
-	if(tracker.get_recent_damage() > GNOLL_ABDUCT_DAMAGE_TRESHOLD)
+	if(tracker.get_recent_damage() > GNOLL_ABDUCT_DAMAGE_THRESHOLD)
 		tracker.channeling_abduction = FALSE
 		to_chat(user, span_warning("The pain of your wounds disrupts the abduction at the last moment!"))
 		revert_cast()
@@ -231,7 +230,7 @@
 	if(gnoll_hitchhikers)
 		var/obj/structure/portal_jaunt/portal = new(origin_turf)
 		portal.linked_turf = destination_turf
-		portal.safe_passage = TRUE 
+		portal.safe_passage = TRUE
 		portal.name = "fading blood rift"
 		portal.color = "#570f04"
 		portal.max_uses = 1
@@ -258,7 +257,7 @@
 	last_damage_time = world.time
 	damage_taken += damage
 
-	if(channeling_abduction && ishuman(parent) && get_recent_damage() >= GNOLL_ABDUCT_DAMAGE_TRESHOLD)
+	if(channeling_abduction && ishuman(parent) && get_recent_damage() >= GNOLL_ABDUCT_DAMAGE_THRESHOLD)
 		var/mob/living/carbon/human/H = parent
 		// micro stun to break any do_afters
 		// asynchronous as to not mess with signal behavior!
