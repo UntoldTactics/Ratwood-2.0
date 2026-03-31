@@ -123,6 +123,15 @@
 		return "Combat fallback"
 	return "Direct scent"
 
+/datum/antagonist/gnoll/proc/is_examine_marked_target(mob/living/target)
+	if(!target)
+		return FALSE
+	if(target.has_flaw(/datum/charflaw/hunted))
+		return TRUE
+	if(get_tracked_target() != target)
+		return FALSE
+	return get_tracked_target_source(target) == "Combat fallback"
+
 /datum/antagonist/gnoll/antag_listing_status()
 	var/base_status = ..()
 	var/mob/living/target = get_tracked_target()

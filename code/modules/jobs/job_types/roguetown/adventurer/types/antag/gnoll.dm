@@ -62,6 +62,10 @@
 		statpack = null
 		headshot_link = null
 
+	// Gnolls should not inherit player-authored social metadata from their base slot.
+	rumour = null
+	noble_gossip = null
+
 	if(initial_setup && status_traits)
 		for(var/trait in status_traits.Copy())
 			if(HAS_TRAIT_FROM(src, trait, TRAIT_VIRTUE))
