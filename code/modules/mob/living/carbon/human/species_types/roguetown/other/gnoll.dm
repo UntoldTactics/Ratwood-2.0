@@ -95,6 +95,8 @@
 
 /datum/species/gnoll/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()
+	C.remove_status_effect(/datum/status_effect/buff/adrenaline_rush)
+	REMOVE_TRAIT(C, TRAIT_ADRENALINE_RUSH, INNATE_TRAIT)
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	RegisterSignal(C, COMSIG_MOVABLE_BARK, PROC_REF(cancel_default_bark))
 	C.ambushable = FALSE
