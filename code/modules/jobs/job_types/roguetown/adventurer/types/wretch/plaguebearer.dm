@@ -50,6 +50,7 @@
 		/obj/item/flashlight/flare/torch/lantern/prelit = 1,
 		/obj/item/reagent_containers/glass/bottle/rogue/strongpoison = 1,
 		/obj/item/reagent_containers/glass/bottle/alchemical/healthpot = 1,	//Small health vial
+		/obj/item/natural/worms/leech/cheele = 1,
 		)
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
 	H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
