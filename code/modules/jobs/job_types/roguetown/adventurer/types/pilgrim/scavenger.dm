@@ -1,6 +1,7 @@
 /datum/advclass/scavenger/harvester
 	name = "Harvester"
-	tutorial = "Perhaps terrible fate befell your last homestead, or circumstances conspired to drive you away. Either way, the soil of these lands are rich and fertile, so you hear. Let us hope you can build something to last the winter."
+	tutorial = "Perhaps terrible fate befell your last homestead, or circumstances conspired to drive you away. \
+	Either way, the soil of these lands are rich and fertile, so you hear. Let us hope you can build something to last the winter."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/refugee/harvester
