@@ -1,5 +1,5 @@
 
-#define CTAG_SULTAN			"CAT_SULTAN"		// Lord alt
+// #define CTAG_SULTAN			"CAT_SULTAN"		// Lord alt
 #define CTAG_VIZIER			"CAT_VIZIER"		// Hand class alt
 #define CTAG_SHEIKH			"CAT_SHEIKH"		// Hand class alt
 #define CTAG_AMIR			"CAT_AMIR"		// Heir alt
@@ -21,7 +21,7 @@
 // #define NOBLEMEN		(1<<0)
 
 // #define LORD		(1<<0)
-#define SULTAN		(1<<0)
+// #define SULTAN		(1<<0)
 // #define LADY		(1<<1)
 // #define HAND		(1<<2)
 #define VIZIER		(1<<2)
@@ -140,3 +140,21 @@
 // #define GUILDMASTER (1<<1)
 // #define GUILDSMAN  	(1<<2)
 // #define TAILOR		(1<<3)
+
+/obj/effect/proc_holder/spell/self/convertrole/slave
+	name = "Recruit Slave"
+	new_role = "Slave"
+	overlay_state = "recruit_servant"
+	recruitment_faction = "Servants"
+	recruitment_message = "Serve the crown, %RECRUIT!"
+	accept_message = "I OBEY, MASTER!"
+	refuse_message = "I refuse."
+	recharge_time = 100
+
+/obj/effect/proc_holder/spell/self/convertrole/azeb
+	name = "Recruit Azeb"
+	new_role = "Azeb"
+	recruitment_faction = "Bog Guard"
+	recruitment_message = "Serve the my will, %RECRUIT!"
+	accept_message = "FOR THE CROWN!"
+	refuse_message = "I refuse."

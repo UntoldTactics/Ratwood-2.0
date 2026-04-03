@@ -2990,7 +2990,6 @@
 #include "modular\DesertTown\jobs\garrison\janissary\jezail.dm"
 #include "modular\DesertTown\jobs\garrison\janissary\zephyr.dm"
 #include "modular\DesertTown\jobs\nobility\cataphract.dm"
-#include "modular\DesertTown\jobs\nobility\sultan.dm"
 #include "modular\DesertTown\jobs\nobility\vizier.dm"
 #include "modular\DesertTown\jobs\youngfolk\dtprince.dm"
 #include "modular\DesertTown\jobs\youngfolk\dtslave.dm"

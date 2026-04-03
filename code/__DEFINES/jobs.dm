@@ -360,7 +360,6 @@
 	/datum/job/roguetown/lady,\
 	/datum/job/roguetown/lord,\
 	/datum/job/roguetown/steward,\
-	/datum/job/roguetown/sultan,\
 	/datum/job/roguetown/dtprince,\
 	/datum/job/roguetown/cataphract,\
 	/datum/job/roguetown/vizier,\

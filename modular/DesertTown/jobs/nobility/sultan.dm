@@ -15,9 +15,9 @@
 	spells = list(
 		/obj/effect/proc_holder/spell/self/grant_title,
 		/obj/effect/proc_holder/spell/self/convertrole/slave,
+		/obj/effect/proc_holder/spell/self/convertrole/azeb
 		/obj/effect/proc_holder/spell/self/convertrole/guard,
 		/obj/effect/proc_holder/spell/self/grant_nobility,
-		/obj/effect/proc_holder/spell/self/convertrole/azeb
 	)
 	outfit = /datum/outfit/job/roguetown/sultan
 	visuals_only_outfit = /datum/outfit/job/roguetown/sultan/visuals
@@ -109,7 +109,6 @@
 	Warrior Lord subclass. An evolution from the Daring Twit. This is the original Lord Class.
 */
 /datum/advclass/sultan/dtwarrior
-	name = "Iron-fisted Warlord"
 	tutorial = "You're a noble warrior. You rose to your rank through your own strength and skill, whether by leading your men or by fighting alongside them. Or perhaps you are none of that, but simply a well-trained heir elevated to the position of Lord. You're trained in the usage of heavy armor, and knows swordsmanship well."
 	outfit = /datum/outfit/job/roguetown/sultan/warrior
 	category_tags = list(CTAG_SULTAN)
@@ -391,21 +390,19 @@
 // 	recruiter.say("I HEREBY GRANT YOU, [uppertext(recruit.name)], NOBILITY!")
 // 	ADD_TRAIT(recruit, TRAIT_NOBLE, TRAIT_GENERIC)
 // 	return TRUE
-
-/obj/effect/proc_holder/spell/self/convertrole/slave
-	name = "Recruit Slave"
-	new_role = "Slave"
-	overlay_state = "recruit_servant"
-	recruitment_faction = "Servants"
-	recruitment_message = "Serve the crown, %RECRUIT!"
-	accept_message = "I OBEY, MASTER!"
-	refuse_message = "I refuse."
-	recharge_time = 100
-
-/obj/effect/proc_holder/spell/self/convertrole/azeb
-	name = "Recruit Azeb"
-	new_role = "Azeb"
-	recruitment_faction = "Bog Guard"
-	recruitment_message = "Serve the my will, %RECRUIT!"
-	accept_message = "FOR THE CROWN!"
-	refuse_message = "I refuse."
+	if(SSmapping.config.map_name == "Desert Town")
+		spells = list(
+		/obj/effect/proc_holder/spell/self/grant_title,
+		/obj/effect/proc_holder/spell/self/convertrole/guard,
+		/obj/effect/proc_holder/spell/self/grant_nobility,
+		/obj/effect/proc_holder/spell/self/convertrole/slave,
+		/obj/effect/proc_holder/spell/self/convertrole/azeb,
+		)
+	else
+		spells = list(
+		/obj/effect/proc_holder/spell/self/grant_title,
+		/obj/effect/proc_holder/spell/self/convertrole/guard,
+		/obj/effect/proc_holder/spell/self/grant_nobility,
+		/obj/effect/proc_holder/spell/self/convertrole/bog,
+		/obj/effect/proc_holder/spell/self/convertrole/servant,
+		)

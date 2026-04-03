@@ -11,7 +11,7 @@
 		// /datum/job/roguetown/mercenary = 7, //haha fuck you one less slot!!
 	)
 	title_adjust = list(
-		/datum/job/roguetown/lord = list(display_title = "Sultan", f_title = "Sultana"),//this just effects the Lord Name code that effects global messages like from the throne
+		/datum/job/roguetown/lord = list(display_title = "Sultan", f_title = "Sultana"),
 		// /datum/job/roguetown/marshal = list(display_title = "Mayor"),
 		/datum/job/roguetown/priest =  list(display_title = "High Priest", f_title = "High Priestess"),
 		/datum/job/roguetown/captain = list(display_title = "Cataphract Captain"),
@@ -41,7 +41,7 @@
 		// /datum/job/roguetown/trader,
 		// /datum/job/roguetown/assassin,
 
-		/datum/job/roguetown/lord,// sultan
+		// /datum/job/roguetown/lord,// sultan
 		/datum/job/roguetown/knight,// cataphract
 		/datum/job/roguetown/hand,// vizier
 		// /datum/job/roguetown/suitor,

@@ -23,8 +23,8 @@
 	name = "Vizier"
 /obj/effect/landmark/start/dt/prince
 	name = "prince"
-/obj/effect/landmark/start/dt/sultan
-	name = "Sultan"
+// /obj/effect/landmark/start/dt/sultan
+// 	name = "Sultan"
 /obj/effect/landmark/start/dt/dtmagician
 	name = "Palace Magician"
 /obj/effect/landmark/start/dt/slave
