@@ -3109,6 +3109,10 @@
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/indoors/town/grove)
+"bGG" = (
+/obj/machinery/light/roguestreet/orange,
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/deserttown)
 "bGZ" = (
 /obj/structure/chair/wood/zybantine{
 	dir = 4
@@ -25595,6 +25599,12 @@
 /obj/structure/roguetent,
 /turf/open/floor/rogue/twig,
 /area/rogue/outdoors/desert)
+"mxt" = (
+/obj/machinery/light/roguestreet/orange{
+	dir = 1
+	},
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/deserttown)
 "mxy" = (
 /obj/structure/bookcase/random/archive,
 /obj/item/book/rogue/blackmountain,
@@ -26059,6 +26069,10 @@
 /obj/item/cushion/desert2,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/deserttown/tavern)
+"mLu" = (
+/obj/structure/pillar/sand1,
+/turf/open/floor/rogue/citybrick/citybrick2,
+/area/rogue/outdoors/deserttown)
 "mLw" = (
 /obj/structure/ladder,
 /turf/open/floor/rogue/twig,
@@ -46898,6 +46912,12 @@
 "wMj" = (
 /turf/open/floor/rogue/tile/brownbrick,
 /area/rogue/indoors/deserttown/manor)
+"wMk" = (
+/obj/machinery/light/roguestreet/orange/midlamp{
+	density = 0
+	},
+/turf/open/floor/rogue/darkpath,
+/area/rogue/outdoors/deserttown)
 "wMs" = (
 /obj/structure/fluff/railing/border/east,
 /obj/item/reagent_containers/glass/bucket,
@@ -369870,7 +369890,7 @@ hbV
 hbV
 hbV
 hbV
-sVj
+hbV
 hbV
 hbV
 hbV
@@ -370477,7 +370497,7 @@ rhI
 rhI
 rhI
 rhI
-rhI
+qAr
 hbV
 hbV
 hbV
@@ -370771,7 +370791,7 @@ hQC
 hQC
 hQC
 hQC
-hbV
+sVj
 hbV
 hbV
 hbV
@@ -489750,10 +489770,10 @@ mmM
 mmM
 agv
 agv
-bzG
-bzG
-bzG
-bzG
+hbV
+hbV
+hbV
+oAq
 xZI
 oDh
 oOp
@@ -490052,13 +490072,13 @@ wge
 wge
 nFC
 agv
-rYI
-bzG
-bzG
+mLu
+hbV
+oAq
 bzG
 oOp
-bzG
-bzG
+gXr
+hbV
 wKv
 qYi
 fIB
@@ -490354,13 +490374,13 @@ cjp
 cjp
 wge
 agv
-bzG
-bzG
+bGG
+oAq
 bzG
 bzG
 vuM
 oaJ
-bzG
+gXr
 wKv
 fIB
 fIB
@@ -490663,7 +490683,7 @@ bzG
 anV
 bzG
 bzG
-bzG
+gXr
 bCd
 mWt
 qYi
@@ -490965,7 +490985,7 @@ bzG
 anV
 bzG
 bzG
-bzG
+jil
 kYK
 mWt
 qYi
@@ -491260,13 +491280,13 @@ cjp
 cjp
 wge
 agv
-bzG
-bzG
+mxt
+xLJ
 bzG
 bzG
 vuM
 jli
-bzG
+jil
 rhI
 hQC
 hQC
@@ -491562,14 +491582,14 @@ wge
 wge
 pXt
 agv
-rYI
-bzG
-bzG
+mLu
+hbV
+xLJ
 bzG
 oOp
-bzG
-bzG
-rhI
+jil
+hbV
+wMk
 hQC
 hQC
 qYi
@@ -491864,12 +491884,12 @@ mmM
 mmM
 agv
 agv
-bzG
-bzG
-bzG
-bzG
+hbV
+hbV
+hbV
+xLJ
 vuM
-bzG
+hbV
 hQC
 hQC
 hQC
@@ -492166,9 +492186,9 @@ wge
 wge
 wge
 agv
-bzG
-bzG
-bzG
+hbV
+hbV
+hbV
 rhI
 hQC
 hQC

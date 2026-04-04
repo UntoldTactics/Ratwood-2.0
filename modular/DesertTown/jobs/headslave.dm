@@ -22,6 +22,7 @@
 	round_contrib_points = 3
 	social_rank = SOCIAL_RANK_YEOMAN
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
+	cmode_music = 'sound/music/combat_desert2.ogg'
 	job_subclasses = list(
 		/datum/advclass/headslave,
 	)
