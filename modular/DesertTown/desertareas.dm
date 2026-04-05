@@ -238,21 +238,6 @@
 	name = "Warden Fort"
 	warden_area = TRUE
 
-/area/rogue/under/deserttown/basement
-	name = "basement"
-	icon_state = "basement"
-	town_area = FALSE
-	ceiling_protected = TRUE
-
-/area/rogue/under/deserttown/basement/town
-	town_area = TRUE
-
-/area/rogue/under/deserttown/basement/keep
-	name = "keep basement"
-	icon_state = "basement"
-	keep_area = TRUE
-	town_area = TRUE
-
 /area/rogue/outdoors/banditcamp/desert
 	name = "Bandit Camp"
 	droning_sound = 'sound/music/area/desert/faithless.ogg'
@@ -268,9 +253,6 @@
 	droning_sound_dusk = 'sound/music/area/desert/faithless.ogg'
 	droning_sound_night = 'sound/music/area/desert/faithless.ogg'
 	deathsight_message = "hidden among thieves, in the hoard of a dragon"
-
-
-
 
 /area/rogue/outdoors/town/desert
 	name = "desert town outdoors"
@@ -444,3 +426,7 @@
 	droning_sound_dusk = 'sound/music/area/desert/faithless.ogg'
 	droning_sound_night = 'sound/music/area/desert/faithless.ogg'
 	deathsight_message = "hidden among thieves, in the hoard of a dragon"
+
+/area/rogue/indoors/town/desert/arenaview
+	name = "Grand Arena"
+	viewing_area = TRUE
