@@ -2367,21 +2367,6 @@
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/deserttown/manor)
-"bmu" = (
-/obj/machinery/light/rogue/candle/blue,
-/obj/item/roguekey/vault{
-	pixel_x = -3;
-	pixel_y = 4
-	},
-/obj/structure/rack/rogue/shelf/biggest{
-	pixel_x = 0;
-	pixel_y = 10
-	},
-/obj/item/storage/keyring,
-/obj/item/storage/keyring,
-/obj/item/storage/keyring,
-/turf/open/floor/carpet/royalblack,
-/area/rogue/indoors/deserttown/manor)
 "bmM" = (
 /obj/structure/toilet,
 /mob/living/carbon/human/species/human/northern/bum/ambush,
@@ -2760,6 +2745,21 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/rogue/underworld/space/sparkle_quiet,
 /area/rogue/indoors/deserttown/magician)
+"byh" = (
+/obj/machinery/light/rogue/candle/blue,
+/obj/item/roguekey/vault{
+	pixel_x = -3;
+	pixel_y = 4
+	},
+/obj/structure/rack/rogue/shelf/biggest{
+	pixel_x = 0;
+	pixel_y = 10
+	},
+/obj/item/storage/keyring,
+/obj/item/storage/keyring,
+/obj/item/storage/keyring,
+/turf/open/floor/carpet/royalblack,
+/area/rogue/indoors/deserttown/manor)
 "byp" = (
 /obj/structure/sandrock/sandrock3,
 /turf/open/floor/rogue/dunes,
@@ -8981,8 +8981,7 @@
 /area/rogue/indoors/town/church)
 "ezz" = (
 /obj/structure/closet/crate/chest{
-	locked = 1;
-	lockid = "artificer"
+	lockid = "crafterguild"
 	},
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak,
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak,
@@ -31838,7 +31837,7 @@
 	},
 /obj/structure/closet/crate/chest{
 	locked = 1;
-	lockid = "artificer"
+	lockid = "crafterguild"
 	},
 /obj/item/grown/log/tree,
 /obj/item/grown/log/tree,
@@ -476191,7 +476190,7 @@ kIL
 hhI
 hhI
 hhI
-bmu
+byh
 jAg
 nVW
 nVW
