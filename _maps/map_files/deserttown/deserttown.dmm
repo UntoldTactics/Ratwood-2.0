@@ -42654,6 +42654,10 @@
 	icon = 'modular/DesertTown/icons/alt/roguefloor.dmi'
 	},
 /area/rogue/indoors/deserttown)
+"uSd" = (
+/obj/effect/landmark/deaths_door/exit,
+/turf/open/floor/rogue/darkpath,
+/area/rogue/indoors/town/church/basement)
 "uSe" = (
 /obj/structure/table/wood{
 	dir = 8;
@@ -214370,7 +214374,7 @@ ePk
 ePk
 ePk
 ePk
-ePk
+uSd
 bPQ
 fJk
 cfC
