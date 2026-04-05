@@ -26219,10 +26219,6 @@
 	icon_state = "tilegreeny"
 	},
 /area/rogue/indoors/town/church)
-"mPd" = (
-/obj/structure/bed/rogue/inn/hay,
-/turf/closed/mineral/rogue,
-/area/rogue/outdoors/mountains)
 "mPe" = (
 /obj/machinery/light/rogue/candle,
 /obj/structure/roguemachine/atm{
@@ -241211,10 +241207,10 @@ gXj
 gXj
 gXj
 gXj
+oqv
+oqv
+oqv
 gXj
-oqv
-oqv
-oqv
 gXj
 gXj
 gXj
@@ -241512,12 +241508,12 @@ gXj
 gXj
 gXj
 gXj
-gXj
 oqv
 oqv
 gmm
 oqv
 oqv
+gXj
 gXj
 gXj
 gXj
@@ -241814,12 +241810,12 @@ gXj
 gXj
 gXj
 gXj
-gXj
 oqv
 bsS
 qIm
 bsS
 oqv
+gXj
 gXj
 gXj
 gXj
@@ -242117,11 +242113,11 @@ gXj
 gXj
 gXj
 oqv
-oqv
 oLE
 qIm
 oLE
 oqv
+gXj
 gXj
 gXj
 gXj
@@ -242421,9 +242417,9 @@ gXj
 oqv
 oLE
 qIm
-qIm
 oLE
 oqv
+gXj
 gXj
 gXj
 gXj
@@ -242725,7 +242721,7 @@ oLE
 qIm
 oLE
 oqv
-oqv
+gXj
 gXj
 gXj
 gXj
@@ -326326,7 +326322,7 @@ ngV
 ngV
 hQC
 hQC
-mPd
+hQC
 hQC
 hQC
 hQC
