@@ -91,7 +91,7 @@
 	
 	obscured_flags = new_flags
 
-/// Tries to get the mob's class title and return it as a string.
+/// Tries to get the mob's displayed class title, and return it as a string.
 /// This should always return a string, even an empty one. CHECK ITS length()!
 /mob/living/proc/get_class_title(unknown_class_if_empty = FALSE)
 	if(mind?.cosmetic_class_title)

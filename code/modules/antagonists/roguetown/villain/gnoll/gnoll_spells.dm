@@ -67,18 +67,20 @@
 	var/list/combat_roles = get_gnoll_tracking_combat_roles()
 	var/list/name_counts = list()
 	//Allows a fallback, if no hunted targets are available, we can track worthy prey (combat roles) instead. 
-	for(var/mob/living/L in GLOB.player_list)
-		if(L == user || QDELETED(L) || L.stat == DEAD || istype(L, /mob/living/carbon/human/dummy) || !L.mind)
+	for(var/mob/living/carbon/human/human in GLOB.player_list)
+		if(human == user || QDELETED(human) || human.stat == DEAD || istype(human, /mob/living/carbon/human/dummy) || !human.mind)
 			continue
-		var/base_name = "[L.real_name]"
+		if(human.advsetup || !human.class_equip_finished) // they haven't gotten their true class name yet
+			continue
+		var/base_name = "[human.real_name]"
 		var/name_count = (name_counts[base_name] || 0) + 1
-		var/class = L.get_class_title()
+		var/class = human.get_class_title()
 		name_counts[base_name] = name_count
 		var/entry_name = (name_count > 1) ? "[base_name] ([name_count])[length(class) ? " - [class]" : ""]" : "[base_name][length(class) ? " - [class]" : ""]"
-		if(L.has_flaw(/datum/charflaw/hunted))
-			hunted_targets[entry_name] = L
-		else if(L.job in combat_roles)
-			combat_targets[entry_name] = L
+		if(human.has_flaw(/datum/charflaw/hunted))
+			hunted_targets[entry_name] = human
+		else if(human.job in combat_roles)
+			combat_targets[entry_name] = human
 
 	var/list/possible_targets = length(hunted_targets) ? hunted_targets : combat_targets
 
