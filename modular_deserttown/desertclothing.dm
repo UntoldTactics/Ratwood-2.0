@@ -490,22 +490,8 @@
 	sleeved = 'modular_deserttown/icons/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE, FEMALE)
 	sellprice = 50
 	nodismemsleeves = TRUE
-
-/obj/item/clothing/cloak/catcloak/ComponentInitialize()
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/roguetown/cloak)
-
-// /obj/item/clothing/cloak/catcloak/dropped(mob/living/carbon/human/user)
-// 	..()
-// 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-// 	if(STR)
-// 		var/list/things = STR.contents()
-// 		for(var/obj/item/I in things)
-// 			STR.remove_from_storage(I, get_turf(src))
-
 	
 /obj/item/clothing/cloak/raincloak/amir
 	name = "amir's cloak"
@@ -530,8 +516,34 @@
 	block2add = FOV_BEHIND
 	flags_inv = HIDEHAIR
 
-//////BELTS
+/obj/item/clothing/cloak/dunestalker
+	name = "dunestalker cloak"
+	desc = "A heavy leather cloak held together by a gilded pin, depicting the Grand Sultan's house. The sign of a faithful servant."
+	icon = 'modular_deserttown/icons/clothing/shadowcloak.dmi'
+	mob_overlay_icon = 'modular_deserttown/icons/clothing/onmob/shadowcloak.dmi'
+	icon_state = "shadowcloak"
+	sleeved = 'modular_deserttown/icons/clothing/onmob/shadowcloak.dmi'
+	sleevetype = "shirt"
+	alternate_worn_layer = CLOAK_BEHIND_LAYER
+	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
+//	body_parts_covered = ARMS|CHEST
+	boobed = TRUE
+	nodismemsleeves = TRUE
+	inhand_mod = TRUE
+	hoodtype = null
+	toggle_icon_state = FALSE
+	allowed_sex = list(MALE, FEMALE)
+	flags_inv = null
 
+/obj/item/clothing/cloak/citywatch/janissary
+	name = "janissary cape"
+	desc = "A light cloak held together by a gilded badge, depicting the Grand Sultan's house. The sign of a faithful servant."
+	icon = 'modular_deserttown/icons/clothing/shadowcloak.dmi'
+	mob_overlay_icon = 'modular_deserttown/icons/clothing/onmob/shadowcloak.dmi'
+	icon_state = "jan"
+	item_state = "jan"
+
+//////BELTS
 
 /obj/item/storage/belt/rogue/leather/cloth/sash
 	name = "Zybantine sash"
@@ -642,43 +654,3 @@
 	desc = "Sturdy boots stitched together from cured leather. Stylish, firm, and sport a satisfying 'squeek' with each step."
 	icon_state = "shalal"//change when I get around to it
 	item_state = "shalal"
-
-/obj/item/clothing/cloak/dunestalker
-	name = "dunestalker cloak"
-	desc = "A heavy leather cloak held together by a gilded pin, depicting the Grand Sultan's house. The sign of a faithful servant."
-	icon = 'modular_deserttown/icons/clothing/shadowcloak.dmi'
-	mob_overlay_icon = 'modular_deserttown/icons/clothing/onmob/shadowcloak.dmi'
-	icon_state = "shadowcloak"
-	color = null
-	sleeved = 'modular_deserttown/icons/clothing/onmob/shadowcloak.dmi'
-	sleevetype = "shirt"
-	alternate_worn_layer = CLOAK_BEHIND_LAYER
-	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
-//	body_parts_covered = ARMS|CHEST
-	boobed = TRUE
-	nodismemsleeves = TRUE
-	inhand_mod = TRUE
-	hoodtype = null
-	toggle_icon_state = FALSE
-	allowed_sex = list(MALE, FEMALE)
-	flags_inv = null
-
-/obj/item/clothing/cloak/dunestalker/ComponentInitialize()
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/roguetown/cloak)
-
-/obj/item/clothing/cloak/citywatch/janissary
-	name = "janissary cape"
-	desc = "A light cloak held together by a gilded badge, depicting the Grand Sultan's house. The sign of a faithful servant."
-	icon = 'modular_deserttown/icons/clothing/shadowcloak.dmi'
-	mob_overlay_icon = 'modular_deserttown/icons/clothing/onmob/shadowcloak.dmi'
-	icon_state = "jan"
-	item_state = "jan"
-
-// /obj/item/clothing/cloak/dunestalker/dropped(mob/living/carbon/human/user)
-// 	..()
-// 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-// 	if(STR)
-// 		var/list/things = STR.contents()
-// 		for(var/obj/item/I in things)
-// 			STR.remove_from_storage(I, get_turf(src))
