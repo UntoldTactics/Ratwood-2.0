@@ -540,6 +540,11 @@
 	else if(istype(item, /obj/item/rogueweapon/chisel/assembly))
 		to_chat(user, span_warning("You most use both hands to rename the grille."))
 
+/obj/structure/bars/grille/rusty
+	name = "rusty grille"
+	desc = "A few good hits ought to smash it open."
+	max_integrity = 70
+
 /obj/structure/bars/pipe
 	name = "bronze pipe"
 	desc = ""
