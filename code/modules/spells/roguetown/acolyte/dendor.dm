@@ -177,7 +177,7 @@
 	var/obj/item/reagent_containers/water_container = null
 	for(var/obj/item/held in list(user.get_active_held_item(), user.get_inactive_held_item()))
 		if(held?.reagents && (istype(held, /obj/item/reagent_containers/glass/bucket) || istype(held, /obj/item/reagent_containers/glass/mortar)))
-			if(held.reagents.get_reagent_amount(/datum/reagent/water/holywater) >= 2)
+			if(held.reagents.get_reagent_amount(/datum/reagent/water/blessed) >= 2)
 				water_container = held
 				break
 
@@ -194,11 +194,11 @@
 			to_chat(user, span_warning("I need blessed seed powder in-hand to sanctify logs."))
 			return FALSE
 		if(!water_container)
-			to_chat(user, span_warning("I need a stone mortar or bucket with holy water in-hand to sanctify logs."))
+			to_chat(user, span_warning("I need a stone mortar or bucket with blessed water in-hand to sanctify logs."))
 			return FALSE
-		var/holy_amt = water_container.reagents.get_reagent_amount(/datum/reagent/water/holywater)
-		if(holy_amt < 1)
-			to_chat(user, span_warning("My container has no holy water to fuel the blessing."))
+		var/blessed_amt = water_container.reagents.get_reagent_amount(/datum/reagent/water/blessed)
+		if(blessed_amt < 1)
+			to_chat(user, span_warning("My container has no blessed water to fuel the blessing."))
 			return FALSE
 		var/blessed_logs = 0
 		for(var/obj/item/grown/log/tree/log in target_long_logs)
@@ -210,7 +210,7 @@
 		if(blessed_logs <= 0)
 			to_chat(user, span_warning("There are no unblessed long logs here to sanctify."))
 			return FALSE
-		water_container.reagents.remove_reagent(/datum/reagent/water/holywater, holy_amt)
+		water_container.reagents.remove_reagent(/datum/reagent/water/blessed, blessed_amt)
 		qdel(blessed_seed_powder)
 		visible_message(span_green("[usr] sanctifies the long logs with Dendor's favor!"))
 		return TRUE
@@ -224,6 +224,7 @@
 	if(target_soil)
 		if(target_soil.blessed_time > 0 && !blessed_seed_powder)
 			to_chat(user, span_warning("That soil is already blessed. It can be blessed again in [DisplayTimeText(target_soil.blessed_time)]."))
+			revert_cast(user)
 			return FALSE
 		if(blessed_seed_powder)
 			var/amount_blessed = 0
@@ -530,6 +531,10 @@
 	invocation_type = "whisper"
 	/// Reference to the currently summoned lesser dryad.
 	var/mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/conjured_dryad = null
+	/// TRUE while the player is intentionally unsummoning the dryad.
+	var/manual_unsummon = FALSE
+	/// Absolute world.time when summon is allowed again after dryad death.
+	var/death_cooldown_until = 0
 
 /obj/effect/proc_holder/spell/targeted/summon_lesser_dryad/Destroy()
 	if(conjured_dryad && !QDELETED(conjured_dryad))
@@ -542,11 +547,17 @@
 	if(!istype(user, /mob/living/carbon/human))
 		return FALSE
 	var/mob/living/carbon/human/H = user
+	if(world.time < death_cooldown_until)
+		to_chat(H, span_warning("The bond to my sould-bound tree is unstable. I must wait [DisplayTimeText(death_cooldown_until - world.time)] before summoning another dryad."))
+		revert_cast()
+		return FALSE
 
 	// If already summoned, unsummon
 	if(conjured_dryad && !QDELETED(conjured_dryad))
+		manual_unsummon = TRUE
 		conjured_dryad.visible_message(span_boldwarning("[conjured_dryad] dissolves back into the grove."))
 		qdel(conjured_dryad)
+		manual_unsummon = FALSE
 		conjured_dryad = null
 		to_chat(H, span_notice("My dryad returns to the grove."))
 		return TRUE
@@ -565,6 +576,7 @@
 
 	var/mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/D = new(spawn_turf, H)
 	conjured_dryad = D
+	D.summoner_spell = src
 	// Register cleanup if the dryad dies on its own
 	RegisterSignal(D, COMSIG_QDELETING, PROC_REF(on_dryad_deleted))
 	to_chat(H, span_green("A lesser dryad emerges from the roots, answering my call."))
@@ -572,46 +584,88 @@
 	return TRUE
 
 /obj/effect/proc_holder/spell/targeted/summon_lesser_dryad/proc/on_dryad_deleted(datum/source)
+	if(!manual_unsummon)
+		death_cooldown_until = max(death_cooldown_until, world.time + 2 MINUTES)
 	conjured_dryad = null
 	UnregisterSignal(source, COMSIG_QDELETING)
 
-/// Triggers the lesser dryad's surge: kneestingers + 5×5 vines around it.
-/// The player targets the dryad (or any turf near it) to activate the ability.
+/// Triggers the lesser dryad's surge by middle-targeting a location or creature.
 /obj/effect/proc_holder/spell/targeted/lesser_dryad_special
 	name = "Dryad Surge"
-	desc = "Command your lesser dryad to erupt with thorns and vines. The dryad must be within 10 tiles."
+	desc = "Prepare an order, then middle-target a turf or creature to command your lesser dryad there."
 	overlay_state = "blesscrop"
 	action_icon_state = "blessing"
 	action_icon = 'icons/mob/actions/genericmiracles.dmi'
 	releasedrain = 50
 	recharge_time = 25 SECONDS
 	chargetime = 0 SECONDS
-	max_targets = 1
-	cast_without_targets = FALSE
+	max_targets = 0
+	cast_without_targets = TRUE
 	associated_skill = /datum/skill/magic/holy
 	invocations = list("Tangle my enemies and sting their feet. Grove, arise!")
 	invocation_type = "shout"
 	range = 10
+	/// world.time until this prepared cast expires if no middle-target is provided.
+	var/awaiting_middle_target_until = 0
 
 /obj/effect/proc_holder/spell/targeted/lesser_dryad_special/cast(list/targets, mob/user = usr)
 	. = ..()
 	if(!istype(user, /mob/living/carbon/human))
 		return FALSE
+	awaiting_middle_target_until = world.time + 8 SECONDS
+	to_chat(user, span_notice("I focus the grove's command. Middle-target a turf or creature to direct my dryad's vine surge."))
+	return TRUE
+
+/obj/effect/proc_holder/spell/targeted/lesser_dryad_special/proc/try_cast_on_middle_target(atom/target, mob/living/carbon/human/user)
+	if(!target || !user)
+		return FALSE
+	if(world.time > awaiting_middle_target_until)
+		return FALSE
+	awaiting_middle_target_until = 0
+
 	var/mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/D = null
-	// Find a lesser dryad owned by this player within range
-	for(var/mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/dryad in view(10, user))
+	for(var/mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/dryad in view(14, user))
 		if(dryad.conjurer_ckey == user.ckey)
 			D = dryad
 			break
 	if(!D)
 		to_chat(user, span_warning("My dryad is not nearby."))
-		revert_cast()
-		return FALSE
-	if(!D.dryad_surge())
-		to_chat(user, span_warning("My dryad's power has not yet recovered."))
-		revert_cast()
-		return FALSE
+		return TRUE
+
+	var/turf/target_turf = get_turf(target)
+	if(!target_turf || isclosedturf(target_turf))
+		to_chat(user, span_warning("The dryad cannot reach that location."))
+		return TRUE
+
+	if(D.ai_controller)
+		D.ai_controller.clear_blackboard_key(BB_BASIC_MOB_CURRENT_TARGET)
+	D.Goto(target_turf, D.move_to_delay, 1)
+	addtimer(CALLBACK(src, PROC_REF(try_execute_surge), D, target_turf, user, 12), 0.5 SECONDS)
 	return TRUE
+
+/obj/effect/proc_holder/spell/targeted/lesser_dryad_special/proc/try_execute_surge(mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/D, turf/target_turf, mob/living/carbon/human/user, attempts_left)
+	if(QDELETED(D) || QDELETED(user) || !target_turf)
+		return
+	if(get_dist(D, target_turf) > 1)
+		if(attempts_left <= 0)
+			to_chat(user, span_warning("My dryad cannot reach the commanded target."))
+			return
+		D.Goto(target_turf, D.move_to_delay, 1)
+		addtimer(CALLBACK(src, PROC_REF(try_execute_surge), D, target_turf, user, attempts_left - 1), 0.5 SECONDS)
+		return
+	if(!D.dryad_surge(target_turf))
+		to_chat(user, span_warning("My dryad's power has not yet recovered."))
+
+/mob/living/proc/try_handle_middle_targeted_spell(atom/target)
+	return FALSE
+
+/mob/living/carbon/human/try_handle_middle_targeted_spell(atom/target)
+	if(!mind)
+		return FALSE
+	for(var/obj/effect/proc_holder/spell/targeted/lesser_dryad_special/S in mind.spell_list)
+		if(S.try_cast_on_middle_target(target, src))
+			return TRUE
+	return FALSE
 
 /// Minion order subtype for controlling the lesser dryad faction.
 /// Inherits all minion_order behavior, but only affects mobs tagged with the caster's faction.
@@ -619,4 +673,25 @@
 	name = "Order Dryad"
 	desc = "Command your lesser dryad to move, follow, or attack. Cast on the dryad to toggle stance, on a turf to send it there, on yourself to have it follow, or on an enemy to have it attack."
 	faction_ordering = FALSE
+
+/obj/effect/proc_holder/spell/invoked/minion_order/lesser_dryad/cast(list/targets, mob/user)
+	. = ..()
+	if(!istype(user, /mob/living/carbon/human))
+		return
+	if(!targets || !targets.len)
+		return
+	if(targets[1] != user)
+		return
+	var/mob/living/carbon/human/H = user
+	var/faction_tag = "[H.mind.current.real_name]_faction"
+	for(var/mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/D in oview(src.order_range, H))
+		if(!(faction_tag in D.faction))
+			continue
+		D.aggressive = FALSE
+		if(!("neutral" in D.faction))
+			D.faction += "neutral"
+		D.enemies = list()
+		D.LoseTarget()
+		if(D.ai_controller)
+			D.ai_controller.clear_blackboard_key(BB_BASIC_MOB_RETALIATE_LIST)
 

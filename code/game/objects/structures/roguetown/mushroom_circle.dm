@@ -14,7 +14,7 @@
 //   You must stand inside the circle, and every living being standing in it travels together.
 //
 // Renaming:
-//   Click with /obj/item/natural/feather (UNIQUE_RENAME flag).
+//   Click with /obj/item/natural/feather (name only, no description editing).
 
 GLOBAL_LIST_EMPTY(mushroom_circles)
 
@@ -62,7 +62,7 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 			visible_message(span_warning("[src] withers back into the blessed soil."))
 			qdel(src)
 			return
-	if(growth_progress >= 5 MINUTES)
+	if(growth_progress >= 10 MINUTES)
 		bloom()
 
 /obj/structure/mushroom_sprout/examine(mob/user)
@@ -91,9 +91,9 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 /obj/structure/mushroom_sprout/proc/bloom()
 	if(QDELETED(src))
 		return
-	if(linked_soil && !QDELETED(linked_soil))
-		qdel(linked_soil)
-	new /obj/structure/mushroom_circle(get_turf(src))
+	var/obj/structure/mushroom_circle/new_circle = new(get_turf(src))
+	if(new_circle)
+		new_circle.linked_soil = linked_soil
 	qdel(src)
 
 //==============================================================================
@@ -106,7 +106,7 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 	anchored = TRUE
 	density = FALSE
 	opacity = FALSE
-	obj_flags = CAN_BE_HIT | UNIQUE_RENAME
+	obj_flags = CAN_BE_HIT
 	max_integrity = 50
 	resistance_flags = FLAMMABLE
 	icon = 'icons/roguetown/misc/foliage.dmi'
@@ -119,6 +119,12 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 	var/active = TRUE
 	/// Timer ID for the final_decay timer so it can be cancelled on Destroy().
 	var/decay_timerid = null
+	/// world.time moment when final decay will occur after overgrowth starts.
+	var/decay_finish_time = 0
+	/// Soil this circle draws from while still active.
+	var/obj/structure/soil/linked_soil
+	var/soil_water_drain = 1.0 / (1 MINUTES)
+	var/soil_nutrition_drain = 0.75 / (1 MINUTES)
 
 /obj/structure/mushroom_circle/Initialize(mapload)
 	. = ..()
@@ -137,6 +143,11 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 /obj/structure/mushroom_circle/process(dt)
 	if(!active)
 		return
+	if(linked_soil && !QDELETED(linked_soil) && linked_soil.blessed_time > 0 && linked_soil.water > 0 && linked_soil.nutrition > 0)
+		linked_soil.adjust_water(-dt * soil_water_drain)
+		linked_soil.adjust_nutrition(-dt * soil_nutrition_drain)
+	else
+		maintenance_elapsed += dt
 	maintenance_elapsed += dt
 	if(maintenance_elapsed >= 20 MINUTES)
 		begin_decay()
@@ -149,6 +160,7 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 	icon_state = "mushroomcluster"
 	desc = "A withered ring of mushrooms that has lost its fae connection."
 	visible_message(span_warning("[src] begins to wither — the mystical light flickers and dies."))
+	decay_finish_time = world.time + 10 MINUTES
 	decay_timerid = addtimer(CALLBACK(src, PROC_REF(final_decay)), 10 MINUTES, flags = TIMER_STOPPABLE)
 
 /obj/structure/mushroom_circle/proc/final_decay()
@@ -160,18 +172,34 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 /obj/structure/mushroom_circle/examine(mob/user)
 	. = ..()
 	if(!active)
-		. += span_warning("The circle has lost its power. Its fae connection is severed — it won't last much longer.")
+		var/time_to_final_decay = max(decay_finish_time - world.time, 0)
+		. += span_warning("The circle has lost its power. Its fae connection is severed — it will collapse in [DisplayTimeText(time_to_final_decay)].")
 		return
+	var/time_to_overgrowth = max((20 MINUTES) - maintenance_elapsed, 0)
 	if(maintenance_elapsed > (15 MINUTES))
-		. += span_warning("The mushrooms look unhealthy. They need tending with scissors soon or the circle will fade and become overgrown.")
+		. += span_warning("The mushrooms look unhealthy. Prune them with scissors soon or the circle will become overgrown in [DisplayTimeText(time_to_overgrowth)].")
 	else
-		. += span_info("The mushrooms glow steadily with fae power.")
+		. += span_info("The mushrooms glow steadily with fae power. They will become overgrown in [DisplayTimeText(time_to_overgrowth)] if left untended.")
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.patron && H.patron.type == /datum/patron/divine/dendor)
 			. += span_notice("Hold my amulet of Dendor and press it on this circle to travel to another fae circle.")
 
 /obj/structure/mushroom_circle/attackby(obj/item/I, mob/living/user, params)
+	// Feather rename support is name-only for circles.
+	if(istype(I, /obj/item/natural/feather))
+		var/new_name = stripped_input(user, "What do you want to name this fae circle?", "Rename Fae Circle", "", MAX_NAME_LEN)
+		if(!new_name || QDELETED(src) || !user.canUseTopic(src, BE_CLOSE))
+			return
+		var/old_name = name
+		if(old_name == new_name)
+			to_chat(user, span_notice("The fae circle keeps its name."))
+		else
+			name = "[new_name] ([initial(name)])"
+			renamedByPlayer = TRUE
+			to_chat(user, span_notice("I rename [old_name] to [new_name]."))
+		return
+
 	// Scissors maintenance — requires snip intent so attacks don't accidentally maintain it
 	if(istype(I, /obj/item/rogueweapon/huntingknife/scissors) && user.used_intent.type == /datum/intent/snip)
 		if(!active)

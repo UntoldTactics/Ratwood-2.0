@@ -46,8 +46,14 @@
 /datum/alch_grind_recipe/natural_bone
 	name = "Natural Bone"
 	valid_input = /obj/item/natural/bone
-	valid_outputs = list(/obj/item/alch/bonemeal = 2)
-	bonus_chance_outputs = list(/obj/item/alch/bonemeal = 50)
+	valid_outputs = list(/obj/item/alch/bonemeal = 1)
+	bonus_chance_outputs = list(/obj/item/alch/bonemeal = 2)
+
+/datum/alch_grind_recipe/natural_bone/get_bonus_output_chance(output_path, mob/living/carbon/human/user, base_chance)
+	if(output_path != /obj/item/alch/bonemeal || !user)
+		return base_chance
+	var/alch_level = user.get_skill_level(/datum/skill/craft/alchemy)
+	return min(base_chance + (alch_level * 4), 30)
 
 /datum/alch_grind_recipe/horn
 

@@ -3,8 +3,8 @@
 #define BUSHSAP_STAGE_BUDDING 2
 #define BUSHSAP_STAGE_MATURE  3
 
-#define BUSHSAP_STAGE_TIME   360  // 6 minutes per water-dependent stage
-#define BUSHSAP_HEDGE_TIME   480  // 8 minutes before becoming a hedge (resets on shear)
+#define BUSHSAP_STAGE_TIME   (5 MINUTES)
+#define BUSHSAP_HEDGE_TIME   (5 MINUTES)
 #define BUSHSAP_DEATH_TICKS  60   // negative-progress seconds before withering
 
 //==============================================================================
@@ -31,7 +31,7 @@
 	layer = OBJ_LAYER
 
 	var/stage = BUSHSAP_STAGE_SAPLING
-	var/growth_progress = 0  // seconds toward next stage
+	var/growth_progress = 0
 	var/dead = FALSE
 	var/obj/structure/soil/linked_soil
 	var/soil_water_drain = 1.5 / (1 MINUTES)
@@ -55,7 +55,7 @@
 	if(dead)
 		return
 
-	if(stage <= BUSHSAP_STAGE_BUDDING)
+	if(stage <= BUSHSAP_STAGE_MATURE)
 		if(!linked_soil || QDELETED(linked_soil))
 			wither_and_die()
 			return
@@ -68,10 +68,6 @@
 			if(growth_progress <= -BUSHSAP_DEATH_TICKS)
 				wither_and_die()
 				return
-	else
-		// Stage 3: grows into a hedge; shearing resets the timer
-		growth_progress += dt
-
 	var/stage_time = (stage == BUSHSAP_STAGE_MATURE) ? BUSHSAP_HEDGE_TIME : BUSHSAP_STAGE_TIME
 	if(growth_progress >= stage_time)
 		advance_stage()
@@ -92,14 +88,11 @@
 	stage++
 	switch(stage)
 		if(BUSHSAP_STAGE_BUDDING)
+			name = "bush sprout"
 			icon = 'icons/roguetown/misc/foliage.dmi'
 			icon_state = "bush2"
 		if(BUSHSAP_STAGE_MATURE)
-			// Remove soil beneath — the bush takes over from here
-			var/turf/T = get_turf(src)
-			for(var/obj/structure/soil/S in T)
-				qdel(S)
-			linked_soil = null
+			name = "bush"
 			// Pick loot type, same weighting as the wild bush
 			if(isnull(bushtype))
 				bushtype = pickweight(list(
@@ -122,6 +115,9 @@
 	looty += /obj/item/natural/fibers
 
 /obj/structure/bush_sapling/proc/spawn_hedge()
+	for(var/obj/structure/soil/S in get_turf(src))
+		qdel(S)
+	linked_soil = null
 	new /obj/structure/flora/roguegrass/bush/wall/tall/grown(get_turf(src))
 	qdel(src)
 
@@ -136,11 +132,12 @@
 		if(BUSHSAP_STAGE_BUDDING)
 			. += span_info("Growing steadily — it is still rooting in the soil.")
 		if(BUSHSAP_STAGE_MATURE)
+			var/time_to_hedge = max(BUSHSAP_HEDGE_TIME - growth_progress, 0)
 			if(growth_progress >= BUSHSAP_HEDGE_TIME * 0.7)
-				. += span_warning("It is looking overgrown. Shear it soon, or it will become a tall hedge.")
+				. += span_warning("It is looking overgrown. Shear it soon, or it will become a tall hedge in [DisplayTimeText(time_to_hedge)].")
 			else
-				. += span_notice("A mature bush. Shear it with scissors to keep it manageable, or leave it to grow into a taller hedge.")
-	if(stage <= BUSHSAP_STAGE_BUDDING)
+				. += span_notice("A mature bush. Shear it with scissors to keep it manageable, or leave it to grow into a taller hedge in [DisplayTimeText(time_to_hedge)].")
+	if(stage <= BUSHSAP_STAGE_MATURE)
 		if(linked_soil && !QDELETED(linked_soil))
 			if(linked_soil.water <= 45)
 				. += span_warning("The soil beneath it is thirsty.")
@@ -179,7 +176,7 @@
 	return ..()
 
 /obj/structure/bush_sapling/attackby(obj/item/I, mob/living/user, params)
-	if(stage <= BUSHSAP_STAGE_BUDDING && !dead && linked_soil)
+	if(stage <= BUSHSAP_STAGE_MATURE && !dead && linked_soil)
 		if(linked_soil.try_handle_watering(I, user, params))
 			return
 		if(linked_soil.try_handle_fertilizing(I, user, params))

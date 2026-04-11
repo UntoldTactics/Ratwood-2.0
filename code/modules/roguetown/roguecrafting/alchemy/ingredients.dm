@@ -94,6 +94,7 @@
 /obj/item/alch/blessedseedpowder
 	name = "blessed seed powder"
 	desc = "Luminous seed dust prepared with sanctified water. Dendor's touch lingers within it."
+	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "flour"
 	color = "#BFFFC4"
 	major_pot = null
@@ -103,7 +104,7 @@
 /obj/item/alch/blessedseedpowder/Initialize(mapload)
 	. = ..()
 	set_light(1, 1, 2, l_color = "#58C86A")
-	add_filter("blessedseed_glow", 2, list("type" = "outline", "color" = "#58C86A", "alpha" = 120, "size" = 1))
+	add_filter("blessedseed_glow", 2, list("type" = "outline", "color" = "#58C86A", "alpha" = 95, "size" = 1))
 
 /obj/item/alch/blessedseedpowder/Destroy()
 	remove_filter("blessedseed_glow")

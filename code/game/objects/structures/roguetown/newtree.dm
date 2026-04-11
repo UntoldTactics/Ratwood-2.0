@@ -159,6 +159,8 @@
 		T.update_icon()
 
 /obj/structure/flora/newtree/proc/build_branches()
+	if(!istype(loc, /turf/open/transparent/openspace))
+		return
 	for(var/D in GLOB.cardinals)
 		var/turf/NT = get_step(src, D)
 		if(istype(NT, /turf/open/transparent/openspace))

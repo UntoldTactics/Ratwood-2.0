@@ -11,14 +11,18 @@
 	maxHealth = 300
 	melee_damage_lower = 12
 	melee_damage_upper = 18
+	aggressive = FALSE
 	inherent_spells = list()
 	/// Cooldown for the special attack (set by the trigger spell).
 	var/special_cd = 0
 	/// The conjuring player's ckey — used for faction tagging.
 	var/conjurer_ckey = null
+	/// Back-reference to the spell instance that summoned this dryad.
+	var/obj/effect/proc_holder/spell/targeted/summon_lesser_dryad/summoner_spell
 
 /mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/Initialize(mapload, mob/living/carbon/human/owner)
 	. = ..()
+	faction |= "neutral"
 	if(owner)
 		conjurer_ckey = owner.ckey
 		// Tag with owner faction so minion_order/lesser_dryad can command it.
@@ -32,13 +36,15 @@
 /// Special attack: kneestingers on all 4 cardinal tiles + 5×5 solid vine area.
 /// Called by /obj/effect/proc_holder/spell/targeted/lesser_dryad_special when the
 /// caster targets a turf within range of their lesser dryad.
-/mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/proc/dryad_surge()
+/mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/proc/dryad_surge(turf/surge_turf)
 	if(world.time < special_cd + 20 SECONDS)
 		return FALSE
 	special_cd = world.time
 	visible_message(span_boldwarning("[src] raises its arms — thorns and vines heed the call!"))
 	playsound(get_turf(src), 'sound/magic/churn.ogg', 60, TRUE)
-	var/turf/T = get_turf(src)
+	var/turf/T = surge_turf || get_turf(src)
+	if(!T)
+		return FALSE
 	// Kneestingers on cardinal tiles
 	for(var/D in GLOB.cardinals)
 		var/turf/adj = get_step(T, D)
@@ -52,8 +58,9 @@
 
 /mob/living/simple_animal/hostile/retaliate/rogue/fae/dryad/lesser/death(gibbed)
 	visible_message(span_boldwarning("[src] dissolves into greenish light..."))
-	var/turf/deathspot = get_turf(src)
-	new /obj/item/magic/fae/dust(deathspot)
+	playsound(get_turf(src), 'sound/items/dig_shovel.ogg', 70, TRUE)
+	if(summoner_spell)
+		summoner_spell.on_dryad_deleted(src)
 	update_icon()
 	spill_embedded_objects()
 	qdel(src)

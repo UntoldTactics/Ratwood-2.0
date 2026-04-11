@@ -11,8 +11,8 @@
 #define TREESAP_STAGE_YOUNG   3
 
 #define TREESAP_WATER_MAX    200
-#define TREESAP_STAGE_TIME   360  // seconds per stage (6 minutes)
-#define TREESAP_YOUNG_TIME   240  // seconds for young-tree stage (4 minutes)
+#define TREESAP_STAGE_TIME   (10 MINUTES)
+#define TREESAP_YOUNG_TIME   (10 MINUTES)
 #define TREESAP_WATER_DRAIN  0.5  // water units lost per second (~6.7 min to dry)
 #define TREESAP_DEATH_TICKS  60   // negative-progress seconds before dying
 
@@ -29,7 +29,7 @@
 	layer = OBJ_LAYER
 
 	var/stage = TREESAP_STAGE_SAPLING
-	var/growth_progress = 0   // seconds accumulated toward next stage
+	var/growth_progress = 0
 	var/dead = FALSE
 	var/obj/structure/soil/linked_soil
 	var/soil_water_drain = 1.5 / (1 MINUTES)
@@ -62,7 +62,7 @@
 	if(dead)
 		return
 
-	if(stage <= TREESAP_STAGE_SHRUB)
+	if(stage <= TREESAP_STAGE_YOUNG)
 		if(!linked_soil || QDELETED(linked_soil))
 			wither_and_die()
 			return
@@ -75,9 +75,6 @@
 			if(growth_progress <= -TREESAP_DEATH_TICKS)
 				wither_and_die()
 				return
-	else
-		growth_progress += dt
-
 	var/stage_time = (stage == TREESAP_STAGE_YOUNG) ? TREESAP_YOUNG_TIME : TREESAP_STAGE_TIME
 	if(growth_progress >= stage_time)
 		advance_stage()
@@ -101,11 +98,6 @@
 			icon = stage2_icon
 			icon_state = stage2_state
 		if(TREESAP_STAGE_YOUNG)
-			// Uproot any soil below — the tree is taking over
-			var/turf/T = get_turf(src)
-			for(var/obj/structure/soil/S in T)
-				qdel(S)
-			linked_soil = null
 			icon = stage3_icon
 			icon_state = stage3_state
 			density = TRUE
@@ -118,6 +110,7 @@
 /obj/structure/tree_sapling/proc/spawn_final_tree()
 	for(var/obj/structure/soil/S in get_turf(src))
 		qdel(S)
+	linked_soil = null
 	var/atom/movable/final_tree = new tree_final_type(get_turf(src))
 	if(final_tree)
 		final_tree.pixel_x = pixel_x
@@ -143,7 +136,7 @@
 			. += span_info("A small shrub growing steadily.")
 		if(TREESAP_STAGE_YOUNG)
 			. += span_notice("A young tree still taking root. It should grow on its own now.")
-	if(stage <= TREESAP_STAGE_SHRUB)
+	if(stage <= TREESAP_STAGE_YOUNG)
 		if(linked_soil && !QDELETED(linked_soil))
 			if(linked_soil.water <= 45)
 				. += span_warning("The soil beneath it is thirsty.")
@@ -159,7 +152,7 @@
 				. += span_info("The soil beneath it looks fertile.")
 
 /obj/structure/tree_sapling/attackby(obj/item/I, mob/living/user, params)
-	if(stage <= TREESAP_STAGE_SHRUB && !dead && linked_soil)
+	if(stage <= TREESAP_STAGE_YOUNG && !dead && linked_soil)
 		if(linked_soil.try_handle_watering(I, user, params))
 			return
 		if(linked_soil.try_handle_fertilizing(I, user, params))

@@ -99,10 +99,11 @@
 				for(var/i in 1 to foundrecipe.valid_outputs[output])
 					new output(get_turf(src))
 			if(foundrecipe.bonus_chance_outputs.len > 0)
-				for(var/i in 1 to foundrecipe.bonus_chance_outputs.len)
-					if(foundrecipe.bonus_chance_outputs[foundrecipe.bonus_chance_outputs[i]] >= roll(1,100))
-						var/obj/item/bonusduck = foundrecipe.bonus_chance_outputs[i]
-						new bonusduck(get_turf(user))
+				for(var/bonus_output in foundrecipe.bonus_chance_outputs)
+					var/base_chance = foundrecipe.bonus_chance_outputs[bonus_output]
+					var/final_chance = foundrecipe.get_bonus_output_chance(bonus_output, user, base_chance)
+					if(final_chance >= roll(1, 100))
+						new bonus_output(get_turf(user))
 			if(istype(to_grind,/obj/item/rogueore) || istype(to_grind,/obj/item/ingot))
 				user.flash_fullscreen("whiteflash")
 				var/datum/effect_system/spark_spread/S = new()

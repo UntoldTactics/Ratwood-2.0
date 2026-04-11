@@ -168,20 +168,36 @@
 	SEND_SOUND(usr, sound(null))
 	playsound(user, 'sound/music/tree.ogg', 80)
 
+/obj/structure/flora/roguetree/wise/bless_tree(mob/user)
+	if(obj_integrity < max_integrity)
+		obj_integrity = min(max_integrity, obj_integrity + 50)
+		return TRUE
+	return FALSE
+
 /obj/structure/flora/roguetree/wise/proc/notify_nearby_dendorites()
 	for(var/mob/living/carbon/human/H in GLOB.alive_mob_list)
 		if(H.patron?.type != /datum/patron/divine/dendor)
 			continue
 		if(H.z != z)
 			continue
-		if(get_dist(H, src) > 20)
+		if(get_dist(H, src) > 10)
 			continue
 		H.add_stress(/datum/stressevent/treefather_loss)
 		var/tree_dir = dir2text(get_dir(H, src))
 		to_chat(H, span_boldwarning("A sacred tree has fallen to my [tree_dir]! The Treefather recoils in pain."))
-		playsound(H, 'sound/music/tree.ogg', 35, FALSE)
+		playsound(H, 'sound/misc/jack_killing_2.ogg', 60, FALSE)
+
+/obj/structure/flora/roguetree/wise/proc/fling_nearby_mobs()
+	for(var/mob/living/L in range(3, src))
+		if(L.stat == DEAD)
+			continue
+		var/atom/throwtarget = get_edge_target_turf(src, get_dir(src, get_step_away(L, src)))
+		if(!throwtarget)
+			continue
+		L.safe_throw_at(throwtarget, 4, 1, force = MOVE_FORCE_STRONG)
 
 /obj/structure/flora/roguetree/wise/obj_destruction(damage_flag)
+	fling_nearby_mobs()
 	notify_nearby_dendorites()
 	return ..()
 
@@ -612,6 +628,14 @@
 /obj/structure/flora/shroomstump/Initialize(mapload)
 	. = ..()
 	icon_state = "t[rand(1,4)]stump"
+
+/obj/structure/flora/shroomstump/obj_destruction(damage_flag)
+	if(prob(50))
+		new /obj/item/grown/log/tree/small(get_turf(src))
+	else
+		new /obj/item/grown/log/tree/stick(get_turf(src))
+		new /obj/item/grown/log/tree/stick(get_turf(src))
+	return ..()
 
 /obj/structure/roguerock
 	name = "rock"

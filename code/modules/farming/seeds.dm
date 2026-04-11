@@ -385,17 +385,18 @@
 /obj/item/seeds/flower
 	name = "flower seeds"
 	desc = "A small packet of mixed flower seeds. Click in-hand to choose which flower to grow, then plant them in the earth and water."
-	icon_state = "seed"
+	icon = 'icons/roguetown/items/produce.dmi'
+	icon_state = "seeds"
 	seed_identity = "flower seeds"
 	var/flower_sprout_type = null
 	var/flower_name = null
 
 /obj/item/seeds/flower/attack_self(mob/living/user)
 	var/list/options = list(
-		"Yellow flowers"        = /obj/structure/flower_sprout/yellow,
-		"Blue & red flowers"    = /obj/structure/flower_sprout/brflower,
-		"Purple & pink flowers" = /obj/structure/flower_sprout/ppflower,
-		"Lavender"              = /obj/structure/flower_sprout/lavender
+		"Yellow flowers"        = /obj/structure/flora/ausbushes/ywflowers,
+		"Blue & red flowers"    = /obj/structure/flora/ausbushes/brflowers,
+		"Purple & pink flowers" = /obj/structure/flora/ausbushes/ppflowers,
+		"Lavender"              = /obj/structure/flora/ausbushes/lavendergrass
 	)
 	var/choice = input(user, "Which flower would you like to cultivate from these seeds?", "Choose Flower") as null|anything in options
 	if(isnull(choice))
@@ -407,7 +408,7 @@
 
 /obj/item/seeds/flower/attack_turf(turf/T, mob/living/user)
 	if(!flower_sprout_type)
-		to_chat(user, span_warning("I haven't chosen what to grow yet. Click in hand to choose first."))
+		to_chat(user, span_warning("I haven't chosen what to grow yet. Use them in your hand to choose first."))
 		return
 	var/obj/structure/soil/soil = locate(/obj/structure/soil) in T
 	if(soil)
@@ -429,7 +430,7 @@
 
 /obj/item/seeds/flower/try_plant_seed(mob/living/user, obj/structure/soil/soil)
 	if(!flower_sprout_type)
-		to_chat(user, span_warning("I haven't chosen what to grow yet. Click in hand to choose first."))
+		to_chat(user, span_warning("I haven't chosen what to grow yet. Use them in your hand to choose first."))
 		return
 	if(soil.plant || soil.has_custom_growth())
 		to_chat(user, span_warning("Something is already sprouting here."))
