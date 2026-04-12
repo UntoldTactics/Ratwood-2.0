@@ -1472,7 +1472,7 @@
 "qg" = (
 /obj/structure/mineral_door/wood/deadbolt{
 	dir = 1;
-	name = "Castellan's Quarters"
+	name = "Guest Room"
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/inhumen/wretch/camp)
