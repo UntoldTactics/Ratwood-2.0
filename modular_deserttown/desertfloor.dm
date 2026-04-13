@@ -154,7 +154,7 @@
 	name = ""
 	desc = ""
 	icon = 'modular_deserttown/icons/desertfloor.dmi'
-	icon_state = "desertgrass_edges"
+	icon_state = "desertgrassedge"
 	mouse_opacity = 0
 
 
@@ -174,14 +174,23 @@
 	canSmoothWith = list(
 						/turf/open/floor/rogue/grass,
 						/turf/open/floor/rogue/dunes,
-						/turf/open/floor/rogue/citybrick,)
-	max_integrity = 1200
+						/turf/open/floor/rogue/citybrick,
+						/turf/open/floor/rogue/grassred,
+						/turf/open/floor/rogue/grassyel,
+						/turf/open/floor/rogue/grasscold,
+						/turf/open/floor/rogue/grassgrey,
+						/turf/open/floor/rogue/grasspurple,
+						/turf/open/floor/rogue/snowpatchy,
+						/turf/open/floor/rogue/snow,
+						/turf/open/floor/rogue/snowrough,)
+	neighborlay = "desertgrassedge"
+	spread_chance = 15
+	burn_power = 6
 
 /turf/open/floor/rogue/desert_grass/Initialize()
 	. = ..()
 	dir = pick(GLOB.cardinals)
 	icon_state = "desertgrass[rand(1,16)]"
-
 
 /turf/open/floor/rogue/desert_grass/cardinal_smooth(adjacencies)
 	roguesmooth(adjacencies)
