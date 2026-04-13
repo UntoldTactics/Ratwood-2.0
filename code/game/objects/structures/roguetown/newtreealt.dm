@@ -1,4 +1,4 @@
-/obj/structure/flora/newtreealt
+/obj/structure/flora/newtreealt//a visually different version for use in sunnier brighter environments. Would have wanted to make it an easy subtype but it has separate branches and leaves
 	name = "tree"
 	desc = "The thick core of a tree."
 	icon = 'icons/roguetown/misc/treealt.dmi'
