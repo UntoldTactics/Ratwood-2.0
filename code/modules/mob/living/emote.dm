@@ -1098,13 +1098,6 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = TRUE
 
-/datum/emote/living/shiver
-	key = "shiver"
-	key_third_person = "shiver"
-	message = "shivers."
-	emote_type = EMOTE_AUDIBLE
-	show_runechat = TRUE
-
 /mob/living/carbon/human/verb/emote_shiver()
 	set name = "Shiver"
 	set category = "Noises"
