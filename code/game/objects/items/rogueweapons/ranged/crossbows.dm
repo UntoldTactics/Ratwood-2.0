@@ -165,7 +165,7 @@
 
 		if(damage_from_perception)
 			if(user.STAPER > 10)
-				 BB.damage *= (user.STAPER / 10)
+			BB.damage *= (user.STAPER / 10)
 
 	cocked = FALSE
 	..()
