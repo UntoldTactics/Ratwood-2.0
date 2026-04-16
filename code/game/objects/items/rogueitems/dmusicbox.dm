@@ -130,8 +130,10 @@ GLOBAL_VAR_INIT(musicboxes_last_play, 0) //last time of the last played track, t
 		return
 	if(fexists(logged_filename))
 		curfile = file(logged_filename)
-		if(!curfile || length(curfile) != file_size)
+		if(curfile && length(curfile) != file_size) // file didn't finish/uploaded file size does not match - delete file
+			fdel(logged_filename)
 			curfile = null
+		if(!curfile)
 			user.log_message("attempted to upload jukebox song: [logged_filename]", LOG_GAME)
 		else
 			user.log_message("uploaded jukebox song: [logged_filename]", LOG_GAME)
