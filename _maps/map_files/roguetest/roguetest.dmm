@@ -585,7 +585,7 @@
 /turf/open/floor/rogue/carpet/lord,
 /area/rogue/indoors)
 "sG" = (
-/obj/structure/dungeon_entry/center,
+/obj/item/seeds/random,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors)
 "sJ" = (
@@ -1638,7 +1638,21 @@
 /turf/open/floor/rogue/blocks/stonered/tiny,
 /area/rogue/indoors)
 "XN" = (
-/obj/structure/dungeon_entry/hamlet,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
+/obj/item/seeds/random,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors)
 "XU" = (
@@ -3152,7 +3166,7 @@ rT
 rT
 rT
 rT
-XN
+rT
 rT
 rT
 rT
@@ -3251,8 +3265,8 @@ yK
 yK
 yK
 yK
-rT
-rT
+XN
+sG
 rT
 rT
 rT
@@ -3303,8 +3317,8 @@ rT
 rT
 yK
 yK
-rT
-rT
+sG
+sG
 rT
 rT
 rT
@@ -3360,7 +3374,7 @@ rT
 rT
 rT
 rT
-sG
+rT
 rT
 rT
 rT
