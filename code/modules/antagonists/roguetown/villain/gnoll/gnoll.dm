@@ -16,10 +16,11 @@
 	repair_time = 14 SECONDS
 	combat_taggable = TRUE
 
-/obj/item/clothing/suit/roguetown/armor/regenerating/skin/gnoll_armor/equipped(mob/user, slot)
+/obj/item/clothing/suit/roguetown/armor/regenerating/skin/gnoll_armor/Initialize(mapload)
 	. = ..()
 	// Gnolls don't really get to unequip their skin so they might as well just register it as soon as they get it
-	RegisterSignal(user, list(COMSIG_SPECIES_ATTACKED_BY, COMSIG_LIVING_ARMOR_CHECKED, COMSIG_MOB_APPLY_DAMGE), PROC_REF(on_attacked_by), override = TRUE)
+	// loc is shitcode here because the skin is created inside the gnoll so we can juse abuse that logic
+	RegisterSignal(loc, list(COMSIG_SPECIES_ATTACKED_BY, COMSIG_LIVING_ARMOR_CHECKED, COMSIG_MOB_APPLY_DAMGE), PROC_REF(on_attacked_by), override = TRUE)
 
 /datum/antagonist/gnoll
 	name = "Gnoll"
