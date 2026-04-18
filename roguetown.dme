@@ -3133,6 +3133,7 @@
 #include "modular_deserttown\jobs\garrison\janissary\footman.dm"
 #include "modular_deserttown\jobs\garrison\janissary\janissary.dm"
 #include "modular_deserttown\jobs\garrison\janissary\jezail.dm"
+#include "modular_deserttown\jobs\garrison\janissary\flagbearer.dm"
 #include "modular_deserttown\jobs\garrison\janissary\zephyr.dm"
 #include "modular_hearthstone\code\datums\accents.dm"
 #include "modular_hearthstone\code\game\objects\effects\track.dm"
