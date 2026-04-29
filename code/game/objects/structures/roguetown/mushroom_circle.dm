@@ -56,7 +56,7 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 	if(linked_soil.blessed_time > 0 && linked_soil.water > 0 && linked_soil.nutrition > 0)
 		linked_soil.adjust_water(-dt * soil_water_drain)
 		linked_soil.adjust_nutrition(-dt * soil_nutrition_drain)
-		growth_progress += dt
+		growth_progress += dt * linked_soil.get_environmental_growth_multiplier()
 		has_grown = TRUE
 	else if(has_grown)
 		growth_progress -= dt * 2
