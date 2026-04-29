@@ -69,6 +69,8 @@ GLOBAL_LIST_EMPTY(mushroom_circles)
 
 /obj/structure/mushroom_sprout/examine(mob/user)
 	. = ..()
+	var/time_to_bloom = max((10 MINUTES) - growth_progress, 0)
+	. += span_info("It will bloom into a fey mushroom circle in approximately [DisplayTimeText(time_to_bloom)] if well tended.")
 	if(linked_soil)
 		if(linked_soil.blessed_time <= 0)
 			. += span_warning("The soil's blessing is fading; the sprout will not endure without it.")
