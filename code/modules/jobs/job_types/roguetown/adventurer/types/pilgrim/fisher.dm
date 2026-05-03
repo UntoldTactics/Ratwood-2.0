@@ -76,7 +76,8 @@
 							/obj/item/natural/worms = 2,
 							/obj/item/rogueweapon/shovel/small = 1,
 							/obj/item/flashlight/flare/torch = 1,
-							/obj/item/rogueweapon/scabbard/sheath = 1
+							/obj/item/rogueweapon/scabbard/sheath = 1,
+							/obj/item/mini_flagpole/fisher
 							)
 	if(SSmapping.config.map_name == "Desert Town")
 		shoes = /obj/item/clothing/shoes/roguetown/sandals

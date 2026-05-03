@@ -91,6 +91,7 @@
 			/obj/item/rogueweapon/hammer/iron = 1,
 			/obj/item/rogueweapon/tongs = 1,
 			/obj/item/recipe_book/blacksmithing = 1,
+			/obj/item/mini_flagpole/blacksmith = 1
 			)
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
@@ -161,6 +162,7 @@
 						/obj/item/recipe_book/survival = 1,
 						/obj/item/clothing/mask/rogue/spectacles/golden = 1, //putting them in the bag because bad eye sight virtue strips these
 						/obj/item/contraption/linker = 1,
+						/obj/item/mini_flagpole/artificer = 1
 						)
 	if(SSmapping.config.map_name == "Desert Town")
 		shoes = /obj/item/clothing/shoes/roguetown/sandals
@@ -230,7 +232,9 @@
 						/obj/item/recipe_book/builder = 1,
 						/obj/item/recipe_book/survival = 1,
 						/obj/item/roguekey/crafterguild = 1,
-						/obj/item/rogueweapon/blowrod = 1
+						/obj/item/rogueweapon/blowrod = 1,
+						/obj/item/mini_flagpole/blacksmith = 1,
+						/obj/item/mini_flagpole/artificer = 1,
 						)
 	if(SSmapping.config.map_name == "Desert Town")
 		pants = /obj/item/clothing/under/roguetown/sirwal/plainrandom
