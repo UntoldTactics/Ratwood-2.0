@@ -422,7 +422,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_night = null
 	deathsight_message = "a structure full of pained wails and practiced surgeons"
 
-/area/rogue/indoors/town/Academy
+/area/rogue/indoors/town/academy
 	name = "Academy"
 	icon_state = "academy"
 	droning_sound = 'sound/music/area/academy.ogg'
