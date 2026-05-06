@@ -35,17 +35,17 @@
 	droning_sound_dusk = null
 	droning_sound_night = null
 
-// /area/rogue/under/town/caverogue
-// 	name = "miningcave (roguetown)"
-// 	icon_state = "caverogue"
-// 	ambientsounds = AMB_GENCAVE
-// 	ambientnight = AMB_GENCAVE
-// 	spookysounds = SPOOKY_CAVE
-// 	spookynight = SPOOKY_CAVE
-// 	droning_sound = 'sound/music/area/caves.ogg'
-// 	droning_sound_dusk = null
-// 	droning_sound_night = null
-// 	converted_type = /area/rogue/outdoors/exposed/under/caves
+/area/rogue/under/town/caverogue
+	name = "town cave"
+	icon_state = "caverogue"
+	ambientsounds = AMB_GENCAVE
+	ambientnight = AMB_GENCAVE
+	spookysounds = SPOOKY_CAVE
+	spookynight = SPOOKY_CAVE
+	droning_sound = 'sound/music/area/caves.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	converted_type = /area/rogue/outdoors/exposed/under/caves
 
 /area/rogue/outdoors/exposed/under/caves
 	icon_state = "caves"
