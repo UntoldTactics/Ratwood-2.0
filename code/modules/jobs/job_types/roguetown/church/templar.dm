@@ -282,7 +282,10 @@
 			H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE) //Expert bow, Journeyman otherwise
 			H.adjust_skillrank(/datum/skill/combat/wrestling, -1, TRUE)//Haha... no.
 			H.change_stat(STATKEY_SPD, 1)
+			H.change_stat(STATKEY_PER, 2)
 			H.change_stat(STATKEY_STR, -1)
+			H.change_stat(STATKEY_END, -1)
+			H.change_stat(STATKEY_CON, -1)
 		if("Harp Bow (short)")
 			H.equip_to_slot_or_del(new /obj/item/quiver/arrows, SLOT_BELT_R, TRUE)
 			H.equip_to_slot_or_del(new /obj/item/clothing/suit/roguetown/armor/plate/half, SLOT_ARMOR, TRUE) //Cuirass, not halfplate. Slightly reduced starting armor.
@@ -291,7 +294,10 @@
 			H.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE) //Expert bow, Journeyman otherwise
 			H.adjust_skillrank(/datum/skill/combat/wrestling, -1, TRUE)//Haha... no.
 			H.change_stat(STATKEY_SPD, 1)
+			H.change_stat(STATKEY_PER, 2)
 			H.change_stat(STATKEY_STR, -1)
+			H.change_stat(STATKEY_END, -1)
+			H.change_stat(STATKEY_CON, -1)
 //Unarmed specific stuff is locked to patrons who have it. RAAAAAAA!!!!!! HEAVY ARMOUR BRUISERS!!!!!!
 		if("Close Caress")
 			H.put_in_hands(new /obj/item/rogueweapon/knuckles/eora(H), TRUE)
