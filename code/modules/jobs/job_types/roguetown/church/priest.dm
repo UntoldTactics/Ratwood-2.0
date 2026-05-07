@@ -425,8 +425,6 @@ GLOBAL_LIST_EMPTY(priest_swap_timers)
 		GLOB.apostasy_players += inputty
 		COOLDOWN_START(src, priest_apostasy, PRIEST_APOSTASY_COOLDOWN)
 
-		var/curse_resist = HAS_TRAIT(H, TRAIT_CURSE_RESIST)
-
 		if (istype(H.patron, /datum/patron/divine))
 			H.apply_status_effect(/datum/status_effect/debuff/apostasy, curse_resist)
 			H.add_stress(/datum/stressevent/apostasy)
