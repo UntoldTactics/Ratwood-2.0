@@ -248,6 +248,45 @@
 	color = "#bb9696"
 	anvilrepair = null
 
+/obj/item/clothing/head/roguetown/helmet/heavy/knight/shadowplate
+	name = "drow cavalier helm"
+	desc = "A greathelm commonly worn by Underdark spider-jockies. The golden wings convey both a feminine elegance and martriarchal tyranny.\
+	While lacking an adjustable visor, the winged halo and accompanying plumage can detach from the helm and be worn seperately."
+	item_state = "gildeddrowhelm"
+	icon_state = "gildeddrowhelm"
+	adjustable = CAN_CADJUST
+	emote_environment = 3
+	body_parts_covered = FULL_HEAD
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDESNOUT
+	flags_cover = HEADCOVERSEYES
+	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
+
+/obj/item/clothing/head/roguetown/helmet/heavy/knight/shadowplate/ComponentInitialize()
+	..()
+	AddComponent(/datum/component/adjustable_clothing, (HEAD|EARS|HAIR), (HIDEEARS), null, 'sound/items/visor.ogg', null, UPD_HEAD)
+
+/obj/item/clothing/head/roguetown/helmet/heavy/knight/shadowplate/attackby(obj/item/W, mob/living/user, params)
+	..()
+	if(!(istype(W, /obj/item/natural/feather) && !detail_tag))
+		return
+	user.visible_message(span_warning("[user] adds [W] to [src]."))
+	user.transferItemToLoc(W, src, FALSE, FALSE)
+	detail_color = COLOR_WHITE
+	detail_tag = "_detail"
+	update_icon()
+	if(loc == user && ishuman(user))
+		var/mob/living/carbon/H = user
+		H.update_inv_head()
+
+/obj/item/clothing/head/roguetown/helmet/heavy/knight/shadowplate/update_icon()
+	cut_overlays()
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		add_overlay(pic)
+
 /obj/item/clothing/head/roguetown/helmet/heavy/knight/fluted
 	name = "fluted armet"
 	desc = "An ornate steel greathelm with a visor, which protects the entire head. While bulky, the fluted design excels at prolonging chivalrous bouts with fellow knights. Add a feather to show the colors of your family or allegiance."
@@ -995,7 +1034,7 @@
 
 /obj/item/clothing/head/roguetown/helmet/heavy/frogmouth/zizo
 	name = "avantyne froggemund"
-	desc = "A heavy frogmouth helmet, forged from avantyne. A wide slit allows for a practical amount of visibility considered unusual for this style of helmet. Called forth from the edge of what should be known. In Her name."
+	desc = "<font color='A50021'>In an antique land, two vast and trunkless legs of stone stand in the desert.</font>"
 	icon_state = "zizofrogmouth"
 	item_state = "zizofrogmouth"
 	max_integrity = ARMOR_INT_HELMET_ANTAG
@@ -1055,7 +1094,7 @@
 
 /obj/item/clothing/head/roguetown/helmet/heavy/zizo
 	name = "avantyne barbute"
-	desc = "A avantyne barbute. This one has an adjustable visor. Called forth from the edge of what should be known. In Her name."
+	desc = "<font color='A50021'>In an antique land, two vast and trunkless legs of stone stand in the desert.</font>"
 	adjustable = CAN_CADJUST
 	icon_state = "zizobarbute"
 	max_integrity = ARMOR_INT_HELMET_ANTAG
@@ -1072,8 +1111,7 @@
 
 /obj/item/clothing/head/roguetown/helmet/heavy/knight/zizo
 	name = "avantyne bascinet"
-	desc = "A darksteeled bascinet, perpetually backlit with an eerie crimson haze. Glimpse into the abyss for too \
-	long..</br>‎<font color='FF0000'>..and something will look back.</font>"
+	desc = "<font color='A50021'>In an antique land, two vast and trunkless legs of stone stand in the desert.</font>"
 	adjustable = CANT_CADJUST
 	icon_state = "zizobascinet"
 	item_state = "zizobascinet"
@@ -1091,8 +1129,7 @@
 
 /obj/item/clothing/head/roguetown/helmet/heavy/volfplate/zizo
 	name = "avantyne volf-face bascinet"
-	desc = "A terminal prognosis, a lethal parasite; unholy strands of avantyne, worming their way through the steel to make something \
-	greater. Progress is an agonising process, both unto flesh and metal."
+	desc = "<font color='A50021'>In an antique land, two vast and trunkless legs of stone stand in the desert.</font>"
 	adjustable = CAN_CADJUST
 	icon_state = "volfplate_avantyne"
 	item_state = "volfplate_avantyne"
