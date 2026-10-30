@@ -20,6 +20,7 @@
 		STATKEY_INT = -1,
 		STATKEY_SPD = -1
 	)
+	vice_restrictions = list(/datum/charflaw/hemophage, /datum/charflaw/silverweakness)
 	subclass_skills = list(
 		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_EXPERT,
@@ -77,7 +78,7 @@
 					if("Katar")
 						r_hand = /obj/item/rogueweapon/katar/psydon
 					if("Knuckledusters")
-						r_hand = /obj/item/rogueweapon/knuckles/psydon
+						r_hand = /obj/item/clothing/gloves/roguetown/knuckles/psydon
 			if("Quarterstaff - Expert Polearms, +I PER / +I INT")//stave user but with no int and per malus so they dont get folded.
 				H.adjust_skillrank_up_to(/datum/skill/combat/polearms, SKILL_LEVEL_EXPERT, TRUE)
 				r_hand = /obj/item/rogueweapon/woodstaff/quarterstaff/psy
